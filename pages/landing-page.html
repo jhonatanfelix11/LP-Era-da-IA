@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Era da I.A. — Mapa Completo das Ferramentas de I.A.</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="shortcut icon" href="favicon.svg">
+<meta name="description" content="Mapa completo das ferramentas de I.A. que profissionais já usam para faturar de R$3.000 a R$50.000/mês. 20+ ferramentas, 5 carreiras, 50 prompts prontos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #06080d;
+  --bg-2: #0a0e18;
+  --bg-3: #0d1220;
+  --surface: #0f1520;
+  --elevated: #131a28;
+  --accent: #3b82f6;
+  --accent-2: #60a5fa;
+  --accent-3: #818cf8;
+  --accent-glow: rgba(59,130,246,.15);
+  --accent-line: rgba(59,130,246,.12);
+  --green: #34d399;
+  --green-glow: rgba(52,211,153,.12);
+  --red: #f87171;
+  --amber: #fbbf24;
+  --text-1: #ffffff;
+  --text-2: #e2e8f0;
+  --text-3: #94a3b8;
+  --text-4: #64748b;
+  --border: rgba(255,255,255,.08);
+  --font-body: 'Inter',system-ui,sans-serif;
+  --font-display: 'Playfair Display',Georgia,serif;
+  --font-mono: 'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text-2);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+
+/* ── LAYOUT ── */
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+.sec{padding:100px 0}
+.sec-sm{padding:72px 0}
+.sec-t{text-align:center;margin-bottom:56px}
+.sec-t .ey{margin-bottom:12px}
+
+/* ── TYPOGRAPHY ── */
+h1,h2,h3{font-family:var(--font-display);font-weight:900;line-height:1.08;color:var(--text-1)}
+h1{font-size:clamp(32px,4.8vw,56px);letter-spacing:-.02em}
+h2{font-size:clamp(28px,4.5vw,48px);letter-spacing:-.015em}
+h3{font-size:clamp(18px,2.5vw,24px)}
+.ey{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-2);display:block}
+.sub{font-size:clamp(15px,1.8vw,18px);color:var(--text-3);line-height:1.65;max-width:580px}
+.sub em{font-style:normal;color:var(--text-2)}
+.accent-text{background:linear-gradient(135deg,var(--accent-2),var(--accent-3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-body);font-weight:700;font-size:15px;padding:16px 32px;border:none;cursor:pointer;border-radius:10px;position:relative;transition:transform .2s,box-shadow .2s}
+.btn-primary{
+  background:linear-gradient(135deg,var(--accent),#2563eb);
+  color:#fff;
+  box-shadow:0 0 0 1px rgba(59,130,246,.3),0 4px 20px rgba(59,130,246,.2);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(59,130,246,.5),0 8px 40px rgba(59,130,246,.35)}
+.btn-primary::before{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(135deg,transparent,rgba(255,255,255,.08));pointer-events:none}
+.btn-ghost{background:transparent;color:var(--text-3);border:1px solid var(--border);border-radius:10px}
+.btn-ghost:hover{border-color:var(--accent-line);color:var(--accent-2)}
+.btn-lg{padding:16px 28px;font-size:15px;border-radius:12px}
+.btn .arrow{transition:transform .2s;display:inline-block}
+.btn:hover .arrow{transform:translateX(4px)}
+
+/* ── HERO ── */
+.hero{padding:120px 0 80px;position:relative;overflow:hidden;min-height:85vh;display:flex;align-items:center}
+.hero::before{content:'';position:absolute;top:-20%;right:-10%;width:700px;height:700px;background:radial-gradient(ellipse,rgba(59,130,246,.07) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(to top,var(--bg),transparent);pointer-events:none;z-index:2}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.hero-content{position:relative;z-index:3}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:100px;border:1px solid var(--accent-line);background:var(--accent-glow);margin-bottom:28px;font-size:12px;font-weight:600;color:var(--accent-2);letter-spacing:.02em}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{margin-bottom:20px}
+.hero h1 .line{display:block;overflow:hidden}
+.hero h1 .line > span{display:block;white-space:nowrap}
+.hero .sub{margin-bottom:36px}
+.hero-btns{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-bottom:20px}
+.hero-meta{display:flex;gap:24px;flex-wrap:wrap}
+.hero-meta span{font-size:12px;color:var(--text-3);display:flex;align-items:center;gap:6px}
+.hero-meta .sep{width:1px;height:14px;background:var(--border)}
+.hero-visual{position:relative;z-index:3}
+.hero-mockup{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.03)}
+.hero-mockup-bar{background:var(--elevated);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.hero-mockup-dots{display:flex;gap:6px}
+.hero-mockup-dots span{width:10px;height:10px;border-radius:50%}
+.hero-mockup-dots span:nth-child(1){background:#ff5f57}
+.hero-mockup-dots span:nth-child(2){background:#ffbd2e}
+.hero-mockup-dots span:nth-child(3){background:#28c840}
+.hero-mockup-brand{font-family:var(--font-mono);font-size:10px;color:var(--text-4);letter-spacing:.05em}
+.hero-mockup-body{padding:24px}
+/* ── Animated ecosystem visualization ── */
+.eco{display:flex;flex-direction:column;gap:14px}
+.eco-center{text-align:center;padding:16px 0 8px}
+.eco-center .eco-title{font-family:var(--font-mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-4);margin-bottom:6px}
+.eco-center .eco-val{font-family:var(--font-display);font-size:28px;font-weight:900;background:linear-gradient(135deg,var(--accent-2),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.eco-paths{display:flex;flex-direction:column;gap:8px}
+.eco-path{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:10px;background:rgba(255,255,255,.02);border:1px solid var(--border);transition:border-color .25s,transform .25s,background .25s,box-shadow .25s;cursor:pointer}
+.eco-path:hover{
+  border-color:var(--c, var(--accent));
+  background:color-mix(in srgb, var(--c, var(--accent)) 10%, transparent);
+  transform:translateX(5px);
+  box-shadow:-2px 0 0 0 var(--c, var(--accent)), 0 6px 24px rgba(0,0,0,.25);
+}
+.eco-path:hover .ep-name{color:#fff}
+.eco-path:hover .ep-val{filter:brightness(1.25)}
+.eco-path:hover .ep-dot{box-shadow:0 0 8px 2px var(--c, var(--accent));transform:scale(1.3)}
+.eco-path .ep-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;transition:box-shadow .25s,transform .25s}
+.eco-path .ep-name{font-size:13px;font-weight:600;color:var(--text-1);flex:1;transition:color .25s}
+.eco-path .ep-val{font-family:var(--font-mono);font-size:11px;color:var(--green);font-weight:600;transition:filter .25s}
+.eco-path .ep-bar{position:relative;height:3px;border-radius:2px;background:rgba(255,255,255,.04);flex:0 0 60px;overflow:hidden}
+.eco-path .ep-bar-fill{position:absolute;left:0;top:0;height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent-3));width:0;transition:width 1.5s ease}
+.eco-tools{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;padding-top:6px;border-top:1px solid var(--border)}
+.eco-tools span{font-family:var(--font-mono);font-size:9px;letter-spacing:.06em;color:var(--text-4);padding:4px 8px;border-radius:4px;background:rgba(255,255,255,.02);border:1px solid var(--border)}
+/* ── Pulse rings ── */
+.pulse-ring{position:absolute;border-radius:50%;border:1px solid rgba(59,130,246,.15);animation:pulseRing 3s ease-out infinite}
+.pulse-ring:nth-child(1){width:200px;height:200px;top:50%;left:50%;transform:translate(-50%,-50%);animation-delay:0s}
+.pulse-ring:nth-child(2){width:300px;height:300px;top:50%;left:50%;transform:translate(-50%,-50%);animation-delay:1s}
+.pulse-ring:nth-child(3){width:400px;height:400px;top:50%;left:50%;transform:translate(-50%,-50%);animation-delay:2s}
+@keyframes pulseRing{0%{opacity:.6;transform:translate(-50%,-50%) scale(.8)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.2)}}
+.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:3}
+.scroll-hint .line{width:1px;height:40px;background:linear-gradient(to bottom,var(--accent-2),transparent);animation:scrollLine 2s ease-in-out infinite}
+@keyframes scrollLine{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+.scroll-hint span{font-family:var(--font-mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-3)}
+
+/* ── LOGO BAR ── */
+.logo-bar-sec{padding:48px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.logo-bar-label{text-align:center;font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-4);margin-bottom:28px}
+.logo-bar{overflow:hidden;width:100%;mask-image:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent)}
+.logo-track{display:flex;width:max-content;align-items:center;animation:marquee 60s linear infinite}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.logo-item{font-family:var(--font-body);font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);opacity:.5;white-space:nowrap;transition:opacity .25s;margin-right:56px}
+.logo-item:hover{opacity:.8}
+
+/* ── STATS ── */
+.stats-sec{background:var(--bg-2);border-bottom:1px solid var(--border)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.stat-card{text-align:center;padding:40px 20px;border-right:1px solid var(--border);transition:border-color .25s}
+.stat-card:last-child{border-right:none}
+.stat-card:hover{border-color:var(--accent-line)}
+.stat-val{font-family:var(--font-display);font-size:clamp(28px,4vw,44px);font-weight:900;color:var(--accent-2);line-height:1;margin-bottom:8px}
+.stat-lbl{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-4);line-height:1.5}
+
+/* ── FEATURE CARDS ── */
+.feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.feat-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:36px 28px;position:relative;overflow:hidden;transition:border-color .3s,box-shadow .3s,transform .25s}
+.feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .3s}
+.feat-card::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 0%,rgba(59,130,246,.04),transparent);opacity:0;transition:opacity .4s;pointer-events:none}
+.feat-card:hover{border-color:rgba(59,130,246,.2);box-shadow:0 0 30px rgba(59,130,246,.1);transform:translateY(-4px)}
+.feat-card:hover::before{opacity:.6}
+.feat-card:hover::after{opacity:1}
+.feat-icon{width:44px;height:44px;border-radius:10px;background:var(--accent-glow);border:1px solid var(--accent-line);display:flex;align-items:center;justify-content:center;margin-bottom:20px;color:var(--accent-2)}
+.feat-icon svg{width:20px;height:20px}
+.feat-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-4);margin-bottom:8px;display:block}
+.feat-card h3{font-size:18px;font-weight:700;color:var(--text-1);margin-bottom:8px;font-family:var(--font-body)}
+.feat-card p{font-size:14px;color:var(--text-3);line-height:1.6}
+
+/* ── HOW IT WORKS (STEPS) ── */
+.flow-sec{background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.flow-track{display:flex;align-items:flex-start;gap:0;position:relative;margin-top:48px}
+.flow-step{flex:1;text-align:center;position:relative;padding:0 20px}
+.flow-step-inner{display:flex;flex-direction:column;align-items:center}
+.flow-circle{width:52px;height:52px;border-radius:50%;background:var(--surface);border:2px solid var(--accent-line);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-family:var(--font-display);font-size:18px;font-weight:900;color:var(--accent-2);position:relative;z-index:2;transition:border-color .3s,box-shadow .3s}
+.flow-step:hover .flow-circle{border-color:var(--accent);box-shadow:0 0 20px rgba(59,130,246,.2)}
+.flow-line{position:absolute;top:26px;left:calc(50% + 26px);right:calc(-50% + 26px);height:2px;background:linear-gradient(90deg,var(--accent-line),rgba(59,130,246,.04));z-index:1}
+.flow-step:last-child .flow-line{display:none}
+.flow-step h4{font-size:15px;font-weight:700;color:var(--text-1);margin-bottom:6px}
+.flow-step p{font-size:13px;color:var(--text-3);line-height:1.55;max-width:220px;margin:0 auto}
+
+/* ── CHAPTERS ── */
+.ch-grid{display:grid;gap:12px;position:relative;padding-left:32px}
+.ch-grid::before{content:'';position:absolute;left:11px;top:24px;bottom:24px;width:2px;background:linear-gradient(to bottom,var(--accent),var(--accent-3),transparent);opacity:0;transform:scaleY(0);transform-origin:top;transition:opacity .6s,transform 1.2s ease}
+.ch-grid.timeline-ready::before{opacity:1;transform:scaleY(1)}
+.ch-card{display:flex;gap:20px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;position:relative;transition:border-color .3s,transform .25s,box-shadow .3s}
+.ch-card::before{content:'';position:absolute;left:-25px;top:28px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--accent-line);z-index:2;transition:border-color .3s,box-shadow .3s,background .3s}
+.ch-card.ch-active::before{border-color:var(--accent);background:var(--accent);box-shadow:0 0 12px rgba(59,130,246,.4)}
+.ch-card:hover{border-color:var(--accent-line);transform:translateX(4px);box-shadow:0 0 20px rgba(59,130,246,.06)}
+.ch-card.ch-active{border-color:rgba(59,130,246,.15);border-left:2px solid var(--accent)}
+.ch-num{font-family:var(--font-display);font-size:32px;font-weight:900;color:rgba(59,130,246,.2);flex-shrink:0;width:44px;line-height:1.1;transition:color .4s,text-shadow .4s}
+.ch-card.ch-active .ch-num{color:var(--accent-2);text-shadow:0 0 20px rgba(59,130,246,.3)}
+.ch-card h4{font-size:15px;font-weight:700;color:var(--text-1);margin-bottom:4px}
+.ch-card p{font-size:13px;color:var(--text-3);line-height:1.55}
+
+/* ── CAREERS ── */
+.career-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.career-card{background:linear-gradient(145deg,var(--bg-3),var(--surface));border:1px solid var(--accent-line);border-radius:16px;padding:28px;transition:border-color .3s,box-shadow .3s,transform .25s;position:relative;overflow:hidden}
+.career-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .3s}
+.career-card:hover{border-color:rgba(59,130,246,.3);box-shadow:0 0 30px rgba(59,130,246,.12);transform:translateY(-4px)}
+.career-card:hover::before{opacity:.7}
+.career-card h4{font-size:15px;font-weight:700;color:var(--text-1);margin-bottom:6px}
+.career-val{font-family:var(--font-display);font-size:clamp(24px,3vw,32px);font-weight:900;background:linear-gradient(135deg,var(--accent-2),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1}
+.career-period{font-family:var(--font-mono);font-size:10px;color:var(--text-4);letter-spacing:.05em;margin-bottom:10px}
+.career-card p{font-size:13px;color:var(--text-3);line-height:1.55}
+
+/* ── BONUS ── */
+.bonus-sec{position:relative}
+.bonus-sec::before{content:'';position:absolute;top:50%;left:50%;width:600px;height:600px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(52,211,153,.06) 0%,transparent 70%);pointer-events:none}
+.bonus-grid{display:grid;gap:16px;max-width:680px;margin:0 auto;position:relative}
+.bonus-card{display:flex;gap:22px;background:linear-gradient(135deg,rgba(15,21,32,.9),rgba(13,18,32,.95));border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:28px 26px;align-items:flex-start;position:relative;overflow:hidden;transition:border-color .35s,box-shadow .35s,transform .35s cubic-bezier(.22,1,.36,1)}
+.bonus-card::before{content:'';position:absolute;inset:0;border-radius:16px;background:linear-gradient(135deg,rgba(52,211,153,.04) 0%,transparent 50%);opacity:0;transition:opacity .35s;pointer-events:none}
+.bonus-card:hover{border-color:rgba(52,211,153,.18);box-shadow:0 8px 32px rgba(0,0,0,.3),0 0 0 1px rgba(52,211,153,.06);transform:translateY(-2px)}
+.bonus-card:hover::before{opacity:1}
+.bonus-card-wrap{display:flex;gap:22px;align-items:flex-start;width:100%}
+.bonus-num{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.1em;color:var(--green);opacity:.5;position:absolute;top:14px;right:18px}
+.bonus-icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,rgba(52,211,153,.1),rgba(52,211,153,.04));border:1px solid rgba(52,211,153,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--green);transition:box-shadow .35s,border-color .35s}
+.bonus-card:hover .bonus-icon{box-shadow:0 0 20px rgba(52,211,153,.12);border-color:rgba(52,211,153,.25)}
+.bonus-icon svg{width:22px;height:22px}
+.bonus-card h4{font-size:15px;font-weight:700;color:var(--text-1);margin-bottom:5px;letter-spacing:-.01em}
+.bonus-card p{font-size:13px;color:var(--text-3);line-height:1.6}
+.bonus-val{font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--green);margin-top:8px;display:inline-flex;align-items:center;gap:5px}
+.bonus-val::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--green);opacity:.6}
+
+/* ── DIFF ── */
+.diff-sec{background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative}
+.diff-sec::before{content:'';position:absolute;top:0;left:50%;width:800px;height:100%;transform:translateX(-50%);background:radial-gradient(ellipse at center,rgba(52,211,153,.04) 0%,transparent 60%);pointer-events:none}
+.diff-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;max-width:900px;margin:0 auto}
+.diff-col{padding:36px 32px;border-radius:16px;position:relative}
+.diff-col h3{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;margin-bottom:24px;padding-bottom:14px;display:flex;align-items:center;gap:8px}
+.diff-col h3::after{content:'';flex:1;height:1px}
+.diff-col ul{list-style:none}
+.diff-col li{font-size:14px;padding:10px 0;padding-left:28px;position:relative;line-height:1.6;display:flex;align-items:center;gap:8px}
+.diff-col li::before{position:absolute;left:0;top:50%;transform:translateY(-50%)}
+.diff-vs{display:flex;align-items:center;justify-content:center;padding:0 24px}
+.diff-vs span{font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--text-4);background:var(--bg-2);padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;z-index:1}
+.diff-old{background:linear-gradient(160deg,rgba(248,113,113,.04),rgba(248,113,113,.01));border:1px solid rgba(248,113,113,.1);overflow:hidden}
+.diff-old::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(248,113,113,.3),transparent)}
+.diff-old h3{color:var(--red);border-color:rgba(248,113,113,.1)}
+.diff-old li{color:var(--text-3)}
+.diff-old li::before{content:'';position:absolute;left:0;top:50%;width:8px;height:8px;border-radius:50%;background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.2)}
+.diff-new{background:linear-gradient(160deg,rgba(52,211,153,.05),rgba(52,211,153,.01));border:1px solid rgba(52,211,153,.1);overflow:hidden}
+.diff-new::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(52,211,153,.3),transparent)}
+.diff-new h3{color:var(--green);border-color:rgba(52,211,153,.1)}
+.diff-new li{color:var(--text-2)}
+.diff-new li::before{content:'✓';position:absolute;left:0;top:50%;transform:translateY(-50%);width:auto;height:auto;background:none;border:none;font-size:12px;font-weight:700;color:var(--green)}
+
+/* ── FAQ ── */
+.faq-wrap{max-width:700px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--border);overflow:hidden}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:20px 0;cursor:pointer;font-size:15px;font-weight:600;color:var(--text-1);gap:16px;transition:color .2s}
+.faq-q:hover{color:var(--accent-2)}
+.faq-q::after{content:'+';width:26px;height:26px;flex-shrink:0;border:1.5px solid var(--text-4);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:300;color:var(--text-4);line-height:26px;text-align:center;transition:border-color .25s,color .25s,transform .25s}
+.faq-q:hover::after{border-color:var(--accent-2);color:var(--accent-2)}
+.faq-item.open .faq-q{color:var(--accent-2)}
+.faq-item.open .faq-q::after{content:'−';border-color:var(--accent-2);color:var(--accent-2);transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq-a-inner{padding:0 0 20px;font-size:14px;color:var(--text-3);line-height:1.65}
+.faq-item.open .faq-a{max-height:300px}
+
+/* ── GUARANTEE ── */
+.guarantee-sec{background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center}
+.guarantee-icon{width:64px;height:64px;border-radius:50%;background:var(--accent-glow);border:1px solid var(--accent-line);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:var(--accent-2)}
+.guarantee-icon svg{width:28px;height:28px}
+
+/* ── PRICING ── */
+.price-sec{text-align:center;position:relative}
+.price-sec::before{content:'';position:absolute;top:50%;left:50%;width:700px;height:700px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(59,130,246,.07) 0%,transparent 65%);pointer-events:none}
+.price-box{max-width:480px;margin:0 auto;background:linear-gradient(180deg,rgba(15,21,32,.95),rgba(10,14,24,.98));border:1px solid rgba(59,130,246,.12);border-radius:24px;overflow:hidden;position:relative;box-shadow:0 40px 80px rgba(0,0,0,.5),0 0 80px rgba(59,130,246,.08),inset 0 1px 0 rgba(255,255,255,.04)}
+.price-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--accent),var(--accent-2),var(--accent-3),transparent);opacity:.7}
+.price-head{padding:36px 32px 28px;background:linear-gradient(180deg,rgba(59,130,246,.06),transparent);border-bottom:1px solid var(--border);position:relative}
+.price-head h3{font-size:22px;color:var(--text-1);margin-bottom:6px;letter-spacing:-.01em}
+.price-head .sub{font-size:14px;color:var(--text-3);margin:0 auto}
+.price-body{padding:28px 32px}
+.vl{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px;color:var(--text-3);align-items:center}
+.vl span:last-child{font-family:var(--font-mono);font-size:12px;text-decoration:line-through;color:var(--text-4);opacity:.7}
+.vt{display:flex;justify-content:space-between;padding:16px 0;border-top:1px solid rgba(255,255,255,.08);margin-top:8px;font-weight:700;color:var(--text-1);font-size:14px}
+.vt span:last-child{font-family:var(--font-mono);font-size:13px;text-decoration:line-through;color:var(--text-4)}
+.price-final{padding:32px;background:linear-gradient(180deg,rgba(59,130,246,.06),rgba(52,211,153,.03));border-top:1px solid var(--border);position:relative}
+.price-old{font-size:16px;color:var(--text-4);text-decoration:line-through;opacity:.7}
+.price-now{font-family:var(--font-display);font-size:72px;font-weight:900;line-height:1;margin:8px 0;position:relative;display:inline-block}
+.price-now::after{content:'';position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);width:60%;height:3px;background:linear-gradient(90deg,transparent,var(--accent-2),transparent);border-radius:2px}
+.price-inst{font-size:13px;color:var(--text-4);margin-top:8px}
+.price-cta{padding:0 32px 28px}
+.price-cta .btn{width:100%;justify-content:center;font-size:16px;padding:18px 32px;border-radius:14px;position:relative;overflow:hidden}
+.price-cta .btn::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(45deg,transparent,rgba(255,255,255,.08),transparent);transform:rotate(45deg) translateX(-100%);transition:transform .6s}
+.price-cta .btn:hover::after{transform:rotate(45deg) translateX(100%)}
+.price-guarantee{padding:18px 32px;text-align:center;font-size:12px;color:var(--text-4);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:center;gap:6px}
+.price-guarantee strong{color:var(--text-3)}
+.price-guarantee svg{width:14px;height:14px;color:var(--green);flex-shrink:0}
+
+/* ── FINAL CTA ── */
+.final-sec{padding:100px 0;text-align:center;position:relative;overflow:hidden;background:linear-gradient(180deg,var(--bg),var(--bg-2))}
+.final-sec::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(59,130,246,.06) 0%,transparent 65%);pointer-events:none}
+.final-inner{position:relative;z-index:1}
+.final-inner h2{margin-bottom:14px}
+.final-inner .sub{margin:0 auto 32px}
+
+/* ── FOOTER ── */
+footer{padding:36px 28px;text-align:center;border-top:1px solid var(--border)}
+footer .footer-inner{display:flex;flex-direction:column;align-items:center;gap:10px}
+footer .footer-brand{font-family:var(--font-mono);font-size:10px;color:var(--text-4);letter-spacing:.08em}
+footer .footer-links{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:nowrap;white-space:nowrap}
+footer .footer-links a{font-family:var(--font-mono);font-size:10px;color:var(--text-4);letter-spacing:.08em;text-decoration:none;transition:color .2s;white-space:nowrap}
+footer .footer-links a:hover{color:var(--accent-2)}
+footer .footer-sep{width:1px;height:12px;background:var(--border);flex-shrink:0}
+
+/* ── SEPARATOR ── */
+.sep{border-top:1px solid var(--border)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .hero{padding:80px 0 60px;min-height:auto}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .stat-card:nth-child(2){border-right:none}
+  .feat-grid{grid-template-columns:1fr}
+  .career-grid{grid-template-columns:repeat(2,1fr)}
+  .flow-track{flex-direction:column;gap:32px;align-items:center}
+  .flow-line{display:none}
+  .flow-step{padding:0;text-align:center;max-width:320px}
+  .flow-step-inner{display:flex;flex-direction:column;align-items:center}
+  .flow-circle{margin:0 auto 12px;width:44px;height:44px;font-size:16px}
+  .flow-step-text{text-align:center}
+  .flow-step h4{margin-bottom:4px}
+  .flow-step p{margin:0}
+  .diff-grid{grid-template-columns:1fr}
+  .diff-vs{display:none}
+  .sec{padding:72px 0}
+  .sec-sm{padding:56px 0}
+}
+@media(max-width:600px){
+  .wrap{padding:0 20px}
+  .hero{padding:64px 0 48px;text-align:center;overflow:hidden}
+  .hero::before{display:none}
+  .hero h1{font-size:clamp(26px,8vw,40px);text-align:center;letter-spacing:-.03em}
+  .hero h1 .line > span{white-space:normal}
+  .hero .sub{font-size:13px;text-align:center;max-width:100%}
+  .hero-btns{flex-direction:column;align-items:center}
+  .btn{width:100%;justify-content:center;padding:14px 24px;font-size:14px;border-radius:10px}
+  .btn-lg{padding:14px 28px;font-size:14px}
+  .hero-meta{flex-direction:column;gap:8px;align-items:center}
+  .hero-meta .sep{display:none}
+  .hero-mockup-bar{padding:10px 14px}
+  .hero-mockup-brand{font-size:8px}
+  .hero-mockup-body{padding:16px}
+  .eco-center .eco-val{font-size:24px}
+  .eco-path{padding:8px 10px;gap:8px}
+  .eco-path .ep-name{font-size:12px}
+  .eco-path .ep-bar{flex:0 0 40px}
+  .eco-tools span{font-size:8px;padding:3px 6px}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .stat-card{padding:28px 14px}
+  .stat-card .stat-val{font-size:28px}
+  .feat-grid{grid-template-columns:1fr}
+  .feat-card{padding:28px 22px}
+  .career-grid{grid-template-columns:1fr}
+  .career-card{padding:22px}
+  .ch-grid{padding-left:20px}
+  .ch-card{padding:18px;gap:14px}
+  .ch-card::before{left:-15px;width:10px;height:10px}
+  .ch-card h4{font-size:14px}
+  .ch-card p{font-size:12px}
+  .bonus-card{padding:20px 18px;gap:16px}
+  .bonus-icon{width:44px;height:44px;border-radius:12px}
+  .bonus-icon svg{width:18px;height:18px}
+  .bonus-card h4{font-size:14px}
+  .bonus-card p{font-size:12px}
+  .bonus-num{font-size:9px;top:10px;right:14px}
+  .diff-col{padding:24px 20px}
+  .diff-col li{font-size:13px;padding:8px 0 8px 24px}
+  .price-box{border-radius:20px}
+  .price-head{padding:28px 24px 22px}
+  .price-head h3{font-size:18px}
+  .price-body{padding:20px 24px}
+  .price-final{padding:28px 24px}
+  .price-now{font-size:56px}
+  .price-cta{padding:0 24px 24px}
+  .price-cta .btn{padding:16px 24px;font-size:15px}
+  .price-guarantee{padding:14px 24px;font-size:11px}
+  .sec{padding:56px 0}
+  .sec-sm{padding:40px 0}
+  .sec-t{margin-bottom:40px}
+  .guarantee-icon{width:56px;height:56px}
+  .guarantee-icon svg{width:24px;height:24px}
+  footer{padding:28px 20px}
+  footer .footer-links{gap:10px}
+  footer .footer-links span{font-size:9px}
+  footer .footer-links a{font-size:9px}
+}
+@media(max-width:380px){
+  .wrap{padding:0 16px}
+  .hero h1{font-size:28px}
+  .hero .sub{font-size:12px}
+  .stat-card .stat-val{font-size:24px}
+  .stat-card .stat-label{font-size:10px}
+  .eco-path .ep-name{font-size:11px}
+  .eco-path .ep-val{font-size:10px}
+  .bonus-card{flex-direction:column;gap:12px}
+  .bonus-icon{align-self:flex-start}
+  .price-now{font-size:48px}
+  .price-old{font-size:14px}
+  .diff-col h3{font-size:9px}
+  .diff-col li{font-size:12px}
+}
+
+/* ── REDUCED MOTION ── */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .ch-grid::before{opacity:1;transform:scaleY(1)}
+  .ch-card{opacity:1!important;transform:none!important}
+}
+
+/* ── GSAP HELPERS ── */
+.gsap-hide{visibility:hidden}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-content">
+      <div class="hero-badge"><span class="dot"></span> Atualizado para 2025</div>
+      <h1>
+        <span class="line"><span>Fature com <span class="accent-text">I.A.</span></span></span>
+        <span class="line"><span>sem ser técnico.</span></span>
+      </h1>
+      <p class="sub">O mapa das ferramentas que profissionais ja usam para faturar de <em>R$ 3.000 a R$ 50.000 por mes</em> &mdash; e o caminho exato para voce comecar hoje, sem experiencia tecnica.</p>
+      <div class="hero-btns">
+        <a href="#oferta" class="btn btn-primary btn-lg">Quero começar agora <span class="arrow">&rarr;</span></a>
+        <a href="#conteudo" class="btn btn-ghost">Ver o que tem dentro</a>
+      </div>
+      <div class="hero-meta">
+        <span>60+ paginas</span>
+        <span class="sep"></span>
+        <span>20+ ferramentas</span>
+        <span class="sep"></span>
+        <span>50 prompts prontos</span>
+        <span class="sep"></span>
+        <span>Garantia 7 dias</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-mockup">
+        <div class="hero-mockup-bar">
+          <div class="hero-mockup-dots"><span></span><span></span><span></span></div>
+          <span class="hero-mockup-brand">Era da I.A. — Mapa de Carreiras</span>
+          <div></div>
+        </div>
+        <div class="hero-mockup-body">
+          <div class="eco">
+            <div class="eco-center">
+              <div class="eco-title">Potencial mensal</div>
+              <div class="eco-val">R$ 3k &ndash; 50k</div>
+            </div>
+            <div class="eco-paths">
+              <div class="eco-path" style="--c:#3b82f6"><span class="ep-dot" style="background:#3b82f6"></span><span class="ep-name">Designer I.A.</span><span class="ep-val">R$ 15k</span><div class="ep-bar"><div class="ep-bar-fill" data-w="60"></div></div></div>
+              <div class="eco-path" style="--c:#818cf8"><span class="ep-dot" style="background:#818cf8"></span><span class="ep-name">Cineasta I.A.</span><span class="ep-val">R$ 30k</span><div class="ep-bar"><div class="ep-bar-fill" data-w="85"></div></div></div>
+              <div class="eco-path" style="--c:#34d399"><span class="ep-dot" style="background:#34d399"></span><span class="ep-name">Consultor I.A.</span><span class="ep-val">R$ 50k</span><div class="ep-bar"><div class="ep-bar-fill" data-w="100"></div></div></div>
+              <div class="eco-path" style="--c:#fbbf24"><span class="ep-dot" style="background:#fbbf24"></span><span class="ep-name">Infoprodutos</span><span class="ep-val">R$ 40k</span><div class="ep-bar"><div class="ep-bar-fill" data-w="75"></div></div></div>
+              <div class="eco-path" style="--c:#f472b6"><span class="ep-dot" style="background:#f472b6"></span><span class="ep-name">Criador Conteudo</span><span class="ep-val">R$ 10k</span><div class="ep-bar"><div class="ep-bar-fill" data-w="40"></div></div></div>
+            </div>
+            <div class="eco-tools">
+              <span>ChatGPT</span><span>Claude</span><span>Midjourney</span><span>Runway</span><span>Gemini</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="line"></div><span>Scroll</span></div>
+</section>
+
+<!-- ═══ LOGO BAR ═══ -->
+<section class="logo-bar-sec">
+  <p class="logo-bar-label">Ferramentas que voce vai dominar</p>
+  <div class="logo-bar" aria-hidden="true">
+    <div class="logo-track" id="logoTrack">
+      <span class="logo-item">ChatGPT</span>
+      <span class="logo-item">Claude</span>
+      <span class="logo-item">Midjourney</span>
+      <span class="logo-item">Runway</span>
+      <span class="logo-item">Gemini</span>
+      <span class="logo-item">DALL-E 3</span>
+      <span class="logo-item">Higgsfield</span>
+      <span class="logo-item">Magnific.ai</span>
+      <span class="logo-item">Kling AI</span>
+      <span class="logo-item">Canva I.A.</span>
+      <span class="logo-item">ChatGPT</span>
+      <span class="logo-item">Claude</span>
+      <span class="logo-item">Midjourney</span>
+      <span class="logo-item">Runway</span>
+      <span class="logo-item">Gemini</span>
+      <span class="logo-item">DALL-E 3</span>
+      <span class="logo-item">Higgsfield</span>
+      <span class="logo-item">Magnific.ai</span>
+      <span class="logo-item">Kling AI</span>
+      <span class="logo-item">Canva I.A.</span>
+      <span class="logo-item">ChatGPT</span>
+      <span class="logo-item">Claude</span>
+      <span class="logo-item">Midjourney</span>
+      <span class="logo-item">Runway</span>
+      <span class="logo-item">Gemini</span>
+      <span class="logo-item">DALL-E 3</span>
+      <span class="logo-item">Higgsfield</span>
+      <span class="logo-item">Magnific.ai</span>
+      <span class="logo-item">Kling AI</span>
+      <span class="logo-item">Canva I.A.</span>
+      <span class="logo-item">ChatGPT</span>
+      <span class="logo-item">Claude</span>
+      <span class="logo-item">Midjourney</span>
+      <span class="logo-item">Runway</span>
+      <span class="logo-item">Gemini</span>
+      <span class="logo-item">DALL-E 3</span>
+      <span class="logo-item">Higgsfield</span>
+      <span class="logo-item">Magnific.ai</span>
+      <span class="logo-item">Kling AI</span>
+      <span class="logo-item">Canva I.A.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STATS ═══ -->
+<section class="stats-sec">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat-card gsap-reveal">
+        <div class="stat-val"><span data-counter="1.8" data-suffix=" tri" data-decimals="1">0</span></div>
+        <div class="stat-lbl">Mercado global de I.A. ate 2030</div>
+      </div>
+      <div class="stat-card gsap-reveal">
+        <div class="stat-val"><span data-counter="5" data-suffix="%" data-prefix="<">&lt; 0%</span></div>
+        <div class="stat-lbl">Profissionais brasileiros usam I.A.</div>
+      </div>
+      <div class="stat-card gsap-reveal">
+        <div class="stat-val"><span data-counter="3" data-suffix="x">0x</span></div>
+        <div class="stat-lbl">Mais faturamento com I.A.</div>
+      </div>
+      <div class="stat-card gsap-reveal">
+        <div class="stat-val"><span data-counter="50" data-suffix="k" data-prefix="R$ ">R$ 0k</span></div>
+        <div class="stat-lbl">Faturamento maximo por projeto</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BENEFITS ═══ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-t">
+      <span class="ey">Por que este eBook existe</span>
+      <h2>Voce ve todo dia alguem<br>lucrando com I.A.</h2>
+      <p class="sub" style="margin:12px auto 0">Nao e falta de capacidade. E falta de direcao.<br>Este e o mapa que faltava.</p>
+    </div>
+    <div class="feat-grid" id="featGrid">
+      <article class="feat-card gsap-reveal">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <span class="feat-tag">Resultado</span>
+        <h3>Foco em resultado, nao em teoria</h3>
+        <p>Nao ensina "como funciona a I.A." &mdash; ensina como voce ganha dinheiro com ela. Cada ferramenta com caminho de monetizacao.</p>
+      </article>
+      <article class="feat-card gsap-reveal">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
+        <span class="feat-tag">Ecossistema</span>
+        <h3>Mapa completo do ecossistema</h3>
+        <p>Hubs, agentes, geradores de imagem e video &mdash; tudo organizado. Voce sabe exatamente qual ferramenta usar para que.</p>
+      </article>
+      <article class="feat-card gsap-reveal">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <span class="feat-tag">Valores</span>
+        <h3>Valores reais de mercado</h3>
+        <p>5 carreiras detalhadas com faixas de faturamento reais. Nao promessa vaga &mdash; numeros que profissionais ja faturam.</p>
+      </article>
+      <article class="feat-card gsap-reveal">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <span class="feat-tag">Imediato</span>
+        <h3>Aplicavel no dia seguinte</h3>
+        <p>50 prompts prontos, fluxos de trabalho passo a passo, planilha de precos. Voce sai do eBook ja sabendo o que fazer.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<section class="flow-sec sec-sm">
+  <div class="wrap">
+    <div class="sec-t">
+      <span class="ey">Como funciona</span>
+      <h2>Do zero ao primeiro faturamento</h2>
+    </div>
+    <div class="flow-track" id="flowTrack">
+      <div class="flow-step gsap-reveal">
+        <div class="flow-line"></div>
+        <div class="flow-step-inner">
+          <div class="flow-circle">01</div>
+          <div class="flow-step-text"><h4>Leia o mapa</h4><p>Entenda o ecossistema, conheca as ferramentas e descubra qual carreira combina com voce.</p></div>
+        </div>
+      </div>
+      <div class="flow-step gsap-reveal">
+        <div class="flow-line"></div>
+        <div class="flow-step-inner">
+          <div class="flow-circle">02</div>
+          <div class="flow-step-text"><h4>Escolha sua ferramenta</h4><p>Use os prompts prontos e fluxos de trabalho para criar seus primeiros resultados reais.</p></div>
+        </div>
+      </div>
+      <div class="flow-step gsap-reveal">
+        <div class="flow-line"></div>
+        <div class="flow-step-inner">
+          <div class="flow-circle">03</div>
+          <div class="flow-step-text"><h4>Cobre pelo servico</h4><p>Com a planilha de precos e o guia de monetizacao, voce sabe exatamente quanto cobrar.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHAT'S INSIDE ═══ -->
+<section class="sec" id="conteudo">
+  <div class="wrap">
+    <div class="sec-t">
+      <span class="ey">Conteudo completo</span>
+      <h2>O que tem dentro do eBook</h2>
+      <p class="sub" style="margin:12px auto 0">60+ paginas com o mapa completo &mdash; organizado por ferramenta, por carreira e por fluxo de trabalho.</p>
+    </div>
+    <div class="ch-grid" id="chGrid">
+      <div class="ch-card gsap-reveal"><div class="ch-num">01</div><div><h4>O Ecossistema &mdash; Entenda o Mapa</h4><p>Hubs, agentes, geradores de imagem e video &mdash; como tudo se conecta em um fluxo real.</p></div></div>
+      <div class="ch-card gsap-reveal"><div class="ch-num">02</div><div><h4>Os Hubs que Profissionais Usam</h4><p>Magnific.ai, Higgsfield.ai, Runway ML &mdash; ferramentas de nivel profissional que a maioria nao conhece.</p></div></div>
+      <div class="ch-card gsap-reveal"><div class="ch-num">03</div><div><h4>Agentes de I.A. &mdash; Colaboradores Digitais</h4><p>Claude, ChatGPT, Gemini &mdash; qual usar para qual objetivo. Como transformar agentes em renda.</p></div></div>
+      <div class="ch-card gsap-reveal"><div class="ch-num">04</div><div><h4>Geradores de Imagem</h4><p>DALL-E 3, Imagen 3, Midjourney &mdash; com 20 prompts prontos para copiar e monetizar.</p></div></div>
+      <div class="ch-card gsap-reveal"><div class="ch-num">05</div><div><h4>Carreiras e Nichos &mdash; Quanto Voce Pode Ganhar</h4><p>5 caminhos reais de renda com valores, ferramentas e plano de 90 dias.</p></div></div>
+      <div class="ch-card gsap-reveal"><div class="ch-num">06</div><div><h4>Fluxos de Trabalho Prontos</h4><p>3 fluxogramas: video publicitario, eBook/produto digital, designer freelancer.</p></div></div>
+      <div class="ch-card gsap-reveal"><div class="ch-num">07</div><div><h4>Como Nao Perder Dinheiro</h4><p>Armadilhas, como testar antes de pagar, precificacao, contratos e direitos autorais.</p></div></div>
+      <div class="ch-card gsap-reveal"><div class="ch-num">08</div><div><h4>Micro SaaS com I.A.</h4><p>Crie um produto digital recorrente em um fim de semana. Claude Code, Supabase e Vercel &mdash; do zero ao lancamento.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CAREERS ═══ -->
+<section class="sec-sm" style="background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="wrap">
+    <div class="sec-t">
+      <span class="ey">6 carreiras reais</span>
+      <h2>Quanto voce pode ganhar com I.A.</h2>
+      <p class="sub" style="margin:12px auto 0">Cada carreira detalhada com ferramentas, valores e como comecar.</p>
+    </div>
+    <div class="career-grid" id="careerGrid">
+      <div class="career-card gsap-reveal"><h4>Designer I.A.</h4><div class="career-val">R$ 3k &ndash; 15k</div><div class="career-period">por mes &middot; freelancer</div><p>Identidades visuais, mockups, posts e materiais de marketing com Midjourney e DALL-E 3.</p></div>
+      <div class="career-card gsap-reveal"><h4>Cineasta I.A.</h4><div class="career-val">R$ 5k &ndash; 30k</div><div class="career-period">por mes &middot; por projeto</div><p>Videos cinematograficos para marcas e publicidade com Runway, Kling AI e Higgsfield.</p></div>
+      <div class="career-card gsap-reveal"><h4>Criador de Conteudo</h4><div class="career-val">R$ 2k &ndash; 10k</div><div class="career-period">por mes</div><p>Ghost-writing, newsletters, scripts e automacao de redes sociais com ChatGPT e Claude.</p></div>
+      <div class="career-card gsap-reveal"><h4>Consultor de I.A.</h4><div class="career-val">R$ 8k &ndash; 50k</div><div class="career-period">por projeto</div><p>Implementacao de fluxos de I.A. em empresas e agencias. O ticket mais alto do mercado.</p></div>
+      <div class="career-card gsap-reveal"><h4>Produtor de Infoprodutos</h4><div class="career-val">R$ 5k &ndash; 40k</div><div class="career-period">por mes &middot; escala</div><p>eBooks, cursos, templates e kits &mdash; crie uma vez com I.A. e venda infinitamente.</p></div>
+      <div class="career-card gsap-reveal"><h4>Editor de Video I.A.</h4><div class="career-val">R$ 3k &ndash; 20k</div><div class="career-period">por mes &middot; freelancer</div><p>Reels, TikToks e videos curtos para marcas. Edicao automatizada com ferramentas de I.A.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BONUS ═══ -->
+<section class="sec bonus-sec">
+  <div class="wrap">
+    <div class="sec-t">
+      <span class="ey">Bonus inclusos</span>
+      <h2>Voce tambem recebe 3 bonus</h2>
+      <p class="sub" style="margin:12px auto 0">Valor total de R$ 101 &mdash; incluidos gratis.</p>
+    </div>
+    <div class="bonus-grid" id="bonusGrid">
+      <div class="bonus-card gsap-reveal">
+        <span class="bonus-num">01</span>
+        <div class="bonus-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div><h4>50 Prompts Profissionais Prontos</h4><p>Para design, video, copy e automacao. Copie, adapte e comece a cobrar amanha.</p><div class="bonus-val">Valor: R$ 37,00</div></div>
+      </div>
+      <div class="bonus-card gsap-reveal">
+        <span class="bonus-num">02</span>
+        <div class="bonus-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/></svg></div>
+        <div><h4>Planilha de Precos para Servicos I.A.</h4><p>Preco minimo, medio e premium por tipo de servico. Nunca mais fique sem saber quanto cobrar.</p><div class="bonus-val">Valor: R$ 27,00</div></div>
+      </div>
+      <div class="bonus-card gsap-reveal">
+        <span class="bonus-num">03</span>
+        <div class="bonus-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+        <div><h4>Lista das 30 Ferramentas Mais Usadas</h4><p>Categoria, preco, dificuldade, potencial de monetizacao e link direto de cada uma.</p><div class="bonus-val">Valor: R$ 37,00</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DIFF ═══ -->
+<section class="diff-sec sec-sm">
+  <div class="wrap">
+    <div class="sec-t">
+      <span class="ey">Diferencial</span>
+      <h2>Este nao e mais um curso de I.A.</h2>
+    </div>
+    <div class="diff-grid">
+      <div class="diff-col diff-old gsap-reveal">
+        <h3>Outros cursos</h3>
+        <ul>
+          <li>Ensina como funciona, nao como ganhar</li>
+          <li>Foco em uma ferramenta so</li>
+          <li>Genericos, sem valores de mercado</li>
+          <li>Conteudo desatualizado</li>
+          <li>Sem caminho claro de monetizacao</li>
+        </ul>
+      </div>
+      <div class="diff-vs"><span>VS</span></div>
+      <div class="diff-col diff-new gsap-reveal">
+        <h3>Era da I.A.</h3>
+        <ul>
+          <li>Foco total em monetizacao</li>
+          <li>Ecossistema completo (20+ ferramentas)</li>
+          <li>Valores reais por carreira</li>
+          <li>Atualizado com ferramentas de 2025</li>
+          <li>50 prompts prontos para usar agora</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-t">
+      <span class="ey">Duvidas</span>
+      <h2>Perguntas frequentes</h2>
+    </div>
+    <div class="faq-wrap" id="faqWrap">
+      <div class="faq-item">
+        <div class="faq-q">Nao sou tecnico, consigo usar I.A.?</div>
+        <div class="faq-a"><div class="faq-a-inner">Sim. As ferramentas de 2025 sao feitas para nao-tecnicos. Se voce sabe descrever o que quer com palavras, ja sabe usar. O eBook mostra como criar prompts que funcionam &mdash; com 50 exemplos prontos.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Ja tem muita gente fazendo isso?</div>
+        <div class="faq-a"><div class="faq-a-inner">Menos de 5% dos profissionais criativos brasileiros usam I.A. de forma produtiva. O mercado vai de $150 bilhoes para $1,8 trilhao ate 2030. Nao esta saturado &mdash; esta comecando.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">As ferramentas mudam toda semana?</div>
+        <div class="faq-a"><div class="faq-a-inner">Os fundamentos nao mudam. Prompting, fluxo de trabalho, combinar ferramentas &mdash; sao habilidades transferiveis. Quem aprende agora domina qualquer ferramenta nova.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Nao tenho dinheiro para assinar ferramentas</div>
+        <div class="faq-a"><div class="faq-a-inner">Claude, ChatGPT e Gemini tem versoes gratuitas. Runway e Magnific.ai oferecem trials. Voce pode comecar com R$ 0 e so pagar quando ja estiver lucrando.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Parece coisa de gringo, funciona no Brasil?</div>
+        <div class="faq-a"><div class="faq-a-inner">O mercado brasileiro de servicos com I.A. cresce 300% ao ano. As ferramentas sao globais, mas os clientes sao daqui.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">R$ 27 e caro para um eBook</div>
+        <div class="faq-a"><div class="faq-a-inner">R$ 27 e um lanche. A diferenca: isso some em minutos. Este eBook te coloca em um mercado que pode gerar R$ 3.000+ por mes. O valor total incluido e R$ 178.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Ja tentei antes e nao consegui</div>
+        <div class="faq-a"><div class="faq-a-inner">A maioria falhou por falta de direcao, nao de capacidade. Tutoriais genericos sem objetivo nao funcionam. Este eBook mostra: qual ferramenta, para qual trabalho, quanto cobrar.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GUARANTEE ═══ -->
+<section class="guarantee-sec sec-sm">
+  <div class="wrap" style="max-width:560px">
+    <div class="guarantee-icon gsap-reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+    <span class="ey" style="display:block;text-align:center;margin-bottom:12px">Risco zero</span>
+    <h2 style="text-align:center;margin-bottom:12px">7 dias de garantia incondicional</h2>
+    <p class="sub" style="margin:0 auto;text-align:center">Se por qualquer motivo voce nao ficar satisfeito nos primeiros 7 dias, devolvemos 100% do seu dinheiro. Sem perguntas. Sem burocracia.</p>
+  </div>
+</section>
+
+<!-- ═══ PRICING ═══ -->
+<section class="price-sec sec" id="oferta">
+  <div class="wrap">
+    <span class="ey" style="display:block;text-align:center;margin-bottom:12px">Oferta de lancamento</span>
+    <h2 style="text-align:center;margin-bottom:32px">Invista no seu futuro</h2>
+    <div class="price-box gsap-reveal">
+      <div class="price-head">
+        <h3>Era da I.A. &mdash; Pacote Completo</h3>
+        <p class="sub">eBook + 3 Bonus Exclusivos</p>
+      </div>
+      <div class="price-body">
+        <div class="vl"><span>eBook principal (8 capitulos)</span><span>R$ 77</span></div>
+        <div class="vl"><span>Bonus 1 &mdash; 50 Prompts</span><span>R$ 37</span></div>
+        <div class="vl"><span>Bonus 2 &mdash; Planilha de Precos</span><span>R$ 27</span></div>
+        <div class="vl"><span>Bonus 3 &mdash; Lista de 30 Ferramentas</span><span>R$ 37</span></div>
+        <div class="vt"><span>Valor total</span><span>R$ 178</span></div>
+      </div>
+      <div class="price-final">
+        <div class="price-old">De R$ 77,00</div>
+        <div class="price-now accent-text">R$ 27</div>
+        <div class="price-inst">ou 5x de R$ 5,40 sem juros</div>
+      </div>
+      <div class="price-cta">
+        <a href="#" class="btn btn-primary btn-lg">Quero meu eBook agora <span class="arrow">&rarr;</span></a>
+      </div>
+      <div class="price-guarantee">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        <span><strong>Garantia de 7 dias</strong> &mdash; Se nao gostar, devolvemos 100%.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FINAL CTA ═══ -->
+<section class="final-sec">
+  <div class="wrap final-inner">
+    <span class="ey" style="display:block;margin-bottom:14px">Ultima chance</span>
+    <h2>A janela esta aberta.<br><span class="accent-text">Entre agora.</span></h2>
+    <p class="sub">Em 2009, quem criou conta no Instagram construiu audiencias de milhoes. Hoje o mesmo esta acontecendo com I.A. A pergunta nao e "tem espaco?" &mdash; e "quando voce vai entrar?"</p>
+    <p style="font-size:12px;color:var(--text-4);margin-top:16px">Acesso imediato &middot; Garantia de 7 dias</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-brand">Era da I.A. &copy; 2026</span>
+    <div class="footer-links">
+      <a href="termos-de-uso.html">Termos de Uso</a>
+      <span class="footer-sep"></span>
+      <a href="politica-de-privacidade.html">Politica de Privacidade</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ SCRIPTS ═══ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ── Reduced motion check ──
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ── Set initial hidden state via JS (not CSS) ──
+  if(!prefersReduced){
+    gsap.set('.gsap-reveal', {opacity:0, y:40});
+    gsap.set('.hero h1 .line span', {opacity:0, y:'100%'});
+    gsap.set('.hero .sub', {opacity:0, y:20});
+    gsap.set('.hero-btns', {opacity:0, y:20});
+    gsap.set('.hero-meta', {opacity:0});
+    gsap.set('.hero-visual', {opacity:0, x:40});
+    gsap.set('.guarantee-icon', {opacity:0, scale:0.5});
+    gsap.set('.price-box', {opacity:0, y:40, scale:0.96});
+    gsap.set('.final-inner h2', {opacity:0, y:30});
+    gsap.set('.diff-old', {opacity:0, x:-40});
+    gsap.set('.diff-new', {opacity:0, x:40});
+    gsap.set('.diff-vs', {opacity:0, scale:0.8});
+  }
+
+  // ── Hero text reveal ──
+  gsap.to('.hero h1 .line span', {
+    opacity:1, y:0, duration:0.8, stagger:0.12, ease:'power4.out', delay:0.3
+  });
+  gsap.to('.hero .sub', {opacity:1, y:0, duration:0.6, ease:'power2.out', delay:0.8});
+  gsap.to('.hero-btns', {opacity:1, y:0, duration:0.6, ease:'power2.out', delay:0.95});
+  gsap.to('.hero-meta', {opacity:1, duration:0.5, ease:'power2.out', delay:1.1});
+  gsap.to('.hero-visual', {opacity:1, x:0, duration:0.8, ease:'power3.out', delay:0.6});
+
+  // ── Hero parallax ──
+  if(!prefersReduced){
+    gsap.to('.hero-visual', {
+      yPercent:-12, ease:'none',
+      scrollTrigger:{trigger:'.hero', start:'top top', end:'bottom top', scrub:true}
+    });
+  }
+
+  // ── Hero eco bar fill animation ──
+  document.querySelectorAll('.ep-bar-fill').forEach(bar=>{
+    const w = bar.dataset.w;
+    gsap.to(bar, {width:w+'%', duration:1.5, ease:'power2.out', delay:1.2});
+  });
+
+  // ── Hero eco paths stagger ──
+  gsap.from('.eco-path', {
+    opacity:0, x:20, duration:0.5, stagger:0.1, ease:'power2.out', delay:0.8
+  });
+
+
+  // ── Stats counter ──
+  document.querySelectorAll('[data-counter]').forEach(el=>{
+    const target = parseFloat(el.dataset.counter);
+    const suffix = el.dataset.suffix || '';
+    const prefix = el.dataset.prefix || '';
+    const decimals = parseInt(el.dataset.decimals) || 0;
+    ScrollTrigger.create({
+      trigger: el, start:'top 85%', once:true,
+      onEnter:()=>{
+        gsap.to({val:0},{
+          val:target, duration:1.8, ease:'power2.out',
+          onUpdate:function(){
+            el.textContent = prefix + this.targets()[0].val.toFixed(decimals) + suffix;
+          }
+        });
+      }
+    });
+  });
+
+  // ── Stats section reveal ──
+  gsap.to('.stat-card', {
+    scrollTrigger:{trigger:'.stats-sec', start:'top 80%'},
+    opacity:1, y:0, duration:0.5, stagger:0.1, ease:'power2.out'
+  });
+
+  // ── Feature cards stagger ──
+  gsap.to('#featGrid .feat-card', {
+    scrollTrigger:{trigger:'#featGrid', start:'top 85%'},
+    opacity:1, y:0, scale:1, duration:0.55,
+    stagger:{each:0.1, from:'start'},
+    ease:'power3.out'
+  });
+
+  // ── Flow steps stagger ──
+  gsap.to('#flowTrack .flow-step', {
+    scrollTrigger:{trigger:'#flowTrack', start:'top 85%'},
+    opacity:1, y:0, duration:0.5, stagger:0.15, ease:'power2.out'
+  });
+
+  // ── Chapter cards timeline animation ──
+  (function(){
+    const chCards = document.querySelectorAll('#chGrid .ch-card');
+    if(!chCards.length || prefersReduced) return;
+
+    // Set initial state for chapter cards specifically
+    gsap.set(chCards, {opacity:0, x:-50, scale:0.95});
+
+    const chTL = gsap.timeline({
+      scrollTrigger:{trigger:'#chGrid', start:'top 85%', once:true}
+    });
+
+    // Timeline line draws in first
+    chTL.to('#chGrid', {
+      duration:0.01,
+      onComplete:()=> document.getElementById('chGrid').classList.add('timeline-ready')
+    });
+
+    // Cards stagger in with number glow activation
+    chCards.forEach((card, i) => {
+      const num = card.querySelector('.ch-num');
+      chTL.to(card, {
+        opacity:1, x:0, scale:1, duration:0.55, ease:'power3.out',
+        onComplete:()=>{
+          card.classList.add('ch-active');
+          // Number glow pulse
+          gsap.fromTo(num,
+            {color:'rgba(59,130,246,.2)'},
+            {color:'var(--accent-2)', duration:0.3, ease:'power2.out',
+             yoyo:true, repeat:1,
+             onComplete:()=> gsap.to(num, {color:'rgba(59,130,246,.2)', duration:0.4})
+            }
+          );
+        }
+      }, i * 0.1);
+    });
+  })();
+
+  // ── Career cards stagger ──
+  gsap.to('#careerGrid .career-card', {
+    scrollTrigger:{trigger:'#careerGrid', start:'top 85%'},
+    opacity:1, y:0, scale:1, duration:0.5,
+    stagger:{each:0.08, from:'start'},
+    ease:'power3.out'
+  });
+
+  // ── Bonus cards stagger ──
+  gsap.to('#bonusGrid .bonus-card', {
+    scrollTrigger:{trigger:'#bonusGrid', start:'top 85%'},
+    opacity:1, y:0, duration:0.6, stagger:{each:0.12, from:'start'},
+    ease:'power3.out'
+  });
+
+  // ── Diff columns ──
+  gsap.to('.diff-old', {
+    scrollTrigger:{trigger:'.diff-grid', start:'top 85%'},
+    opacity:1, x:0, duration:0.6, ease:'power3.out'
+  });
+  gsap.to('.diff-vs', {
+    scrollTrigger:{trigger:'.diff-grid', start:'top 85%'},
+    opacity:1, scale:1, duration:0.4, ease:'back.out(1.7)', delay:0.15
+  });
+  gsap.to('.diff-new', {
+    scrollTrigger:{trigger:'.diff-grid', start:'top 85%'},
+    opacity:1, x:0, duration:0.6, ease:'power3.out', delay:0.2
+  });
+
+  // ── Guarantee icon ──
+  gsap.to('.guarantee-icon', {
+    scrollTrigger:{trigger:'.guarantee-sec', start:'top 85%'},
+    opacity:1, scale:1, duration:0.6, ease:'back.out(1.7)'
+  });
+
+  // ── Pricing box ──
+  gsap.to('.price-box', {
+    scrollTrigger:{trigger:'.price-sec', start:'top 80%'},
+    opacity:1, y:0, scale:1, duration:0.7, ease:'power3.out'
+  });
+
+  // ── Final CTA ──
+  gsap.to('.final-inner h2', {
+    scrollTrigger:{trigger:'.final-sec', start:'top 85%'},
+    opacity:1, y:0, duration:0.6, ease:'power2.out'
+  });
+
+  // ── FAQ accordion ──
+  document.querySelectorAll('.faq-q').forEach(q=>{
+    q.addEventListener('click',()=>{
+      const item = q.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!wasOpen) item.classList.add('open');
+    });
+  });
+
+})();
+</script>
+</body>
+</html>

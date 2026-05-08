@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Templates de Negócio — Bônus Era da I.A.</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --negro:#030B14;
+  --carbon:#0A1628;
+  --carbon2:#0F1E30;
+  --ouro:#2563EB;
+  --acento-dark:#38BDF8;
+  --pop:#22D3EE;
+  --amber:#FBBF24;
+  --fundo:#EEF4FF;
+  --fundo-alt:#F0F9FF;
+  --texto:#1E293B;
+  --texto-suave:#475569;
+  --branco:#FFFFFF;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{background:#CBD5E1;font-family:'Lato',sans-serif;color:var(--texto)}
+
+/* ── PÁGINA BASE ── */
+.page{
+  width:210mm;height:297mm;overflow:hidden;
+  background:var(--fundo);
+  position:relative;
+  margin:0 auto 8mm;
+  page-break-after:always;break-after:page;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+.page-inner{
+  padding:22mm 20mm 20mm 24mm;
+  height:100%;overflow:hidden;
+  position:relative;
+}
+
+/* ── HEADER / FOOTER ── */
+.ph,.pf{
+  position:absolute;left:0;right:0;
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:'Lato',sans-serif;font-size:7pt;letter-spacing:.08em;
+  color:var(--texto-suave);text-transform:uppercase;
+  padding:0 24mm;
+}
+.ph{top:9mm}
+.pf{bottom:9mm}
+.ph::after{
+  content:'';position:absolute;bottom:-3mm;left:24mm;right:24mm;
+  height:.3mm;background:var(--ouro);opacity:.25;
+}
+.pf::before{
+  content:'';position:absolute;top:-3mm;left:24mm;right:24mm;
+  height:.3mm;background:var(--ouro);opacity:.25;
+}
+.pnum{color:var(--ouro);font-weight:700}
+
+/* ── REGRA DECORATIVA ── */
+.rule{display:block;height:.5mm;background:var(--ouro);margin:4mm 0;opacity:.7}
+
+/* ── TIPOGRAFIA ── */
+h1{font-family:'Playfair Display',serif;font-weight:900;font-size:22pt;line-height:1.15;color:var(--negro);margin-bottom:4mm}
+h2{font-family:'Playfair Display',serif;font-weight:700;font-size:15pt;line-height:1.2;color:var(--negro);margin:5mm 0 2mm}
+h3{font-family:'Lato',sans-serif;font-weight:700;font-size:10pt;letter-spacing:.06em;text-transform:uppercase;color:var(--ouro);margin:4mm 0 2mm}
+strong,b{font-family:'Lato',sans-serif}
+.num{font-family:'Lato',sans-serif;font-weight:900;color:var(--ouro)}
+.num-pop{font-family:'Lato',sans-serif;font-weight:900;color:var(--pop)}
+p{font-family:'Source Serif 4',Georgia,serif;font-size:9.5pt;line-height:1.65;color:var(--texto);margin-bottom:3mm;orphans:3;widows:3}
+.subtitulo-fino{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12pt;color:var(--texto-suave);margin-bottom:4mm}
+.cap-num{font-family:'Lato',sans-serif;font-size:7.5pt;letter-spacing:.15em;text-transform:uppercase;color:var(--ouro);font-weight:700;margin-bottom:2mm}
+.cap-epigrafe{font-family:'Source Serif 4',Georgia,serif;font-style:italic;font-style:italic;font-size:13pt;color:var(--texto-suave);line-height:1.5;border-left:1mm solid var(--ouro);padding-left:4mm;margin:5mm 0}
+.cap-epigrafe span{display:block;font-size:9pt;font-style:normal;font-weight:700;margin-top:2mm;color:var(--texto-suave)}
+
+/* ── COMPONENTES ── */
+.bloco-callout{background:#DBEAFE;border-left:1.5mm solid var(--ouro);padding:4mm 5mm;margin:4mm 0;page-break-inside:avoid;break-inside:avoid}
+.ferramenta-card a{color:var(--ouro);text-decoration:none;font-weight:700}
+.ferramenta-card a:hover{text-decoration:underline}
+.bloco-callout .label{font-size:7pt;letter-spacing:.1em;text-transform:uppercase;color:var(--ouro);font-weight:700;margin-bottom:1.5mm}
+.bloco-callout p{margin:0;font-size:9pt}
+
+.pull-quote{text-align:center;padding:5mm 8mm;margin:5mm 0;page-break-inside:avoid;break-inside:avoid}
+.pull-quote blockquote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15pt;line-height:1.4;color:var(--negro)}
+.pull-quote cite{display:block;font-size:8pt;letter-spacing:.08em;text-transform:uppercase;color:var(--ouro);margin-top:2mm;font-style:normal}
+
+.bloco-exercicio{background:var(--carbon);color:var(--branco);padding:5mm;margin:4mm 0;page-break-inside:avoid;break-inside:avoid}
+.bloco-exercicio .ex-label{font-size:7pt;letter-spacing:.12em;text-transform:uppercase;color:var(--acento-dark);font-weight:700;margin-bottom:2mm}
+.bloco-exercicio h4{color:var(--branco);font-family:'Lato',sans-serif;font-weight:700;font-size:10pt;margin-bottom:2mm}
+.bloco-exercicio p{color:rgba(255,255,255,.8);font-size:9pt;margin-bottom:2mm}
+.prompt-box{background:rgba(255,255,255,.07);border-left:1mm solid var(--acento-dark);padding:3mm 4mm;font-family:monospace;font-size:8pt;color:var(--acento-dark);margin-top:2mm}
+
+.bloco-resumo{background:var(--negro);padding:5mm 6mm;margin:4mm 0;page-break-inside:avoid;break-inside:avoid}
+.bloco-resumo .r-label{font-size:7pt;letter-spacing:.12em;text-transform:uppercase;color:var(--acento-dark);font-weight:700;margin-bottom:2.5mm}
+.bloco-resumo ul{list-style:none;padding:0}
+.bloco-resumo ul li{font-size:9pt;color:rgba(255,255,255,.85);padding:1.5mm 0;border-bottom:.2mm solid rgba(255,255,255,.08);padding-left:4mm;position:relative}
+.bloco-resumo ul li::before{content:'—';position:absolute;left:0;color:var(--acento-dark)}
+
+.stat-row{display:flex;gap:4mm;margin:4mm 0;page-break-inside:avoid;break-inside:avoid}
+.stat-item{flex:1;text-align:center;background:#DBEAFE;padding:4mm 3mm}
+.stat-n{display:block;font-family:'Playfair Display',serif;font-size:22pt;font-weight:900;color:var(--ouro);line-height:1}
+.stat-d{font-size:7.5pt;color:var(--texto-suave);margin-top:1mm;line-height:1.3}
+
+.dark-stat-grid{display:flex;gap:3mm;margin:4mm 0;page-break-inside:avoid;break-inside:avoid}
+.dark-stat-card{flex:1;background:var(--negro);padding:4mm 3mm;text-align:center;border-top:1.5px solid var(--pop)}
+.dsn{display:block;font-family:'Lato',sans-serif;font-size:24pt;font-weight:900;color:var(--pop);line-height:1;letter-spacing:-1px}
+.dsd{font-size:7.5pt;color:rgba(255,255,255,.7);margin-top:1mm;line-height:1.3}
+
+.img-strip{width:100%;height:35mm;overflow:hidden;margin:4mm 0;page-break-inside:avoid;break-inside:avoid}
+.img-strip img{width:100%;height:100%;object-fit:cover}
+
+ul.lista-normal{padding-left:5mm;margin:2mm 0 3mm}
+ul.lista-normal li{font-size:9.5pt;line-height:1.6;color:var(--texto);margin-bottom:1.5mm;list-style:none;padding-left:4mm;position:relative}
+ul.lista-normal li::before{content:'—';position:absolute;left:0;color:var(--ouro)}
+
+.ferramenta-card{background:var(--branco);border:0.3mm solid #CBD5E1;padding:4mm 5mm;margin:3mm 0;page-break-inside:avoid;break-inside:avoid}
+.ferramenta-card .f-nome{font-family:'Lato',sans-serif;font-weight:700;font-size:10pt;color:var(--negro)}
+.ferramenta-card .f-tag{display:inline-block;font-size:6.5pt;letter-spacing:.1em;text-transform:uppercase;color:var(--branco);background:var(--ouro);padding:0.5mm 2mm;margin-bottom:2mm}
+.ferramenta-card p{font-size:8.5pt;margin:0;color:var(--texto-suave)}
+
+.carreira-card{background:var(--carbon);padding:4mm 5mm;margin:3mm 0;page-break-inside:avoid;break-inside:avoid}
+.carreira-card .c-titulo{font-family:'Lato',sans-serif;font-weight:700;font-size:10.5pt;color:var(--branco);margin-bottom:1mm}
+.carreira-card .c-valor{font-family:'Playfair Display',serif;font-size:16pt;font-weight:900;color:var(--acento-dark);line-height:1}
+.carreira-card .c-periodo{font-size:7.5pt;color:rgba(255,255,255,.5);margin-bottom:2mm}
+.carreira-card p{font-size:8.5pt;color:rgba(255,255,255,.75);margin:0}
+
+/* ── CAPA ── */
+.capa-wrap{position:relative;width:100%;height:100%}
+.capa-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.capa-vignette{position:absolute;inset:0;background:linear-gradient(110deg,rgba(5,14,26,.95) 0%,rgba(5,14,26,.75) 55%,rgba(5,14,26,.3) 100%)}
+.capa-content{position:absolute;left:14mm;bottom:30mm;right:55mm}
+.cap-label{font-size:7.5pt;letter-spacing:.2em;text-transform:uppercase;color:var(--acento-dark);font-weight:700;margin-bottom:3mm}
+.capa-titulo{font-family:'Playfair Display',serif;font-weight:900;font-size:28pt;line-height:1.1;color:var(--branco);margin-bottom:4mm}
+.capa-titulo span{color:var(--acento-dark)}
+.capa-rule{height:.5mm;width:20mm;background:var(--acento-dark);margin:4mm 0}
+.capa-subtitulo{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12pt;color:rgba(255,255,255,.8);line-height:1.5}
+.capa-autor{font-size:8pt;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:5mm}
+.capa-edicao{position:absolute;bottom:8mm;left:14mm;font-size:7pt;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+
+/* ── CONTRA-CAPA ── */
+.contra-capa{background:var(--negro);width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20mm}
+.contra-capa .cc-titulo{font-family:'Playfair Display',serif;font-size:18pt;color:var(--branco);text-align:center;font-weight:900;margin-bottom:4mm}
+.contra-capa .cc-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11pt;color:rgba(255,255,255,.6);text-align:center;line-height:1.6;margin-bottom:6mm}
+.contra-capa .cc-rule{height:.5mm;width:15mm;background:var(--acento-dark);margin:0 auto 6mm}
+.contra-capa .cc-preco{font-family:'Lato',sans-serif;font-size:8pt;letter-spacing:.1em;text-transform:uppercase;color:var(--acento-dark)}
+
+/* ── INTRO SPLIT ── */
+.intro-split{display:flex;width:100%;height:100%}
+.intro-img-col{width:75mm;flex-shrink:0;overflow:hidden}
+.intro-img{width:100%;height:100%;object-fit:cover}
+.intro-txt-col{flex:1;padding:18mm 10mm 18mm 10mm;overflow:hidden;background:var(--fundo);display:flex;flex-direction:column;justify-content:center}
+.intro-tag{font-size:7.5pt;letter-spacing:.18em;text-transform:uppercase;color:var(--ouro);font-weight:700;margin-bottom:2mm}
+
+/* ── DIVISÓRIA ── */
+.div-wrap{display:flex;width:100%;height:100%}
+.div-img-col{width:75mm;flex-shrink:0;overflow:hidden;position:relative}
+.div-img{width:100%;height:100%;object-fit:cover}
+.div-img-col::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,transparent 60%,var(--carbon) 100%)}
+.div-txt-col{flex:1;background:var(--carbon);padding:18mm 10mm 18mm 8mm;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.div-bg-num{position:absolute;right:-5mm;bottom:-10mm;font-family:'Playfair Display',serif;font-size:80pt;font-weight:900;color:rgba(255,255,255,.04);line-height:1}
+.div-label{font-size:7.5pt;letter-spacing:.18em;text-transform:uppercase;color:var(--acento-dark);font-weight:700;margin-bottom:2mm}
+.div-titulo{font-family:'Playfair Display',serif;font-weight:900;font-size:18pt;line-height:1.15;color:var(--branco);margin-bottom:3mm}
+.div-rule{height:.5mm;width:15mm;background:var(--acento-dark);margin:3mm 0}
+.div-desc{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11pt;color:rgba(255,255,255,.65);line-height:1.55}
+.div-tags{display:flex;flex-wrap:wrap;gap:2mm;margin-top:4mm}
+.div-tag{font-size:7pt;letter-spacing:.08em;text-transform:uppercase;border:.3mm solid rgba(147,197,253,.4);color:var(--acento-dark);padding:1mm 2.5mm}
+
+/* ── SIDEBAR SPLIT ── */
+.split-content{display:flex;width:100%;height:100%}
+.split-sidebar{width:52mm;flex-shrink:0;background:var(--negro);padding:16mm 8mm;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.split-sidebar-top{}
+.sidebar-label{font-size:7pt;letter-spacing:.18em;text-transform:uppercase;color:var(--acento-dark);font-weight:700;margin-bottom:2mm}
+.sidebar-chapter-title{font-family:'Playfair Display',serif;font-size:15pt;font-weight:900;color:var(--branco);line-height:1.15;margin-bottom:3mm}
+.sidebar-rule{display:block;height:.4mm;background:var(--acento-dark);margin:3mm 0;opacity:.5}
+.sidebar-desc{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:9pt;color:rgba(255,255,255,.55);line-height:1.5}
+.sidebar-index-label{font-size:6.5pt;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:2mm}
+.sidebar-index-item{font-size:8.5pt;color:rgba(255,255,255,.45);padding:1.5mm 0;border-bottom:.2mm solid rgba(255,255,255,.07)}
+.sidebar-index-item.active{color:var(--branco);font-weight:700}
+.split-content-main{flex:1;padding:16mm 10mm 16mm 8mm;overflow:hidden;background:var(--fundo)}
+
+/* ── FECHAMENTO ── */
+.close-wrap{position:relative;width:100%;height:100%}
+.close-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.close-overlay{position:absolute;inset:0;background:rgba(5,14,26,.88)}
+.close-content{position:absolute;left:14mm;right:14mm;top:50%;transform:translateY(-50%);text-align:center}
+.close-tag{font-size:7.5pt;letter-spacing:.2em;text-transform:uppercase;color:var(--acento-dark);font-weight:700;margin-bottom:3mm}
+.close-title{font-family:'Playfair Display',serif;font-weight:900;font-size:22pt;line-height:1.15;color:var(--branco);margin-bottom:4mm}
+.close-rule{height:.5mm;width:15mm;background:var(--acento-dark);margin:0 auto 4mm}
+.close-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12pt;color:rgba(255,255,255,.75);line-height:1.6;margin-bottom:6mm}
+.close-cta-btn{display:inline-block;background:var(--ouro);color:var(--branco);font-family:'Lato',sans-serif;font-size:9pt;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3.5mm 10mm;text-decoration:none}
+.close-footer{position:absolute;bottom:8mm;left:0;right:0;text-align:center;font-size:7pt;color:rgba(255,255,255,.25);letter-spacing:.08em;text-transform:uppercase}
+
+/* ── SUMÁRIO ── */
+.toc-page-header{display:flex;align-items:flex-end;gap:4mm;margin-bottom:4mm}
+.toc-big-letter{font-family:'Playfair Display',serif;font-size:72pt;font-weight:900;color:var(--negro);line-height:1;opacity:.1}
+.toc-header-text{}
+.toc-of{font-size:8pt;letter-spacing:.12em;text-transform:uppercase;color:var(--texto-suave)}
+.toc-contents{font-family:'Playfair Display',serif;font-size:22pt;font-weight:900;color:var(--negro)}
+.toc-line{display:flex;align-items:baseline;gap:2mm;padding:2.5mm 0;border-bottom:.2mm solid rgba(5,14,26,.08)}
+.toc-num{font-size:7.5pt;letter-spacing:.1em;color:var(--ouro);font-weight:700;min-width:12mm}
+.toc-title{flex:1;font-size:9.5pt;color:var(--texto)}
+.toc-pag{font-size:8pt;color:var(--texto-suave)}
+.toc-section{font-size:7.5pt;letter-spacing:.1em;text-transform:uppercase;color:var(--texto-suave);margin:3mm 0 1mm;padding-top:2mm}
+
+/* ── CAPA DARK PAGE ── */
+.dark-page{background:var(--negro)}
+.dark-page .page-inner{background:var(--negro)}
+.dark-page h1,.dark-page h2{color:var(--branco)}
+.dark-page p{color:rgba(255,255,255,.75)}
+.dark-page .cap-num{color:var(--acento-dark)}
+.dark-page .rule{background:var(--acento-dark)}
+
+/* ── ANIMAÇÕES (só tela) ── */
+.av{opacity:0;transition:opacity .5s ease,transform .5s ease}
+.av.up{transform:translateY(6mm)}
+.av.in{transform:none}
+.av.scale{transform:scale(.97)}
+.av.left{transform:translateX(-6mm)}
+.d1{transition-delay:.1s}.d2{transition-delay:.25s}.d3{transition-delay:.4s}.d4{transition-delay:.55s}.d5{transition-delay:.65s}
+.av.visible{opacity:1;transform:none!important}
+
+/* ── PDF ── */
+.ui-only.pdf-wrap{position:fixed;bottom:6mm;right:6mm;z-index:999;display:flex;flex-direction:column;align-items:flex-end;gap:2mm}
+.pdf-hint{font-size:7.5pt;color:#64748B;background:rgba(255,255,255,.9);padding:2mm 3mm;border:.3mm solid #CBD5E1}
+.btn-pdf{display:flex;align-items:center;gap:2mm;background:var(--ouro);color:#fff;border:none;padding:3mm 5mm;font-family:'Lato',sans-serif;font-size:9pt;font-weight:700;cursor:pointer;letter-spacing:.04em}
+.btn-pdf svg{width:16px;height:16px;fill:#fff}
+
+@media print{
+  /* Forçar cores e imagens idênticas ao HTML — sem supressão do browser */
+  *{
+    -webkit-print-color-adjust:exact!important;
+    print-color-adjust:exact!important;
+    color-adjust:exact!important
+  }
+  html,body{
+    background:white!important;
+    -webkit-print-color-adjust:exact!important;
+    print-color-adjust:exact!important
+  }
+  .page{
+    margin:0!important;
+    box-shadow:none!important;
+    -webkit-print-color-adjust:exact!important;
+    print-color-adjust:exact!important
+  }
+  /* Garantir que backgrounds de cards e seções escuras imprimem */
+  .dark-stat-card,
+  .dark-stat-grid,
+  [style*="background:var(--negro)"],
+  [style*="background:var(--carbon)"],
+  [style*="background:var(--chumbo"],
+  .bloco-callout,
+  .ferramenta-card,
+  .feat-img,
+  .stat-cell,
+  .faq-item,
+  .chart-bar-bg,
+  .chart-fill,
+  .div-dark,
+  .page-dark{
+    -webkit-print-color-adjust:exact!important;
+    print-color-adjust:exact!important
+  }
+  /* Imagens — garantir que imprimem em tamanho correto */
+  img{
+    max-width:100%!important;
+    -webkit-print-color-adjust:exact!important;
+    print-color-adjust:exact!important;
+    display:block!important
+  }
+  /* Animações — desligar para PDF */
+  .av{opacity:1!important;transform:none!important;transition:none!important}
+  /* Esconder elementos de UI (botão PDF, etc) */
+  .ui-only{display:none!important}
+  /* Paginação A4 exata */
+  @page{size:A4 portrait;margin:0}
+}
+
+/* ── CHART BARS ─────────────────────────────────────────── */
+.chart-wrap{margin:4mm 0 5mm}
+.chart-row{display:flex;align-items:center;gap:2mm;margin-bottom:1.5mm}
+.chart-label{font-family:'Lato',sans-serif;font-size:7.5pt;width:30mm;text-align:right;color:var(--texto-suave);flex-shrink:0;font-weight:600}
+.chart-bar-bg{flex:1;background:rgba(37,99,235,.12);height:5.5mm;border-radius:1mm;overflow:hidden}
+.chart-fill{height:100%;display:flex;align-items:center;padding-left:2mm;border-radius:1mm}
+.chart-val{font-family:'Lato',sans-serif;font-size:7pt;font-weight:900;color:white;white-space:nowrap}
+
+/* ── FAQ ────────────────────────────────────────────────── */
+.faq-item{border-left:2.5px solid var(--ouro);padding:2mm 3mm;margin-bottom:3mm;background:rgba(37,99,235,.04);border-radius:0 1mm 1mm 0}
+.faq-q{font-family:'Lato',sans-serif;font-weight:700;font-size:9pt;color:var(--texto);margin-bottom:1mm}
+.faq-a{font-size:8.5pt;color:var(--texto-suave);line-height:1.55;font-family:'Source Serif 4',Georgia,serif}
+
+/* ── IMAGE + TEXT ROW ───────────────────────────────────── */
+.feat-row{display:flex;gap:4mm;align-items:flex-start;margin:3mm 0;page-break-inside:avoid}
+.feat-img{flex:0 0 52mm;border-radius:2mm;overflow:hidden;box-shadow:0 2mm 6mm rgba(0,0,0,.15)}
+.feat-img img{width:100%;height:48mm;object-fit:cover;display:block}
+.feat-content{flex:1}
+.feat-tag{font-family:'Lato',sans-serif;font-size:6.5pt;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--ouro);margin-bottom:1mm}
+.feat-title{font-family:'Playfair Display',serif;font-size:12pt;font-weight:700;color:var(--texto);margin-bottom:2mm;line-height:1.2}
+
+/* ── TIMELINE ───────────────────────────────────────────── */
+.timeline-v{position:relative;padding-left:8mm;margin:3mm 0}
+.timeline-v::before{content:'';position:absolute;left:3.5mm;top:1mm;bottom:1mm;width:.5mm;background:linear-gradient(var(--ouro),var(--pop))}
+.tl-item{position:relative;margin-bottom:4mm;page-break-inside:avoid}
+.tl-dot{position:absolute;left:-5mm;top:1mm;width:3mm;height:3mm;background:var(--ouro);border-radius:50%;box-shadow:0 0 0 1.5px var(--fundo),0 0 0 2.5px var(--ouro)}
+.tl-step{font-family:'Lato',sans-serif;font-size:7pt;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--ouro);margin-bottom:.5mm}
+.tl-text{font-size:8.5pt;color:var(--texto)}
+
+/* ── BADGE ──────────────────────────────────────────────── */
+.badge-row{display:flex;flex-wrap:wrap;gap:2mm;margin:2mm 0}
+.badge{display:inline-block;padding:.8mm 2.5mm;border-radius:.8mm;font-family:'Lato',sans-serif;font-size:7pt;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.badge-blue{background:rgba(37,99,235,.12);color:var(--ouro)}
+.badge-pop{background:rgba(34,211,238,.12);color:var(--pop)}
+.badge-amber{background:rgba(251,191,36,.12);color:#D97706}
+.badge-ok{background:rgba(34,197,94,.12);color:#16A34A}
+
+/* ── STAT ROW INLINE ────────────────────────────────────── */
+.stat-row{display:flex;gap:4mm;margin:4mm 0;page-break-inside:avoid}
+.stat-cell{flex:1;text-align:center;padding:3mm;background:var(--fundo-alt);border-radius:1.5mm;border-bottom:2px solid var(--ouro)}
+.stat-num{font-family:'Lato',sans-serif;font-size:16pt;font-weight:900;color:var(--ouro);display:block;line-height:1}
+.stat-label{font-family:'Lato',sans-serif;font-size:7pt;font-weight:600;color:var(--texto-suave);margin-top:1mm;display:block}
+
+/* ── CALLOUT MELHORIA ───────────────────────────────────── */
+.bloco-callout{background:var(--fundo-alt);border-radius:2mm;padding:4mm 5mm;margin:4mm 0;page-break-inside:avoid;border-left:3px solid var(--ouro)}
+.bloco-callout .label{font-size:7pt;text-transform:uppercase;letter-spacing:.1em;font-family:'Lato',sans-serif;font-weight:700;color:var(--ouro);margin-bottom:2mm}
+</style>
+<style>
+  body { background: #CBD5E1; }
+  @media print {
+    * { -webkit-print-color-adjust:exact!important; print-color-adjust:exact!important; color-adjust:exact!important }
+    @page { size:A4 portrait; margin:0 }
+    body { background:white!important }
+    .page { margin:0!important; box-shadow:none!important }
+  }
+</style>
+</head>
+<body>
+
+<!-- CAPA DO BÔNUS -->
+<div class="page no-hf" id="p1" style="background:var(--negro);position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(37,99,235,.25) 0%,transparent 65%)"></div>
+  <div style="position:absolute;top:25mm;left:20mm;right:20mm;bottom:20mm;display:flex;flex-direction:column;justify-content:center">
+    <div style="font-family:'Lato',sans-serif;font-size:7pt;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--pop);margin-bottom:6mm">Era da I.A. &middot; Material Bônus</div>
+    <div style="font-family:'Lato',sans-serif;font-size:48pt;font-weight:900;color:rgba(255,255,255,.08);line-height:1;margin-bottom:4mm;letter-spacing:-2px">03</div>
+    <h1 style="font-family:'Playfair Display',serif;font-size:28pt;font-weight:700;color:#fff;line-height:1.15;margin-bottom:4mm">Templates de Negócio</h1>
+    <p style="font-family:'Source Serif 4',Georgia,serif;font-size:11pt;color:rgba(255,255,255,.65);line-height:1.6;max-width:120mm">Modelo de proposta comercial pronto, tabela de precificação de referência e estratégia de ancoragem para fechar contratos com I.A.</p>
+    <div style="width:20mm;height:.6mm;background:var(--ouro);margin-top:8mm"></div>
+    <div style="font-family:'Lato',sans-serif;font-size:8pt;font-weight:700;color:rgba(255,255,255,.4);margin-top:4mm;text-transform:uppercase;letter-spacing:.1em">Equipe Era da I.A. — 2026</div>
+  </div>
+  <div style="position:absolute;bottom:12mm;right:20mm;font-family:'Lato',sans-serif;font-size:7pt;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:.1em">Este material é complementar ao eBook principal</div>
+</div>
+
+<!-- ═══ P_MODELO_PROPOSTA — TEMPLATE ═══ -->
+<div class="page" id="p_prop1">
+  <div class="ph"><span>ERA DA I.A.</span><span>BÔNUS — MODELO DE PROPOSTA</span></div>
+  <div class="page-inner">
+    <h2 >Bônus 6 — Modelo de Proposta Comercial Pronta</h2>
+    <p >Use este modelo como base. Substitua os campos em [colchetes] e envie. Copie para o Google Docs e adapte ao seu estilo.</p>
+    <span class="rule" style="width:22mm"></span>
+        <div style="background:var(--carbon);border-left:3px solid var(--pop);border-radius:2mm;padding:4mm 5mm;margin:4mm 0;page-break-inside:avoid">
+      <div style="font-size:7pt;letter-spacing:.1em;text-transform:uppercase;font-family:'Lato',sans-serif;font-weight:700;color:var(--pop);margin-bottom:2mm">Proposta de Serviço — Gestão de Conteúdo com I.A.</div>
+      <div style="font-size:8.5pt;line-height:1.8;color:#ffffff;font-family:'Source Serif 4',Georgia,serif">
+        <span style="color:#ffffff;display:block;margin-bottom:3mm"><span style="font-family:'Lato',sans-serif;font-weight:700;color:#ffffff">Para:</span> [Nome do cliente] &nbsp;·&nbsp; <span style="font-family:'Lato',sans-serif;font-weight:700;color:#ffffff">Data:</span> [data] &nbsp;·&nbsp; <span style="font-family:'Lato',sans-serif;font-weight:700;color:#ffffff">Válida até:</span> [7 dias]</span>
+        <span style="color:#ffffff;display:block;margin-bottom:3mm"><span style="font-family:'Lato',sans-serif;font-weight:700;color:#ffffff">O que você vai receber:</span> [número] posts para [plataforma] por mês — copy completo + imagem gerada com I.A. alinhada à sua identidade visual. Entrega semanal de [X] posts, programados com até [Y] dias de antecedência.</span>
+        <span style="color:#ffffff;display:block;margin-bottom:1.5mm"><span style="font-family:'Lato',sans-serif;font-weight:700;color:var(--pop)">Pacote Essencial — R$[valor]:</span> [X] posts/mês, 1 reunião mensal de alinhamento, relatório de desempenho.</span>
+        <span style="color:#ffffff;display:block;margin-bottom:1.5mm"><span style="font-family:'Lato',sans-serif;font-weight:700;color:var(--pop)">Pacote Profissional — R$[2x valor]:</span> tudo do Essencial + [X+10] posts + 1 Reels roteirizado + análise de concorrentes mensalmente.</span>
+        <span style="color:#ffffff;display:block;margin-bottom:3mm"><span style="font-family:'Lato',sans-serif;font-weight:700;color:var(--pop)">Pacote Premium — R$[3x valor]:</span> tudo do Profissional + gestão de DMs + stories diários + suporte via WhatsApp.</span>
+        <span style="color:rgba(255,255,255,.7);display:block;font-size:8pt"><span style="font-family:'Lato',sans-serif;font-weight:700;color:#ffffff">Próximo passo:</span> responda este e-mail com o pacote de sua preferência. Contrato digital assinado em minutos via [DocuSign / Adobe Sign]. Início em [X] dias úteis após confirmação.</span>
+      </div>
+    </div>
+    <div class="bloco-callout">
+      <div class="label">Por que 3 pacotes sempre funcionam</div>
+      <p>Cérebro humano não avalia valor absoluto — avalia valor relativo. Com 3 opções, o pacote do meio parece o ponto de equilíbrio ideal. Na prática, 60-70% dos clientes escolhem o meio. Defina seus pacotes para que o do meio seja exatamente onde você quer estar.</p>
+    </div>
+  </div>
+  <div class="pf"><span>Equipe Era da I.A.</span><span class="pnum">60</span></div>
+</div>
+
+<!-- ═══ P_FAQ — PERGUNTAS FREQUENTES ═══ -->
+<div class="page" id="p_faq">
+  <div class="ph"><span>ERA DA I.A.</span><span>BÔNUS — FAQ</span></div>
+  <div class="page-inner">
+    <h2 >FAQ — As 10 Perguntas Mais Honestas sobre I.A.</h2>
+    <p  style="font-size:8.5pt">Respostas diretas para as dúvidas que a maioria tem mas poucos perguntam abertamente.</p>
+    <span class="rule" style="width:22mm"></span>
+    <div class="faq-item">
+      <div class="faq-q">Preciso saber programar para ganhar dinheiro com I.A.?</div>
+      <div class="faq-a">Não. 100% das ferramentas deste eBook funcionam sem nenhuma linha de código. O diferencial é saber formular bons prompts — habilidade que você desenvolve em semanas.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Quanto tempo leva para ter o primeiro cliente?</div>
+      <div class="faq-a">Com dedicação de 1-2 horas por dia, profissionais com portfólio básico (3 estudos de caso) conseguem o primeiro cliente pago em 3 a 6 semanas. O principal acelerador é a oferta clara — não a quantidade de ferramentas dominadas.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Preciso revelar ao cliente que usei I.A.?</div>
+      <div class="faq-a">Não existe obrigação legal ou ética de revelar, da mesma forma que um designer não precisa revelar qual software usou. O que importa é a qualidade da entrega. Dito isso, nunca minta se perguntado diretamente.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">As ferramentas de I.A. vão substituir designers e redatores?</div>
+      <div class="faq-a">Não os melhores. I.A. executa — mas não estrategiza. Quem entende o negócio do cliente, sabe o que comunicar e por que, e usa I.A. para executar 10x mais rápido, se torna insubstituível. Quem executa tarefas repetitivas sem estratégia — sim, corre risco.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Qual a ferramenta mais importante para começar?</div>
+      <div class="faq-a">Claude Pro (~R$110/mês) para texto, Magnific (~R$220/mês) para imagem e vídeo. Essas duas cobrem a maior parte dos pedidos de clientes nos primeiros 6 meses. Comece com o plano grátis de ambas para testar antes de assinar.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">I.A. inventa informações — isso não é um problema?</div>
+      <div class="faq-a">Sim, e é um risco real. A solução: nunca publique sem revisar dados verificáveis (datas, números, nomes). Use I.A. para estruturar e redigir — você valida os fatos. Com esse processo, o risco é zero.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Quanto investir nas ferramentas no início?</div>
+      <div class="faq-a">Stack mínimo viável: ~R$330/mês (Claude Pro + Magnific). Um único cliente pagando R$1.500/mês cobre esse custo mais de 4 vezes. Comece pequeno, reinvista à medida que fatura.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Os planos das ferramentas mudam muito?</div>
+      <div class="faq-a">Sim — o mercado de I.A. evolui rápido. Os preços neste eBook refletem maio de 2026. Sempre verifique o site oficial antes de assinar. A escolha de ferramenta deve ser baseada em funcionalidade, não apenas preço.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Posso usar as imagens geradas por I.A. comercialmente?</div>
+      <div class="faq-a">Na maioria das ferramentas pagas: sim. Midjourney, Magnific, DALL-E 3 (via ChatGPT Plus) permitem uso comercial nos planos pagos. Leia sempre os Termos de Serviço do plano específico antes de entregar para clientes.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Isso funciona para qualquer nicho ou só para criativo?</div>
+      <div class="faq-a">Funciona para qualquer nicho onde exista necessidade de conteúdo, imagem, vídeo ou automação. Os melhores casos são: saúde, direito, imóveis, e-commerce, educação e serviços B2B — onde o volume de conteúdo necessário é alto e o budget para produção existe.</div>
+    </div>
+  </div>
+  <div class="pf"><span>Equipe Era da I.A.</span><span class="pnum">61</span></div>
+</div>
+<!-- ═══════════════════════════════════ P48 — BÔNUS 3 ═══════════════════════════════════ -->
+<div class="page" id="p48">
+  <div class="ph"><span>ERA DA I.A.</span><span>BÔNUS</span></div>
+  <div class="page-inner">
+    <div class="cap-num" style="color:var(--ouro)">Bônus 03</div>
+    <h1  style="font-size:17pt">As 30 Ferramentas que Profissionais Usam</h1>
+    <span class="rule" style="width:20mm"></span>
+    <h3>Agentes de Linguagem</h3>
+    <ul class="lista-normal" style="font-size:8pt">
+      <li><strong><a href="https://claude.ai" target="_blank" rel="noopener">Claude</a> (Anthropic)</strong> — Melhor para texto longo e sofisticado. Grátis / Pro ~R$110/mês</li>
+      <li><strong><a href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT</a> / GPT-4o (OpenAI)</strong> — Mais versátil, DALL-E integrado. Grátis / Plus ~R$110/mês</li>
+      <li><strong><a href="https://gemini.google.com" target="_blank" rel="noopener">Gemini Advanced</a> (Google)</strong> — Integração Google Workspace. Grátis / Advanced ~R$110/mês</li>
+      <li><strong><a href="https://perplexity.ai" target="_blank" rel="noopener">Perplexity AI</a></strong> — Pesquisa com fontes em tempo real. Grátis / Pro ~R$110/mês</li>
+    </ul>
+    <h3>Geradores de Imagem</h3>
+    <ul class="lista-normal" style="font-size:8pt">
+      <li><strong>DALL-E 3</strong> — Via ChatGPT. Fidelidade ao texto. Incluso no Plus</li>
+      <li><strong><a href="https://midjourney.com" target="_blank" rel="noopener">Midjourney</a></strong> — Arte premium e identidade visual. ~R$55/mês básico</li>
+      <li><strong>Imagen 3 (Google)</strong> — Fotorrealismo. Via Gemini Advanced</li>
+      <li><strong>Adobe Firefly</strong> — Integrado ao Creative Cloud. Seguro para uso comercial</li>
+      <li><strong>Stable Diffusion (local)</strong> — Grátis, roda no computador, sem censura</li>
+    </ul>
+    <h3>Hubs de Qualidade e Vídeo</h3>
+    <ul class="lista-normal" style="font-size:8pt">
+      <li><strong><a href="https://magnific.com" target="_blank" rel="noopener">Magnific</a></strong> — Plataforma completa: gera, upscale, vídeo, voz. ~R$220/mês Pro</li>
+      <li><strong>Higgsfield.ai</strong> — Cinema AI. Por créditos</li>
+      <li><strong><a href="https://runwayml.com" target="_blank" rel="noopener">Runway ML</a></strong> — Edição e geração de vídeo profissional. ~R$85/mês Standard</li>
+      <li><strong>Kling AI</strong> — Geração de vídeo asiática, qualidade excepcional. Créditos</li>
+      <li><strong><a href="https://higgsfield.ai" target="_blank" rel="noopener">Higgsfield.ai</a></strong> — Hub de vídeo cinematográfico com controle de câmera. ~R$85/mês</li>
+      <li><strong><a href="https://seedance.ai" target="_blank" rel="noopener">Seedance 2.0</a> (ByteDance)</strong> — Geração de vídeo de maior qualidade do mercado. Planos em dólar.</li>
+      <li><strong><a href="https://elevenlabs.io" target="_blank" rel="noopener">ElevenLabs</a></strong> — Voz sintética profissional. Grátis limitado / ~R$120/mês</li>
+    </ul>
+    <h3>Automação e Produtividade</h3>
+    <ul class="lista-normal" style="font-size:8pt">
+      <li><strong>n8n</strong> — Automação de fluxos (open source). Grátis self-hosted</li>
+      <li><strong><a href="https://zapier.com" target="_blank" rel="noopener">Zapier</a></strong> — Automação sem código. Grátis limitado / ~R$110/mês</li>
+      <li><strong>Make (ex-Integromat)</strong> — Automação visual avançada. Grátis limitado</li>
+      <li><strong>Notion AI</strong> — Gestão de projetos com I.A. Incluso no Notion Plus</li>
+      <li><strong>CapCut AI</strong> — Edição de vídeo com I.A. Grátis</li>
+    </ul>
+  </div>
+  <div class="pf"><span>Equipe Era da I.A.</span><span class="pnum">62</span></div>
+</div>
+
+
+
+<!-- PÁGINA FINAL DO BÔNUS -->
+<div class="page" id="p_final" style="background:var(--negro)">
+  <div class="page-inner" style="display:flex;flex-direction:column;justify-content:center;align-items:center;height:100%;text-align:center">
+    <div style="font-family:'Playfair Display',serif;font-size:22pt;font-weight:700;color:#fff;margin-bottom:4mm">Obrigado por fazer parte.</div>
+    <p style="font-family:'Source Serif 4',Georgia,serif;font-size:10pt;color:rgba(255,255,255,.6);max-width:120mm;line-height:1.7">Este bônus é parte do ecossistema Era da I.A. Aplique o que aprendeu — resultados aparecem na execução, não na leitura.</p>
+    <div style="width:15mm;height:.5mm;background:var(--ouro);margin:6mm auto"></div>
+    <div style="font-family:'Lato',sans-serif;font-size:7.5pt;color:var(--pop);letter-spacing:.08em;text-transform:uppercase">eBook: Era da I.A. — Como Lucrar Agora</div>
+  </div>
+</div>
+
+</body>
+</html>

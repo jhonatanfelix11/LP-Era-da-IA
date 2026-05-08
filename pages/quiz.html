@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz — A Era da I.A.</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="shortcut icon" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root {
+  --bg:           #F9FBFF;
+  --surface:      #FFFFFF;
+  --primary:      #050E1A;
+  --accent:       #2563EB;
+  --accent-hover: #1D4ED8;
+  --accent-lt:    #EEF4FF;
+  --accent-mid:   #BFDBFE;
+  --accent-dk:    #93C5FD;
+  --text:         #050E1A;
+  --text-muted:   #4A6A8A;
+  --border:       #C8DCEE;
+  --border-sel:   #2563EB;
+  --radius:       14px;
+  --radius-sm:    9px;
+  --shadow-card:  0 1px 2px rgba(5,14,26,.06), 0 4px 14px rgba(5,14,26,.07);
+  --shadow-hover: 0 4px 12px rgba(5,14,26,.1), 0 10px 28px rgba(5,14,26,.09);
+  --shadow-btn:   0 4px 18px rgba(37,99,235,.32);
+  --shadow-btn-h: 0 8px 28px rgba(37,99,235,.44);
+  --font:         'Inter', system-ui, sans-serif;
+  --ease:         cubic-bezier(.22,1,.36,1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  -webkit-font-smoothing: antialiased;
+}
+
+#quiz-app {
+  width: 100%;
+  max-width: 620px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px 60px;
+}
+
+/* ── Header ── */
+header {
+  padding: 28px 0 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.brand-icon {
+  width: 28px; height: 28px;
+  background: var(--primary);
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent-mid);
+  flex-shrink: 0;
+}
+.brand-icon svg { width: 15px; height: 15px; stroke-width: 2; }
+
+.brand-name {
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 1.8px; text-transform: uppercase;
+  color: var(--primary);
+}
+
+.progress-wrap { display: flex; align-items: center; gap: 12px; }
+
+.progress-track {
+  flex: 1; height: 3px;
+  background: var(--border);
+  border-radius: 99px; overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%; background: var(--accent);
+  border-radius: 99px;
+  transition: width 0.55s var(--ease);
+  width: 0%;
+}
+
+.progress-label {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.5px; color: var(--text-muted);
+  white-space: nowrap; min-width: 58px; text-align: right;
+}
+
+/* ── Stage ── */
+#quiz-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 8px;
+}
+
+.question-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.question-screen.fade-out { animation: fadeOut 0.18s ease forwards; }
+.question-screen.fade-in  { animation: fadeIn  0.26s var(--ease) forwards; }
+
+@keyframes fadeOut {
+  to { opacity: 0; transform: translateY(-10px); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Microcontexto ── */
+.micro-context {
+  font-size: 13.5px; font-style: italic;
+  color: var(--text-muted); line-height: 1.65;
+  padding: 11px 15px;
+  border-left: 2px solid var(--accent);
+  background: var(--accent-lt);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+/* ── Pergunta ── */
+.question-meta { display: flex; align-items: center; gap: 8px; }
+
+.question-num {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--accent);
+}
+
+.question-text {
+  font-size: clamp(19px, 4.5vw, 26px);
+  font-weight: 800; line-height: 1.28;
+  color: var(--primary); letter-spacing: -0.4px;
+}
+
+/* ── Alternativas ── */
+.options-list {
+  list-style: none;
+  display: flex; flex-direction: column;
+  gap: 10px;
+}
+
+.option-card {
+  display: flex; align-items: center;
+  gap: 14px; padding: 15px 18px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer; user-select: none;
+  transition: border-color .16s ease, background .16s ease,
+              box-shadow .16s ease, transform .14s ease;
+  box-shadow: var(--shadow-card);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.option-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-1px);
+}
+
+.option-card.selected {
+  border-color: var(--border-sel);
+  background: var(--accent-lt);
+  box-shadow: 0 0 0 3px rgba(37,99,235,.1), var(--shadow-card);
+}
+
+.option-card.selected .option-icon {
+  background: rgba(37,99,235,.12);
+  color: var(--accent);
+}
+
+.option-icon {
+  width: 40px; height: 40px;
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; color: var(--text-muted);
+  transition: background .16s ease, color .16s ease;
+}
+.option-icon svg { width: 18px; height: 18px; stroke-width: 1.8; }
+
+.option-text {
+  font-size: 14.5px; font-weight: 500;
+  line-height: 1.5; color: var(--text); flex: 1;
+}
+
+/* ── Botão Próximo ── */
+.btn-next-wrap {
+  opacity: 0; pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity .22s ease, transform .22s var(--ease);
+}
+
+.btn-next-wrap.visible {
+  opacity: 1; pointer-events: auto;
+  transform: translateY(0);
+}
+
+.btn-next {
+  width: 100%; padding: 15px 24px;
+  background: var(--accent); color: #fff;
+  font-family: var(--font); font-size: 15px; font-weight: 700;
+  border: none; border-radius: var(--radius);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; box-shadow: var(--shadow-btn);
+  transition: background .16s ease, transform .14s ease, box-shadow .16s ease;
+}
+.btn-next:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: var(--shadow-btn-h); }
+.btn-next:active { transform: translateY(0); }
+.btn-next svg { width: 17px; height: 17px; stroke-width: 2.5; }
+
+/* ============================================================
+   COMPONENTE — MÉTRICA
+   ============================================================ */
+.metric-block {
+  background: var(--primary);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+
+.metric-eyebrow {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(147,197,253,.6);
+}
+
+.metric-row { display: flex; align-items: baseline; gap: 4px; }
+
+.metric-number {
+  font-size: 52px; font-weight: 900;
+  line-height: 1; color: var(--accent-dk);
+  letter-spacing: -2px;
+  font-variant-numeric: tabular-nums;
+}
+
+.metric-suffix {
+  font-size: 24px; font-weight: 800;
+  color: var(--accent-dk); letter-spacing: -0.5px;
+}
+
+.metric-desc {
+  font-size: 13px; font-weight: 500;
+  line-height: 1.6; color: rgba(255,255,255,.6);
+  margin-top: 2px;
+}
+
+/* ============================================================
+   COMPONENTE — GRÁFICO DE BARRAS
+   ============================================================ */
+.chart-block {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  display: flex; flex-direction: column; gap: 14px;
+  box-shadow: var(--shadow-card);
+}
+
+.chart-title {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.chart-rows { display: flex; flex-direction: column; gap: 11px; }
+.chart-row { display: flex; flex-direction: column; gap: 5px; }
+.chart-row-header { display: flex; justify-content: space-between; align-items: center; }
+.chart-row-label { font-size: 12.5px; font-weight: 600; color: var(--text); }
+.chart-row-val   { font-size: 12px;   font-weight: 800; color: var(--accent); }
+
+.chart-track {
+  height: 6px; background: var(--accent-lt);
+  border-radius: 99px; overflow: hidden;
+}
+
+.chart-bar {
+  height: 100%; background: var(--accent);
+  border-radius: 99px;
+  width: 0%; transition: width 1s var(--ease);
+}
+
+.chart-source {
+  font-size: 10px; color: var(--text-muted);
+  text-align: right; margin-top: -4px;
+}
+
+/* ============================================================
+   COMPONENTE — TELA INTERCALADA
+   ============================================================ */
+.intercalada-screen {
+  display: flex; flex-direction: column; gap: 0;
+  animation: fadeIn .3s var(--ease) forwards;
+}
+
+.intercalada-img-wrap {
+  width: 100%;
+  border-radius: var(--radius);
+  overflow: hidden; position: relative;
+  background: var(--primary);
+  aspect-ratio: 16 / 9;
+}
+
+.intercalada-img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+
+.intercalada-img-wrap::after {
+  content: attr(data-placeholder);
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 20px;
+  font-size: 12px; font-weight: 600;
+  color: rgba(147,197,253,.5);
+  pointer-events: none; opacity: 0;
+  transition: opacity .2s ease;
+}
+
+.intercalada-img-wrap.img-missing .intercalada-img { opacity: 0; }
+.intercalada-img-wrap.img-missing::after { opacity: 1; }
+
+.intercalada-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 30%, rgba(5,14,26,.78) 100%);
+  pointer-events: none;
+}
+
+.intercalada-img-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 16px 18px;
+  font-size: 17px; font-weight: 800;
+  color: #fff; line-height: 1.25; letter-spacing: -0.3px;
+}
+
+.intercalada-body {
+  display: flex; flex-direction: column;
+  gap: 14px; padding-top: 20px;
+}
+
+.intercalada-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--accent);
+}
+.intercalada-tag svg { width: 12px; height: 12px; stroke-width: 2.5; }
+
+.intercalada-stat {
+  background: var(--primary);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  display: flex; align-items: center; gap: 14px;
+}
+
+.intercalada-stat-num {
+  font-size: 36px; font-weight: 900;
+  color: var(--accent-dk); letter-spacing: -1.5px;
+  line-height: 1; white-space: nowrap;
+}
+
+.intercalada-stat-desc {
+  font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.55;
+}
+
+.intercalada-copy {
+  font-size: 14.5px; line-height: 1.75; color: var(--text-muted);
+}
+.intercalada-copy strong { color: var(--text); font-weight: 700; }
+
+/* ============================================================
+   COMPONENTE — LOADING
+   ============================================================ */
+.loading-screen {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 28px; padding: 48px 0;
+  animation: fadeIn .3s var(--ease) forwards;
+}
+
+.loading-icon-wrap {
+  width: 64px; height: 64px;
+  background: var(--primary); border-radius: 18px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent-dk);
+  animation: pulse 1.8s ease-in-out infinite;
+}
+.loading-icon-wrap svg { width: 30px; height: 30px; stroke-width: 1.6; }
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37,99,235,.3); }
+  50%       { box-shadow: 0 0 0 14px rgba(37,99,235,0); }
+}
+
+.loading-texts {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 6px;
+}
+
+.loading-headline {
+  font-size: 18px; font-weight: 800;
+  color: var(--primary); letter-spacing: -0.3px;
+}
+
+.loading-sub {
+  font-size: 13px; color: var(--text-muted);
+  transition: opacity .3s ease;
+}
+
+.loading-bar-wrap {
+  width: 100%;
+  display: flex; flex-direction: column; gap: 8px;
+}
+
+.loading-bar-track {
+  width: 100%; height: 6px;
+  background: var(--border); border-radius: 99px; overflow: hidden;
+}
+
+.loading-bar-fill {
+  height: 100%; background: var(--accent);
+  border-radius: 99px; width: 0%;
+  transition: width .7s var(--ease);
+}
+
+.loading-pct {
+  font-size: 12px; font-weight: 700;
+  color: var(--accent); text-align: right; align-self: flex-end;
+}
+
+/* ============================================================
+   TELA DE RESULTADO
+   ============================================================ */
+.result-screen {
+  display: flex; flex-direction: column; gap: 26px;
+  animation: fadeIn .35s var(--ease) forwards;
+}
+
+.result-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--accent-lt); color: var(--accent);
+  border: 1px solid var(--accent-mid);
+  border-radius: 99px; padding: 6px 14px;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  width: fit-content;
+}
+.result-badge svg { width: 13px; height: 13px; stroke-width: 2.5; }
+
+.result-headline {
+  font-size: clamp(22px, 5.5vw, 30px);
+  font-weight: 900; line-height: 1.22;
+  color: var(--primary); letter-spacing: -0.5px;
+}
+.result-headline span { color: var(--accent); }
+
+.result-sub {
+  font-size: 15px; line-height: 1.72;
+  color: var(--text-muted);
+}
+
+/* Diagnóstico */
+.result-diagnostic {
+  background: var(--primary);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+
+.diagnostic-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(147,197,253,.7); margin-bottom: 2px;
+}
+
+.diagnostic-bar-wrap { display: flex; flex-direction: column; gap: 10px; }
+
+.diagnostic-row { display: flex; flex-direction: column; gap: 5px; }
+
+.diagnostic-row-label { display: flex; justify-content: space-between; align-items: center; }
+
+.diagnostic-row-name { font-size: 12px; font-weight: 600; color: rgba(255,255,255,.75); }
+.diagnostic-row-pct  { font-size: 12px; font-weight: 800; color: var(--accent-dk); }
+
+.diagnostic-track {
+  height: 5px; background: rgba(255,255,255,.08);
+  border-radius: 99px; overflow: hidden;
+}
+
+.diagnostic-bar {
+  height: 100%; background: var(--accent);
+  border-radius: 99px;
+  transition: width 1.2s var(--ease);
+  width: 0%;
+}
+
+/* Depoimentos */
+.testimonials-wrap { display: flex; flex-direction: column; gap: 10px; }
+
+.testimonials-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 4px;
+}
+
+.testimonial-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  display: flex; flex-direction: column; gap: 10px;
+  box-shadow: var(--shadow-card);
+}
+
+.testimonial-stars { display: flex; gap: 3px; }
+.star-icon { width: 14px; height: 14px; fill: var(--accent); color: var(--accent); }
+
+.testimonial-quote {
+  font-size: 13.5px; font-style: italic;
+  line-height: 1.68; color: var(--text);
+}
+
+.testimonial-author {
+  display: flex; align-items: center; gap: 10px;
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
+}
+
+.testimonial-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%; background: var(--primary);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent-dk); flex-shrink: 0;
+}
+.testimonial-avatar svg { width: 15px; height: 15px; stroke-width: 1.8; }
+
+.testimonial-info { display: flex; flex-direction: column; gap: 1px; }
+.testimonial-name { font-size: 12px; font-weight: 700; color: var(--primary); }
+.testimonial-role { font-size: 11px; color: var(--text-muted); }
+
+/* Timer */
+.timer-block {
+  background: var(--accent);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  display: flex; align-items: center; gap: 16px;
+}
+.timer-icon { color: rgba(255,255,255,.8); flex-shrink: 0; }
+.timer-icon svg { width: 24px; height: 24px; stroke-width: 1.8; }
+.timer-content { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.timer-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.7); }
+.timer-digits { font-size: 28px; font-weight: 900; color: #fff; letter-spacing: -1px; font-variant-numeric: tabular-nums; line-height: 1; }
+.timer-note   { font-size: 11px; color: rgba(255,255,255,.65); line-height: 1.4; margin-top: 2px; }
+
+/* Benefícios */
+.benefits-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 14px;
+}
+.benefits-list {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.benefit-item { display: flex; align-items: flex-start; gap: 12px; }
+.benefit-check {
+  width: 22px; height: 22px;
+  border-radius: 50%; background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.benefit-check svg { width: 12px; height: 12px; stroke-width: 3; color: #fff; }
+.benefit-text { font-size: 14.5px; font-weight: 500; line-height: 1.55; color: var(--text); }
+
+/* FAQ */
+.faq-wrap { display: flex; flex-direction: column; }
+.faq-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-item:first-of-type { border-top: 1px solid var(--border); }
+.faq-q {
+  width: 100%; text-align: left;
+  background: none; border: none; cursor: pointer;
+  padding: 14px 0;
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  font-family: var(--font); font-size: 14px; font-weight: 600;
+  color: var(--primary); line-height: 1.4;
+}
+.faq-q svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--accent); transition: transform .25s ease; }
+.faq-item.open .faq-q svg { transform: rotate(180deg); }
+.faq-a {
+  font-size: 13.5px; color: var(--text-muted); line-height: 1.7;
+  max-height: 0; overflow: hidden;
+  transition: max-height .3s ease, padding-bottom .3s ease;
+  padding-bottom: 0;
+}
+.faq-item.open .faq-a { max-height: 200px; padding-bottom: 14px; }
+
+/* Divisor */
+.result-divider { height: 1px; background: var(--border); }
+
+/* Pricing */
+.pricing-block {
+  text-align: center;
+  margin: 8px 0 20px;
+  padding: 18px 16px;
+  background: var(--accent-lt);
+  border: 1.5px dashed var(--accent);
+  border-radius: var(--radius);
+}
+.price-de { font-size: 15px; color: var(--text-muted); text-decoration: line-through; margin-bottom: 6px; }
+.price-por { font-size: 32px; font-weight: 900; color: var(--accent); letter-spacing: -1px; line-height: 1; }
+
+/* CTA */
+.cta-block { display: flex; flex-direction: column; gap: 12px; }
+
+.btn-cta {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; padding: 18px 24px;
+  background: var(--accent); color: #fff;
+  font-family: var(--font); font-size: 16px; font-weight: 800;
+  border: none; border-radius: var(--radius);
+  cursor: pointer; text-decoration: none;
+  box-shadow: var(--shadow-btn);
+  transition: background .16s ease, transform .14s ease, box-shadow .16s ease;
+  letter-spacing: 0.1px;
+}
+.btn-cta:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: var(--shadow-btn-h); }
+.btn-cta svg { width: 19px; height: 19px; stroke-width: 2.5; }
+
+.cta-urgency { text-align: center; font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
+.cta-guarantee {
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  font-size: 12px; font-weight: 600; color: var(--text-muted);
+}
+.cta-guarantee svg { width: 14px; height: 14px; stroke-width: 2; color: var(--accent); }
+
+/* ── Responsivo ── */
+@media (max-width: 480px) {
+  #quiz-app { padding: 0 16px 50px; }
+  header { padding: 20px 0 16px; gap: 14px; }
+  .option-card { padding: 13px 14px; gap: 12px; }
+  .option-icon { width: 36px; height: 36px; }
+  .option-text { font-size: 14px; }
+  .btn-next, .btn-cta { font-size: 15px; padding: 14px 20px; }
+  .metric-number { font-size: 44px; }
+  .timer-digits { font-size: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.option-card:focus-visible,
+.btn-next:focus-visible,
+.btn-cta:focus-visible,
+.faq-q:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+</style>
+</head>
+<body>
+
+<div id="quiz-app">
+  <header>
+    <div class="brand">
+      <div class="brand-icon"><i data-lucide="cpu"></i></div>
+      <span class="brand-name">Quiz — A Era da I.A.</span>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <div class="progress-label" id="progress-label">Pergunta 1 de 10</div>
+    </div>
+  </header>
+
+  <main id="quiz-stage" role="main" aria-live="polite"></main>
+</div>
+
+<script>
+// ============================================================
+// DADOS DO QUIZ
+// ============================================================
+const QUIZ = {
+  ctaUrl: "landing-page.html",
+
+  perguntas: [
+
+    // ── BLOCO 1 — CONEXÃO COM A DOR ──────────────────────────
+    {
+      id: 1, tipo: "unica", microcontexto: null,
+      componenteAntes: {
+        tipo: "metrica",
+        eyebrow: "Profissionais criativos impactados pela I.A. em 2025",
+        numero: 73, sufixo: "%",
+        descricao: "Mas menos de 5% sabem como transformar isso em oportunidade de renda real — e a distância entre esses dois grupos cresce a cada semana."
+      },
+      pergunta: "Como você descreveria sua situação atual no mercado digital?",
+      alternativas: [
+        { icone: "trending-up",  texto: "Estou estabelecido, mas quero crescer ainda mais." },
+        { icone: "compass",      texto: "Estou começando e tentando encontrar meu caminho." },
+        { icone: "timer",        texto: "Sinto que estou ficando para trás enquanto o mercado muda." },
+        { icone: "activity",     texto: "Trabalho na área, mas ainda não consegui a renda que quero." }
+      ]
+    },
+
+    {
+      id: 2, tipo: "unica", microcontexto: null,
+      componenteAntes: {
+        tipo: "grafico",
+        titulo: "Setores criativos mais afetados pela automação",
+        fonte: "Market Intelligence 2025",
+        dados: [
+          { label: "Marketing Digital",   valor: "68%", pct: 100 },
+          { label: "Design Gráfico",      valor: "54%", pct: 79  },
+          { label: "Produção de Vídeo",   valor: "41%", pct: 60  },
+          { label: "Criação de Conteúdo", valor: "35%", pct: 51  }
+        ]
+      },
+      pergunta: "Em qual área você atua ou pretende atuar?",
+      alternativas: [
+        { icone: "megaphone", texto: "Marketing Digital" },
+        { icone: "pen-tool",  texto: "Design Gráfico e Criação Visual" },
+        { icone: "video",     texto: "Produção de Vídeo e Audiovisual" },
+        { icone: "edit-3",    texto: "Criação de Conteúdo em Geral" }
+      ]
+    },
+
+    // ── BLOCO 2 — INTENSIFICAÇÃO ─────────────────────────────
+    {
+      id: 3, tipo: "unica",
+      microcontexto: "A maioria das pessoas sente uma mistura de medo e curiosidade. Suas respostas vão revelar o que domina a sua decisão agora.",
+      componenteAntes: null,
+      pergunta: "Como você se sente em relação à automação e I.A. no mercado?",
+      alternativas: [
+        { icone: "shield-off", texto: "Inseguro, sinto que posso ser substituído." },
+        { icone: "eye-off",    texto: "Curioso, mas não sei como aplicar." },
+        { icone: "zap",        texto: "Animado, quero dominar isso." },
+        { icone: "timer",      texto: "Preocupado com o ritmo das mudanças." }
+      ]
+    },
+
+    {
+      id: 4, tipo: "unica", microcontexto: null, componenteAntes: null,
+      pergunta: "Se você pudesse aprender UMA habilidade de I.A. agora, qual escolheria?",
+      alternativas: [
+        { icone: "star",      texto: "Criar imagens e artes com I.A." },
+        { icone: "film",      texto: "Produzir vídeos cinematográficos com I.A." },
+        { icone: "file-text", texto: "Gerar textos e conteúdo que vende." },
+        { icone: "settings",  texto: "Automatizar tarefas e fluxos de trabalho." }
+      ]
+    },
+
+    // ── INTERCALADA 1 — PAIN ANGLE ──────────────────────────
+    {
+      tipo: "intercalada",
+      imagem: "assets/quiz-img-1.png",
+      caption: "Enquanto você hesita, outros já estão faturando.",
+      tag: "O que está em jogo",
+      tagIcone: "triangle-alert",
+      stat: {
+        numero: "3x",
+        descricao: "Os 5% que já usam I.A. profissionalmente faturam até 3x mais que a média da área."
+      },
+      copy: "Não é sobre substituição. É sobre <strong>quem vai usar a ferramenta</strong> — e quem vai ser substituído por quem já usa.",
+      ctaTexto: "Entendi. Continuar →"
+    },
+
+    // ── BLOCO 3 — VALIDAÇÃO + DESEJO ─────────────────────────
+    {
+      id: 5, tipo: "unica",
+      microcontexto: "Saber onde você está agora ajuda a identificar exatamente o que falta para dar o próximo passo.",
+      componenteAntes: null,
+      pergunta: "O que você já tentou para aprender ou usar I.A.?",
+      alternativas: [
+        { icone: "rotate-ccw",   texto: "Assisti tutoriais no YouTube, mas não consegui aplicar." },
+        { icone: "minus-circle", texto: "Criei conta no ChatGPT, mas só usei para coisas básicas." },
+        { icone: "x-circle",     texto: "Comprei um curso, mas achei técnico demais e desisti." },
+        { icone: "map",          texto: "Ainda não comecei — não sei por onde começar." }
+      ]
+    },
+
+    {
+      id: 6, tipo: "unica", microcontexto: null, componenteAntes: null,
+      pergunta: "Quanto tempo por dia você conseguiria dedicar para dominar I.A.?",
+      alternativas: [
+        { icone: "clock", texto: "Menos de 30 minutos." },
+        { icone: "clock", texto: "Entre 30 minutos e 1 hora." },
+        { icone: "clock", texto: "De 1 a 2 horas." },
+        { icone: "zap",   texto: "Mais de 2 horas — estou disposto a me dedicar de verdade." }
+      ]
+    },
+
+    // ── INTERCALADA 2 — DESIRE ANGLE ────────────────────────
+    {
+      tipo: "intercalada",
+      imagem: "assets/quiz-img-2.png",
+      caption: "Essa pode ser a sua tarde de terça-feira.",
+      tag: "A outra margem",
+      tagIcone: "sun",
+      stat: null,
+      copy: "Uma tarde criando com I.A. — sem chefe, sem horário fixo, com <strong>resultado real na conta</strong>. Isso não é promessa. É o dia a dia de quem já fez a mudança.",
+      ctaTexto: "Quero isso. Continuar →"
+    },
+
+    // ── BLOCO 4 — MECANISMO + DECISÃO ────────────────────────
+    {
+      id: 7, tipo: "unica",
+      microcontexto: "A maioria das pessoas que ainda não usa I.A. profissionalmente tem uma coisa em comum — e não é falta de inteligência.",
+      componenteAntes: null,
+      pergunta: "O que você acha que falta para finalmente usar I.A. de forma profissional?",
+      alternativas: [
+        { icone: "map",    texto: "Um guia prático que mostre o caminho passo a passo." },
+        { icone: "users",  texto: "Exemplos reais de pessoas como eu ganhando com isso." },
+        { icone: "shield", texto: "Confiança de que consigo aprender mesmo sem ser técnico." },
+        { icone: "target", texto: "Clareza sobre qual ferramenta usar para cada objetivo." }
+      ]
+    },
+
+    {
+      id: 8, tipo: "unica", microcontexto: null, componenteAntes: null,
+      pergunta: "Se você dominasse I.A. nos próximos 30 dias, o que mudaria primeiro?",
+      alternativas: [
+        { icone: "timer",       texto: "Faria em 30 minutos o que hoje leva 3 horas." },
+        { icone: "trending-up", texto: "Poderia cobrar mais caro pelos mesmos serviços." },
+        { icone: "wallet",      texto: "Finalmente teria uma renda extra consistente." },
+        { icone: "shield",      texto: "Me sentiria seguro no mercado mesmo com as mudanças." }
+      ]
+    },
+
+    {
+      id: 9, tipo: "unica", microcontexto: null, componenteAntes: null,
+      pergunta: "Qual é a sua situação atual de renda?",
+      alternativas: [
+        { icone: "briefcase",    texto: "Trabalho com carteira assinada e quero uma renda extra." },
+        { icone: "activity",     texto: "Sou freelancer, mas a renda é irregular." },
+        { icone: "trending-up",  texto: "Tenho um negócio e quero escalar com I.A." },
+        { icone: "alert-circle", texto: "Estou sem renda fixa e preciso mudar isso urgentemente." }
+      ]
+    },
+
+    {
+      id: 10, tipo: "unica", microcontexto: null, componenteAntes: null,
+      pergunta: "Qual resultado financeiro em 90 dias te faria dizer \"valeu a pena\"?",
+      alternativas: [
+        { icone: "dollar-sign",  texto: "Uma renda extra de R$500 a R$1.000 por mês." },
+        { icone: "wallet",       texto: "Substituir parte do salário com serviços de I.A." },
+        { icone: "trending-up",  texto: "Chegar a R$3.000/mês ou mais com criação de conteúdo." },
+        { icone: "rocket",       texto: "Criar um negócio digital completo com I.A." }
+      ]
+    }
+
+  ],
+
+  // ── Perfis de resultado (score-based) ──────────────────────
+  // Scores: 0–3 por pergunta, 10 perguntas = 0–30 pts
+  // Índice da alternativa vira score: 0=3, 1=2, 2=1, 3=0
+  // Intercaladas não pontuam
+  perfis: [
+    {
+      id: "iniciante",
+      minScore: 0, maxScore: 10,
+      badge: "Iniciante com Potencial",
+      headline: "Você está no ponto de partida —",
+      headlineSpan: "e isso é mais poderoso do que parece.",
+      sub: "Suas respostas mostram alguém que ainda não deu o primeiro passo com I.A., mas já sente que o mercado está mudando ao redor. O que falta não é capacidade — é o mapa certo nas mãos.",
+      diagnostico: [
+        { label: "Consciência do mercado",    pct: 60 },
+        { label: "Disposição para aprender",  pct: 75 },
+        { label: "Urgência de mudança",       pct: 82 }
+      ]
+    },
+    {
+      id: "transicao",
+      minScore: 11, maxScore: 20,
+      badge: "Em Transição",
+      headline: "Você já tem o perfil —",
+      headlineSpan: "falta só o método certo.",
+      sub: "Suas respostas revelam alguém que já tentou, já pesquisou, já sente que é hora de mudar — mas ainda não encontrou a forma certa de transformar isso em resultado real e consistente.",
+      diagnostico: [
+        { label: "Consciência do mercado",    pct: 78 },
+        { label: "Disposição para aprender",  pct: 88 },
+        { label: "Urgência de mudança",       pct: 92 }
+      ]
+    },
+    {
+      id: "pronto",
+      minScore: 21, maxScore: 30,
+      badge: "Pronto para Dominar",
+      headline: "Você está pronto para",
+      headlineSpan: "dominar o mercado de I.A.",
+      sub: "Suas respostas mostram clareza de objetivo, disposição real para aprender e consciência total do momento que estamos vivendo. O único passo que falta é ter o sistema certo nas mãos.",
+      diagnostico: [
+        { label: "Consciência do mercado",    pct: 97 },
+        { label: "Disposição para aprender",  pct: 96 },
+        { label: "Urgência de mudança",       pct: 100 }
+      ]
+    }
+  ],
+
+  resultado: {
+    depoimentos: [
+      {
+        quote: "\"Comecei sem saber nada de I.A. Em 3 semanas já entregava artes com Midjourney para clientes. Hoje cobro 2x mais por projeto.\"",
+        nome: "Camila R.", cargo: "Designer Freelancer — SP"
+      },
+      {
+        quote: "\"Tinha medo de ser substituído. Depois do ebook entendi que sou eu quem usa a ferramenta. O mercado abriu de vez para mim.\"",
+        nome: "Rafael M.", cargo: "Criador de Conteúdo — MG"
+      }
+    ],
+    beneficios: [
+      "7 áreas de renda com I.A. explicadas passo a passo",
+      "Ferramentas 100% gratuitas para começar hoje mesmo",
+      "Exemplos reais com resultados financeiros concretos",
+      "Bônus: Kit de 50 Prompts Profissionais testados em produção",
+      "Bônus: Guia Completo de Ferramentas I.A. 2025"
+    ],
+    faq: [
+      {
+        pergunta: "Preciso saber programar ou ter conhecimento técnico?",
+        resposta: "Não. O conteúdo foi criado para quem não tem nenhum conhecimento técnico. Se você sabe descrever o que quer com palavras, já tem a única habilidade necessária para começar."
+      },
+      {
+        pergunta: "Em quanto tempo vejo resultado?",
+        resposta: "Quem aplica o conteúdo na prática costuma ver os primeiros resultados em 2 a 3 semanas — desde serviços prestados com I.A. até processos 3x mais rápidos e projetos mais bem pagos."
+      },
+      {
+        pergunta: "Funciona para quem já trabalha na área criativa?",
+        resposta: "Especialmente para quem já trabalha. Quem tem base criativa aprende I.A. mais rápido e consegue cobrar mais pelos mesmos serviços — usando menos tempo e entregando qualidade superior."
+      }
+    ],
+    timer:    { minutos: 15, label: "Oferta especial expira em", nota: "Desconto de R$30 para quem completar o diagnóstico." },
+    precoDe:  "De R$97",
+    precoPor: "Por apenas R$27",
+    ctaTexto: "Quero começar agora",
+    urgencia: "Acesso imediato. Sem mensalidade.",
+    garantia: "Garantia de 7 dias sem risco"
+  }
+};
+
+// ============================================================
+// ENGINE
+// ============================================================
+let currentIndex   = 0;
+let selectedAnswer = null;
+let totalScore     = 0;
+let answeredCount  = 0;
+
+const stage         = document.getElementById("quiz-stage");
+const progressFill  = document.getElementById("progress-fill");
+const progressLabel = document.getElementById("progress-label");
+
+const totalPerguntas = QUIZ.perguntas.filter(p => p.tipo !== "intercalada").length;
+
+function updateProgress(index) {
+  const pct = ((index + 1) / QUIZ.perguntas.length) * 100;
+  progressFill.style.width = Math.min(pct, 100) + "%";
+  const q = QUIZ.perguntas[index];
+  if (q && q.tipo !== "intercalada") {
+    const numQ = QUIZ.perguntas.slice(0, index + 1).filter(p => p.tipo !== "intercalada").length;
+    progressLabel.textContent = "Pergunta " + numQ + " de " + totalPerguntas;
+  }
+}
+
+// ── Componentes ──────────────────────────────────────────────
+
+function renderMetrica(c) {
+  return `
+    <div class="metric-block">
+      <div class="metric-eyebrow">${c.eyebrow}</div>
+      <div class="metric-row">
+        <span class="metric-number" id="metric-num">0</span>
+        <span class="metric-suffix">${c.sufixo}</span>
+      </div>
+      <p class="metric-desc">${c.descricao}</p>
+    </div>`;
+}
+
+function renderGrafico(c) {
+  return `
+    <div class="chart-block">
+      <div class="chart-title">${c.titulo}</div>
+      <div class="chart-rows">
+        ${c.dados.map((d, i) => `
+          <div class="chart-row">
+            <div class="chart-row-header">
+              <span class="chart-row-label">${d.label}</span>
+              <span class="chart-row-val">${d.valor}</span>
+            </div>
+            <div class="chart-track">
+              <div class="chart-bar" id="cbar-${i}" data-pct="${d.pct}"></div>
+            </div>
+          </div>`).join("")}
+      </div>
+      ${c.fonte ? `<div class="chart-source">Fonte: ${c.fonte}</div>` : ""}
+    </div>`;
+}
+
+function renderComponenteAntes(comp) {
+  if (!comp) return "";
+  if (comp.tipo === "metrica") return renderMetrica(comp);
+  if (comp.tipo === "grafico") return renderGrafico(comp);
+  return "";
+}
+
+function animatePostRender(q) {
+  if (!q.componenteAntes) return;
+  if (q.componenteAntes.tipo === "metrica") {
+    const el = document.getElementById("metric-num");
+    if (el) animateNumber(el, 0, q.componenteAntes.numero, 900);
+  }
+  if (q.componenteAntes.tipo === "grafico") {
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        document.querySelectorAll(".chart-bar[data-pct]").forEach(bar => {
+          bar.style.width = bar.dataset.pct + "%";
+        });
+      }, 100);
+    });
+  }
+}
+
+// ── Render intercalada ───────────────────────────────────────
+
+function renderIntercalada(index) {
+  const item = QUIZ.perguntas[index];
+  updateProgress(index);
+
+  const statHtml = item.stat ? `
+    <div class="intercalada-stat">
+      <div class="intercalada-stat-num">${item.stat.numero}</div>
+      <div class="intercalada-stat-desc">${item.stat.descricao}</div>
+    </div>` : "";
+
+  stage.innerHTML = `
+    <div class="question-screen fade-in">
+      <div class="intercalada-screen">
+        <div class="intercalada-img-wrap" id="img-wrap-${index}"
+             data-placeholder="Execute gerar-imagens-quiz.py para gerar as imagens">
+          <img class="intercalada-img" src="${item.imagem}" alt=""
+               onerror="document.getElementById('img-wrap-${index}').classList.add('img-missing')">
+          <div class="intercalada-img-overlay"></div>
+          <div class="intercalada-img-caption">${item.caption}</div>
+        </div>
+        <div class="intercalada-body">
+          ${item.tag ? `<div class="intercalada-tag"><i data-lucide="${item.tagIcone}"></i>${item.tag}</div>` : ""}
+          ${statHtml}
+          <p class="intercalada-copy">${item.copy}</p>
+        </div>
+      </div>
+      <div class="btn-next-wrap visible">
+        <button class="btn-next" onclick="nextStep()">
+          ${item.ctaTexto || "Continuar"}
+          <i data-lucide="arrow-right"></i>
+        </button>
+      </div>
+    </div>`;
+  lucide.createIcons();
+}
+
+// ── Render pergunta ──────────────────────────────────────────
+
+function renderQuestion(index) {
+  const q = QUIZ.perguntas[index];
+  if (!q) { showLoading(); return; }
+  if (q.tipo === "intercalada") { renderIntercalada(index); return; }
+
+  selectedAnswer = null;
+  updateProgress(index);
+
+  const isLast = index === QUIZ.perguntas.length - 1;
+
+  const opcoesHtml = `<ul class="options-list" role="list">` +
+    q.alternativas.map((alt, i) => `
+      <li>
+        <div class="option-card" role="button" tabindex="0"
+             aria-pressed="false" data-index="${i}"
+             onclick="selectAnswer(this)"
+             onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectAnswer(this)}">
+          <div class="option-icon"><i data-lucide="${alt.icone}"></i></div>
+          <span class="option-text">${alt.texto}</span>
+        </div>
+      </li>`).join("") + `</ul>`;
+
+  stage.innerHTML = `
+    <div class="question-screen fade-in">
+      ${renderComponenteAntes(q.componenteAntes)}
+      ${q.microcontexto ? `<p class="micro-context">${q.microcontexto}</p>` : ""}
+      <div>
+        <div class="question-meta">
+          <span class="question-num">Pergunta ${QUIZ.perguntas.slice(0, index + 1).filter(p => p.tipo !== "intercalada").length}</span>
+        </div>
+        <h1 class="question-text">${q.pergunta}</h1>
+      </div>
+      ${opcoesHtml}
+      <div class="btn-next-wrap" id="btn-next-wrap">
+        <button class="btn-next" onclick="nextStep()">
+          ${isLast ? "Ver meu diagnóstico" : "Próximo"}
+          <i data-lucide="arrow-right"></i>
+        </button>
+      </div>
+    </div>`;
+
+  lucide.createIcons();
+  animatePostRender(q);
+}
+
+// ── Seleção ──────────────────────────────────────────────────
+
+function selectAnswer(el) {
+  document.querySelectorAll(".option-card").forEach(c => {
+    c.classList.remove("selected");
+    c.setAttribute("aria-pressed", "false");
+  });
+  el.classList.add("selected");
+  el.setAttribute("aria-pressed", "true");
+  selectedAnswer = parseInt(el.dataset.index);
+
+  const btnWrap = document.getElementById("btn-next-wrap");
+  if (btnWrap) btnWrap.classList.add("visible");
+}
+
+// ── Navegação ────────────────────────────────────────────────
+
+function nextStep() {
+  const q = QUIZ.perguntas[currentIndex];
+
+  if (q.tipo === "unica" && selectedAnswer === null) return;
+
+  // Acumular score (índice 0 = melhor = 3pts, índice 3 = pior = 0pts)
+  if (q.tipo === "unica" && selectedAnswer !== null) {
+    totalScore += (3 - selectedAnswer);
+    answeredCount++;
+  }
+
+  const screen = stage.querySelector(".question-screen");
+  if (screen) {
+    screen.classList.add("fade-out");
+  }
+
+  setTimeout(() => {
+    currentIndex++;
+    if (currentIndex < QUIZ.perguntas.length) {
+      renderQuestion(currentIndex);
+    } else {
+      showLoading();
+    }
+  }, 180);
+}
+
+// ── Loading ──────────────────────────────────────────────────
+
+function showLoading() {
+  progressFill.style.width = "95%";
+  progressLabel.textContent = "Calculando...";
+
+  stage.innerHTML = `
+    <div class="loading-screen">
+      <div class="loading-icon-wrap"><i data-lucide="cpu"></i></div>
+      <div class="loading-texts">
+        <div class="loading-headline">Analisando suas respostas</div>
+        <div class="loading-sub" id="loading-sub">Identificando seu perfil no mercado de I.A....</div>
+      </div>
+      <div class="loading-bar-wrap">
+        <div class="loading-bar-track">
+          <div class="loading-bar-fill" id="loading-bar"></div>
+        </div>
+        <span class="loading-pct" id="loading-pct">0%</span>
+      </div>
+    </div>`;
+  lucide.createIcons();
+
+  const bar = document.getElementById("loading-bar");
+  const pct = document.getElementById("loading-pct");
+  const sub = document.getElementById("loading-sub");
+
+  const fases = [
+    { texto: "Identificando seu perfil no mercado de I.A....",  alvo: 35,  ms: 0    },
+    { texto: "Calculando oportunidades identificadas...",        alvo: 72,  ms: 850  },
+    { texto: "Preparando seu diagnóstico personalizado...",      alvo: 100, ms: 1750 }
+  ];
+
+  fases.forEach(f => {
+    setTimeout(() => {
+      if (sub) sub.textContent = f.texto;
+      if (bar) bar.style.width = f.alvo + "%";
+      if (pct) pct.textContent = f.alvo + "%";
+    }, f.ms);
+  });
+
+  setTimeout(showResult, 2850);
+}
+
+// ── Resultado ────────────────────────────────────────────────
+
+function showResult() {
+  progressFill.style.width = "100%";
+  progressLabel.textContent = "Concluído";
+
+  // Determinar perfil pelo score
+  const perfil = QUIZ.perfis.find(p => totalScore >= p.minScore && totalScore <= p.maxScore)
+               || QUIZ.perfis[1];
+
+  const r = QUIZ.resultado;
+
+  const starsHtml = `
+    <div class="testimonial-stars">
+      ${[...Array(5)].map(() =>
+        `<svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`
+      ).join("")}
+    </div>`;
+
+  stage.innerHTML = `
+    <div class="result-screen">
+
+      <div class="result-badge">
+        <i data-lucide="check-circle"></i>
+        ${perfil.badge}
+      </div>
+
+      <h1 class="result-headline">
+        ${perfil.headline}<br>
+        <span>${perfil.headlineSpan}</span>
+      </h1>
+
+      <p class="result-sub">${perfil.sub}</p>
+
+      <div class="result-diagnostic">
+        <div class="diagnostic-label">Seu diagnóstico personalizado</div>
+        <div class="diagnostic-bar-wrap" id="diag-bars">
+          ${perfil.diagnostico.map((d, i) => `
+            <div class="diagnostic-row">
+              <div class="diagnostic-row-label">
+                <span class="diagnostic-row-name">${d.label}</span>
+                <span class="diagnostic-row-pct" id="pct-${i}">0%</span>
+              </div>
+              <div class="diagnostic-track">
+                <div class="diagnostic-bar" id="bar-${i}"></div>
+              </div>
+            </div>`).join("")}
+        </div>
+      </div>
+
+      <div class="result-divider"></div>
+
+      <div class="testimonials-wrap">
+        <div class="testimonials-label">Quem já aplicou o método</div>
+        ${r.depoimentos.map(d => `
+          <div class="testimonial-card">
+            ${starsHtml}
+            <p class="testimonial-quote">${d.quote}</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar"><i data-lucide="user"></i></div>
+              <div class="testimonial-info">
+                <span class="testimonial-name">${d.nome}</span>
+                <span class="testimonial-role">${d.cargo}</span>
+              </div>
+            </div>
+          </div>`).join("")}
+      </div>
+
+      <div class="result-divider"></div>
+
+      <div>
+        <div class="benefits-label">O que você vai receber</div>
+        <ul class="benefits-list">
+          ${r.beneficios.map(b => `
+            <li class="benefit-item">
+              <div class="benefit-check"><i data-lucide="check"></i></div>
+              <span class="benefit-text">${b}</span>
+            </li>`).join("")}
+        </ul>
+      </div>
+
+      <div class="timer-block">
+        <div class="timer-icon"><i data-lucide="clock"></i></div>
+        <div class="timer-content">
+          <div class="timer-label">${r.timer.label}</div>
+          <div class="timer-digits" id="timer-digits">15:00</div>
+          <div class="timer-note">${r.timer.nota}</div>
+        </div>
+      </div>
+
+      <div class="faq-wrap">
+        <div class="faq-label">Perguntas frequentes</div>
+        ${r.faq.map((f, i) => `
+          <div class="faq-item" id="faq-${i}">
+            <button class="faq-q" onclick="toggleFaq(${i})" aria-expanded="false">
+              ${f.pergunta}
+              <i data-lucide="chevron-down"></i>
+            </button>
+            <div class="faq-a">${f.resposta}</div>
+          </div>`).join("")}
+      </div>
+
+      <div class="cta-block">
+        <div class="pricing-block">
+          <div class="price-de">${r.precoDe}</div>
+          <div class="price-por">${r.precoPor}</div>
+        </div>
+        <a href="${QUIZ.ctaUrl}" class="btn-cta">
+          ${r.ctaTexto}
+          <i data-lucide="arrow-right"></i>
+        </a>
+        <p class="cta-urgency">${r.urgencia}</p>
+        <div class="cta-guarantee">
+          <i data-lucide="shield-check"></i>
+          ${r.garantia}
+        </div>
+      </div>
+
+    </div>`;
+
+  lucide.createIcons();
+
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      perfil.diagnostico.forEach((d, i) => {
+        const bar = document.getElementById("bar-" + i);
+        const pctEl = document.getElementById("pct-" + i);
+        if (bar) bar.style.width = d.pct + "%";
+        if (pctEl) animateNumber(pctEl, 0, d.pct, 1000);
+      });
+    }, 150);
+  });
+
+  startTimer(r.timer.minutos * 60);
+}
+
+// ── FAQ ──────────────────────────────────────────────────────
+
+function toggleFaq(index) {
+  const item = document.getElementById("faq-" + index);
+  if (!item) return;
+  const btn    = item.querySelector(".faq-q");
+  const isOpen = item.classList.contains("open");
+
+  document.querySelectorAll(".faq-item.open").forEach(el => {
+    el.classList.remove("open");
+    el.querySelector(".faq-q").setAttribute("aria-expanded", "false");
+  });
+
+  if (!isOpen) {
+    item.classList.add("open");
+    btn.setAttribute("aria-expanded", "true");
+  }
+}
+
+// ── Timer ────────────────────────────────────────────────────
+
+function startTimer(totalSeconds) {
+  let remaining = totalSeconds;
+  const el = document.getElementById("timer-digits");
+  if (!el) return;
+
+  const tick = () => {
+    if (remaining <= 0) { el.textContent = "00:00"; return; }
+    const m = Math.floor(remaining / 60).toString().padStart(2, "0");
+    const s = (remaining % 60).toString().padStart(2, "0");
+    el.textContent = m + ":" + s;
+    remaining--;
+    setTimeout(tick, 1000);
+  };
+  tick();
+}
+
+// ── Animação de número ───────────────────────────────────────
+
+function animateNumber(el, from, to, duration) {
+  const start = performance.now();
+  function step(now) {
+    const t     = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - t, 3);
+    el.textContent = Math.round(from + (to - from) * eased) + "%";
+    if (t < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+// ── START ────────────────────────────────────────────────────
+renderQuestion(0);
+</script>
+</body>
+</html>

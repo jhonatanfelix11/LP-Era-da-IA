@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Era da I.A. — Design System Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&family=Lato:wght@300;400;700;900&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+/* ── RESET ── */
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Lato',sans-serif;background:#0F172A;color:#E2E8F0;line-height:1.6}
+
+/* ── VARIABLES ── */
+:root{
+  --negro:#030B14;--carbon:#0A1628;--carbon2:#0F1E30;
+  --ouro:#2563EB;--acento-dark:#38BDF8;--pop:#22D3EE;--amber:#FBBF24;
+  --fundo:#EEF4FF;--fundo-alt:#F0F9FF;
+  --texto:#1E293B;--texto-suave:#475569;--branco:#FFFFFF;
+  --callout-bg:#DBEAFE;--border-light:#CBD5E1;
+}
+
+/* ── LAYOUT ── */
+.container{max-width:1200px;margin:0 auto;padding:40px 24px}
+.hero{text-align:center;padding:80px 24px;background:linear-gradient(135deg,var(--negro),var(--carbon2));border-bottom:2px solid var(--ouro)}
+.hero h1{font-family:'Playfair Display',serif;font-size:42px;font-weight:900;color:white;margin-bottom:8px}
+.hero .accent{color:var(--acento-dark)}
+.hero p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:rgba(255,255,255,.6);max-width:600px;margin:0 auto}
+.hero .badge{display:inline-block;margin-top:20px;background:var(--ouro);color:white;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:6px 16px}
+
+section{margin-bottom:64px}
+.section-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:white;margin-bottom:8px}
+.section-label{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--acento-dark);font-weight:700;margin-bottom:4px}
+.section-desc{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:32px;max-width:600px}
+.rule{height:1px;background:var(--ouro);opacity:.3;margin:48px 0}
+
+/* ── COLOR SWATCHES ── */
+.swatch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:32px}
+.swatch{border-radius:8px;overflow:hidden;background:#1E293B}
+.swatch-color{height:100px;position:relative}
+.swatch-color .hex{position:absolute;bottom:8px;right:10px;font-size:12px;font-weight:700;font-family:monospace;padding:2px 6px;border-radius:4px}
+.swatch-color .hex.light{color:white;background:rgba(0,0,0,.4)}
+.swatch-color .hex.dark{color:#1E293B;background:rgba(255,255,255,.6)}
+.swatch-info{padding:12px}
+.swatch-name{font-weight:700;font-size:13px;color:white}
+.swatch-role{font-size:11px;color:rgba(255,255,255,.5)}
+.swatch-token{font-size:10px;font-family:monospace;color:var(--acento-dark);margin-top:4px}
+
+/* ── TYPOGRAPHY SPECIMENS ── */
+.type-specimen{background:#1E293B;border-radius:8px;padding:24px;margin-bottom:16px}
+.type-row{display:flex;align-items:baseline;gap:20px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.type-row:last-child{border:none}
+.type-label{width:120px;flex-shrink:0;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acento-dark);font-weight:700}
+.type-meta{width:200px;flex-shrink:0;font-size:11px;color:rgba(255,255,255,.4);font-family:monospace}
+.type-sample{flex:1}
+
+.h1-sample{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:white;line-height:1.15}
+.h2-sample{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:white;line-height:1.2}
+.h3-sample{font-family:'Lato',sans-serif;font-size:13px;font-weight:700;color:var(--ouro);letter-spacing:.06em;text-transform:uppercase}
+.body-sample{font-family:'Source Serif 4',Georgia,serif;font-size:14px;color:rgba(255,255,255,.85);line-height:1.65}
+.label-sample{font-family:'Lato',sans-serif;font-size:10px;font-weight:700;color:var(--acento-dark);letter-spacing:.15em;text-transform:uppercase}
+.stat-sample{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--pop);line-height:1}
+.caption-sample{font-family:'Lato',sans-serif;font-size:11px;color:rgba(255,255,255,.5);line-height:1.3}
+.epigraph-sample{font-family:'Source Serif 4',Georgia,serif;font-style:italic;font-size:16px;color:rgba(255,255,255,.7);line-height:1.5;border-left:3px solid var(--ouro);padding-left:16px}
+
+/* ── COMPONENT PREVIEWS ── */
+.component-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px}
+.comp-card{background:#1E293B;border-radius:8px;overflow:hidden}
+.comp-header{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center}
+.comp-title{font-size:13px;font-weight:700;color:white}
+.comp-tag{font-size:9px;letter-spacing:.1em;text-transform:uppercase;background:var(--ouro);color:white;padding:3px 8px;border-radius:2px}
+.comp-body{padding:20px}
+
+/* Callout */
+.demo-callout{background:var(--callout-bg);border-left:4px solid var(--ouro);padding:12px 16px}
+.demo-callout .cl{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ouro);font-weight:700;margin-bottom:4px}
+.demo-callout p{font-size:13px;color:var(--texto);line-height:1.5}
+
+/* Stat Row */
+.demo-stat-row{display:flex;gap:12px}
+.demo-stat-item{flex:1;text-align:center;background:var(--callout-bg);padding:16px 12px;border-radius:4px}
+.demo-stat-n{display:block;font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--ouro);line-height:1}
+.demo-stat-d{font-size:10px;color:var(--texto-suave);margin-top:4px;line-height:1.3}
+
+/* Dark Stat Grid */
+.demo-dark-stat{display:flex;gap:8px}
+.demo-dark-card{flex:1;background:var(--negro);padding:16px 12px;text-align:center;border-top:3px solid var(--pop);border-radius:2px}
+.demo-dsn{display:block;font-family:'Lato',sans-serif;font-size:28px;font-weight:900;color:var(--pop);line-height:1;letter-spacing:-1px}
+.demo-dsd{font-size:10px;color:rgba(255,255,255,.6);margin-top:4px;line-height:1.3}
+
+/* Tool Card */
+.demo-tool{background:white;border:1px solid var(--border-light);padding:12px 16px;border-radius:2px}
+.demo-tool .tn{font-family:'Lato',sans-serif;font-weight:700;font-size:14px;color:var(--negro)}
+.demo-tool .tt{display:inline-block;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:white;background:var(--ouro);padding:2px 6px;margin:4px 0 6px;border-radius:1px}
+.demo-tool p{font-size:12px;color:var(--texto-suave);line-height:1.4}
+
+/* Career Card */
+.demo-career{background:var(--carbon);padding:16px;border-radius:2px}
+.demo-career .ct{font-family:'Lato',sans-serif;font-weight:700;font-size:14px;color:white;margin-bottom:2px}
+.demo-career .cv{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--acento-dark);line-height:1}
+.demo-career .cp{font-size:10px;color:rgba(255,255,255,.4);margin-bottom:6px}
+.demo-career p{font-size:12px;color:rgba(255,255,255,.7);line-height:1.4}
+
+/* Pull Quote */
+.demo-pullquote{text-align:center;padding:20px 24px}
+.demo-pullquote blockquote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;line-height:1.4;color:white}
+.demo-pullquote cite{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ouro);margin-top:8px;font-style:normal}
+
+/* FAQ */
+.demo-faq{border-left:3px solid var(--ouro);padding:10px 14px;background:rgba(37,99,235,.04);border-radius:0 4px 4px 0;margin-bottom:8px}
+.demo-faq .fq{font-family:'Lato',sans-serif;font-weight:700;font-size:12px;color:white;margin-bottom:4px}
+.demo-faq .fa{font-size:11px;color:rgba(255,255,255,.6);line-height:1.5;font-family:'Source Serif 4',Georgia,serif}
+
+/* Exercise Block */
+.demo-exercise{background:var(--carbon);padding:16px;border-radius:2px}
+.demo-exercise .el{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--acento-dark);font-weight:700;margin-bottom:6px}
+.demo-exercise h4{color:white;font-family:'Lato',sans-serif;font-weight:700;font-size:13px;margin-bottom:4px}
+.demo-exercise p{color:rgba(255,255,255,.7);font-size:12px;margin-bottom:6px}
+.demo-prompt{background:rgba(255,255,255,.07);border-left:3px solid var(--acento-dark);padding:8px 12px;font-family:monospace;font-size:11px;color:var(--acento-dark);margin-top:6px}
+
+/* Summary Block */
+.demo-summary{background:var(--negro);padding:16px 20px;border-radius:2px}
+.demo-summary .sl{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--acento-dark);font-weight:700;margin-bottom:8px}
+.demo-summary ul{list-style:none;padding:0}
+.demo-summary li{font-size:12px;color:rgba(255,255,255,.8);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.06);padding-left:16px;position:relative}
+.demo-summary li::before{content:'—';position:absolute;left:0;color:var(--acento-dark)}
+
+/* Chart Bar */
+.demo-chart-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.demo-chart-label{font-family:'Lato',sans-serif;font-size:10px;width:80px;text-align:right;color:rgba(255,255,255,.5);flex-shrink:0;font-weight:600}
+.demo-chart-bg{flex:1;background:rgba(37,99,235,.15);height:20px;border-radius:3px;overflow:hidden}
+.demo-chart-fill{height:100%;display:flex;align-items:center;padding-left:8px;border-radius:3px}
+.demo-chart-val{font-family:'Lato',sans-serif;font-size:9px;font-weight:900;color:white;white-space:nowrap}
+
+/* CTA Button */
+.demo-cta{display:inline-block;background:var(--ouro);color:white;font-family:'Lato',sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:10px 28px;border:none;cursor:pointer;text-decoration:none;transition:background .2s}
+.demo-cta:hover{background:#1D4ED8}
+
+/* Feature Row */
+.demo-feat-row{display:flex;gap:16px;align-items:flex-start}
+.demo-feat-img{flex:0 0 140px;height:120px;background:linear-gradient(135deg,var(--carbon2),var(--negro));border-radius:6px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.demo-feat-img svg{width:40px;height:40px;opacity:.3}
+.demo-feat-content{flex:1}
+.demo-feat-tag{font-family:'Lato',sans-serif;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--ouro);margin-bottom:4px}
+.demo-feat-content h4{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:white;margin-bottom:4px}
+.demo-feat-content p{font-size:12px;color:rgba(255,255,255,.6);line-height:1.5}
+
+/* ── SPACING SCALE ── */
+.spacing-grid{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end}
+.spacing-item{text-align:center}
+.spacing-bar{background:var(--ouro);border-radius:3px;margin:0 auto 6px;opacity:.7}
+.spacing-label{font-size:10px;color:rgba(255,255,255,.6)}
+.spacing-val{font-size:11px;color:var(--acento-dark);font-family:monospace;font-weight:700}
+
+/* ── RADIUS ── */
+.radius-grid{display:flex;gap:24px;align-items:center}
+.radius-item{text-align:center}
+.radius-box{width:64px;height:64px;background:var(--ouro);opacity:.6;margin:0 auto 8px}
+.radius-label{font-size:10px;color:rgba(255,255,255,.6)}
+.radius-val{font-size:11px;color:var(--acento-dark);font-family:monospace;font-weight:700}
+
+/* ── DECORATIVE RULES ── */
+.rule-demo{margin-bottom:16px}
+.rule-label{font-size:10px;color:rgba(255,255,255,.4);margin-bottom:6px;font-family:monospace}
+
+/* ── PAGE TEMPLATE PREVIEWS ── */
+.template-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+.template-card{background:#1E293B;border-radius:8px;overflow:hidden}
+.template-preview{height:200px;position:relative;overflow:hidden}
+.template-info{padding:16px}
+.template-info h4{font-size:14px;font-weight:700;color:white;margin-bottom:4px}
+.template-info p{font-size:11px;color:rgba(255,255,255,.5)}
+
+/* Cover preview */
+.tpl-cover{background:linear-gradient(110deg,rgba(5,14,26,.95),rgba(5,14,26,.75),rgba(5,14,26,.3));display:flex;flex-direction:column;justify-content:flex-end;padding:20px}
+.tpl-cover .cl{font-size:7px;letter-spacing:.2em;text-transform:uppercase;color:var(--acento-dark);font-weight:700;margin-bottom:6px}
+.tpl-cover .ct{font-family:'Playfair Display',serif;font-weight:900;font-size:22px;color:white;line-height:1.1;margin-bottom:6px}
+.tpl-cover .ct span{color:var(--acento-dark)}
+.tpl-cover .cr{height:2px;width:40px;background:var(--acento-dark);margin-bottom:6px}
+.tpl-cover .cs{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;color:rgba(255,255,255,.7)}
+
+/* Back cover preview */
+.tpl-back{background:var(--negro);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px;text-align:center}
+.tpl-back .bt{font-family:'Playfair Display',serif;font-size:16px;color:white;font-weight:900;margin-bottom:6px}
+.tpl-back .bs{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;color:rgba(255,255,255,.5);margin-bottom:8px}
+.tpl-back .br{height:2px;width:30px;background:var(--acento-dark);margin:0 auto 8px}
+.tpl-back .bp{font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--acento-dark)}
+
+/* Divider preview */
+.tpl-divider{display:flex;height:100%}
+.tpl-div-img{width:40%;background:linear-gradient(135deg,var(--carbon2),var(--negro))}
+.tpl-div-txt{flex:1;background:var(--carbon);padding:20px;display:flex;flex-direction:column;justify-content:center}
+.tpl-div-txt .dl{font-size:7px;letter-spacing:.18em;text-transform:uppercase;color:var(--acento-dark);font-weight:700;margin-bottom:6px}
+.tpl-div-txt .dt{font-family:'Playfair Display',serif;font-weight:900;font-size:16px;color:white;margin-bottom:6px}
+.tpl-div-txt .dr{height:2px;width:30px;background:var(--acento-dark);margin-bottom:6px}
+.tpl-div-txt .dd{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;color:rgba(255,255,255,.55)}
+
+/* Closing preview */
+.tpl-close{background:linear-gradient(135deg,rgba(5,14,26,.9),rgba(5,14,26,.85));display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px}
+.tpl-close .clt{font-size:7px;letter-spacing:.2em;text-transform:uppercase;color:var(--acento-dark);font-weight:700;margin-bottom:6px}
+.tpl-close .clt2{font-family:'Playfair Display',serif;font-weight:900;font-size:18px;color:white;margin-bottom:8px}
+.tpl-close .clr{height:2px;width:30px;background:var(--acento-dark);margin:0 auto 8px}
+.tpl-close .cls{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;color:rgba(255,255,255,.65);margin-bottom:12px}
+
+/* ── FOOTER ── */
+.footer{text-align:center;padding:40px 24px;border-top:1px solid rgba(255,255,255,.06);margin-top:40px}
+.footer p{font-size:12px;color:rgba(255,255,255,.3)}
+.footer .accent{color:var(--acento-dark)}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="badge">Design System v1.0</div>
+  <h1>Era da <span class="accent">I.A.</span></h1>
+  <p>Como Lucrar Agora Antes que Seja Tarde Demais</p>
+</header>
+
+<div class="container">
+
+<!-- ═══════════════ COLORS ═══════════════ -->
+<section>
+  <div class="section-label">Foundation</div>
+  <h2 class="section-title">Cores</h2>
+  <p class="section-desc">Paleta tech-premium com fundo navy escuro e acentos elétricos. Alto contraste, sensação de autoridade e inovação.</p>
+
+  <h3 style="color:var(--acento-dark);font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin:24px 0 12px;font-weight:700">Dark Foundation</h3>
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#030B14"><span class="hex light">#030B14</span></div>
+      <div class="swatch-info"><div class="swatch-name">--negro</div><div class="swatch-role">Background darkest</div><div class="swatch-token">Capa, seções de impacto</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#0A1628"><span class="hex light">#0A1628</span></div>
+      <div class="swatch-info"><div class="swatch-name">--carbon</div><div class="swatch-role">Background dark</div><div class="swatch-token">Sidebar, cards de carreira</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#0F1E30"><span class="hex light">#0F1E30</span></div>
+      <div class="swatch-info"><div class="swatch-name">--carbon2</div><div class="swatch-role">Background dark alt</div><div class="swatch-token">Variação de superfície</div></div>
+    </div>
+  </div>
+
+  <h3 style="color:var(--acento-dark);font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin:24px 0 12px;font-weight:700">Accent Blue</h3>
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#2563EB"><span class="hex light">#2563EB</span></div>
+      <div class="swatch-info"><div class="swatch-name">--ouro</div><div class="swatch-role">Primary accent</div><div class="swatch-token">Links, CTAs, badges, regras</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#38BDF8"><span class="hex light">#38BDF8</span></div>
+      <div class="swatch-info"><div class="swatch-name">--acento-dark</div><div class="swatch-role">Accent light</div><div class="swatch-token">Títulos em dark, bordas ativas</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#22D3EE"><span class="hex light">#22D3EE</span></div>
+      <div class="swatch-info"><div class="swatch-name">--pop</div><div class="swatch-role">Accent pop</div><div class="swatch-token">Estatísticas de destaque</div></div>
+    </div>
+  </div>
+
+  <h3 style="color:var(--acento-dark);font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin:24px 0 12px;font-weight:700">Secondary &amp; Light</h3>
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#FBBF24"><span class="hex dark">#FBBF24</span></div>
+      <div class="swatch-info"><div class="swatch-name">--amber</div><div class="swatch-role">Warm accent</div><div class="swatch-token">Urgência, alertas</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#EEF4FF"><span class="hex dark">#EEF4FF</span></div>
+      <div class="swatch-info"><div class="swatch-name">--fundo</div><div class="swatch-role">Background light</div><div class="swatch-token">Fundo principal conteúdo</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#F0F9FF"><span class="hex dark">#F0F9FF</span></div>
+      <div class="swatch-info"><div class="swatch-name">--fundo-alt</div><div class="swatch-role">Background light alt</div><div class="swatch-token">Variação sutil de fundo</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#DBEAFE"><span class="hex dark">#DBEAFE</span></div>
+      <div class="swatch-info"><div class="swatch-name">callout-bg</div><div class="swatch-role">Callout background</div><div class="swatch-token">Blocos de destaque</div></div>
+    </div>
+  </div>
+
+  <h3 style="color:var(--acento-dark);font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin:24px 0 12px;font-weight:700">Text</h3>
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#1E293B"><span class="hex light">#1E293B</span></div>
+      <div class="swatch-info"><div class="swatch-name">--texto</div><div class="swatch-role">Text primary</div><div class="swatch-token">Corpo, títulos em light</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#475569"><span class="hex light">#475569</span></div>
+      <div class="swatch-info"><div class="swatch-name">--texto-suave</div><div class="swatch-role">Text secondary</div><div class="swatch-token">Legendas, texto auxiliar</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#FFFFFF;border:1px solid rgba(255,255,255,.1)"><span class="hex dark">#FFFFFF</span></div>
+      <div class="swatch-info"><div class="swatch-name">--branco</div><div class="swatch-role">Text on dark</div><div class="swatch-token">Texto em fundos escuros</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#CBD5E1"><span class="hex dark">#CBD5E1</span></div>
+      <div class="swatch-info"><div class="swatch-name">border-light</div><div class="swatch-role">Light border</div><div class="swatch-token">Bordas de cards</div></div>
+    </div>
+  </div>
+
+  <h3 style="color:var(--acento-dark);font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin:24px 0 12px;font-weight:700">Contrast Ratios</h3>
+  <div class="swatch-grid" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr))">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#EEF4FF;display:flex;align-items:center;justify-content:center"><span style="color:#1E293B;font-family:'Lato',sans-serif;font-weight:700;font-size:14px">Texto / Fundo</span></div>
+      <div class="swatch-info"><div class="swatch-name">11.5:1 — AAA</div><div class="swatch-role">#1E293B on #EEF4FF</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#030B14;display:flex;align-items:center;justify-content:center"><span style="color:rgba(255,255,255,.85);font-family:'Lato',sans-serif;font-weight:700;font-size:14px">Texto / Negro</span></div>
+      <div class="swatch-info"><div class="swatch-name">14.2:1 — AAA</div><div class="swatch-role">white 85% on #030B14</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#030B14;display:flex;align-items:center;justify-content:center"><span style="color:#38BDF8;font-family:'Lato',sans-serif;font-weight:700;font-size:14px">Accent / Negro</span></div>
+      <div class="swatch-info"><div class="swatch-name">8.7:1 — AAA</div><div class="swatch-role">#38BDF8 on #030B14</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ═══════════════ TYPOGRAPHY ═══════════════ -->
+<section>
+  <div class="section-label">Typography</div>
+  <h2 class="section-title">Tipografia</h2>
+  <p class="section-desc">4 famílias tipográficas — display editorial, leitura, UI e accent. Hierarquia clara com contraste entre serif e sans-serif.</p>
+
+  <div class="type-specimen">
+    <div class="type-row">
+      <div class="type-label">Display H1</div>
+      <div class="type-meta">Playfair Display · 22pt · 900</div>
+      <div class="type-sample h1-sample">Era da I.A. — O Futuro é Agora</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Heading H2</div>
+      <div class="type-meta">Playfair Display · 15pt · 700</div>
+      <div class="type-sample h2-sample">O Ecossistema de Ferramentas</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Heading H3</div>
+      <div class="type-meta">Lato · 10pt · 700 · uppercase</div>
+      <div class="type-sample h3-sample">Capítulo 1 — O Mapa Completo</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Body</div>
+      <div class="type-meta">Source Serif 4 · 9.5pt · 400 · 1.65</div>
+      <div class="type-sample body-sample">A revolução da inteligência artificial está acontecendo agora. Quem souber usar as ferramentas certas vai lucrar. Quem esperar, vai ficar para trás. Este eBook mostra o caminho exato.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Label</div>
+      <div class="type-meta">Lato · 7pt · 700 · uppercase</div>
+      <div class="type-sample label-sample">Ferramenta Profissional · Atualizado 2025</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Stat Number</div>
+      <div class="type-meta">Playfair Display · 22pt · 900</div>
+      <div class="type-sample stat-sample">R$ 30.000/mês</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Caption</div>
+      <div class="type-meta">Lato · 7.5pt · 400 · 1.3</div>
+      <div class="type-sample caption-sample">Fonte: pesquisa de mercado com profissionais de I.A. freelancer no Brasil, 2025.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Epigraph</div>
+      <div class="type-meta">Source Serif 4 · 13pt · italic · 1.5</div>
+      <div class="type-sample epigraph-sample">"A janela de oportunidade da I.A. está aberta — e vai fechar. Aprenda agora como entrar antes que a maioria perceba."</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Subtitle</div>
+      <div class="type-meta">Cormorant Garamond · 12pt · italic</div>
+      <div class="type-sample" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(255,255,255,.7)">O mapa completo das ferramentas que profissionais já usam para criar, produzir e lucrar</div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ═══════════════ SPACING ═══════════════ -->
+<section>
+  <div class="section-label">Layout</div>
+  <h2 class="section-title">Espaçamento &amp; Raio</h2>
+  <p class="section-desc">Escala de espaçamento baseada em mm (contexto A4 print). Cantos retos como regra — radius é exceção.</p>
+
+  <h3 style="color:var(--acento-dark);font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin:24px 0 16px;font-weight:700">Spacing Scale</h3>
+  <div class="spacing-grid">
+    <div class="spacing-item">
+      <div class="spacing-bar" style="width:12px;height:6px"></div>
+      <div class="spacing-val">1.5mm</div>
+      <div class="spacing-label">xs</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar" style="width:16px;height:8px"></div>
+      <div class="spacing-val">2mm</div>
+      <div class="spacing-label">sm</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar" style="width:24px;height:11px"></div>
+      <div class="spacing-val">3mm</div>
+      <div class="spacing-label">md</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar" style="width:32px;height:15px"></div>
+      <div class="spacing-val">4mm</div>
+      <div class="spacing-label">base</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar" style="width:40px;height:19px"></div>
+      <div class="spacing-val">5mm</div>
+      <div class="spacing-label">lg</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar" style="width:64px;height:30px"></div>
+      <div class="spacing-val">8mm</div>
+      <div class="spacing-label">xl</div>
+    </div>
+  </div>
+
+  <h3 style="color:var(--acento-dark);font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin:32px 0 16px;font-weight:700">Page Margins (A4)</h3>
+  <div style="background:#1E293B;border-radius:8px;padding:24px;max-width:400px">
+    <div style="border:2px dashed rgba(255,255,255,.15);padding:32px 24px;position:relative;border-radius:4px">
+      <div style="position:absolute;top:4px;left:50%;transform:translateX(-50%);font-size:9px;color:rgba(255,255,255,.3)">22mm</div>
+      <div style="position:absolute;bottom:4px;left:50%;transform:translateX(-50%);font-size:9px;color:rgba(255,255,255,.3)">20mm</div>
+      <div style="position:absolute;top:50%;left:6px;transform:translateY(-50%) rotate(-90deg);font-size:9px;color:rgba(255,255,255,.3)">24mm</div>
+      <div style="position:absolute;top:50%;right:6px;transform:translateY(-50%) rotate(90deg);font-size:9px;color:rgba(255,255,255,.3)">20mm</div>
+      <div style="text-align:center;padding:20px;border:1px solid rgba(255,255,255,.08);border-radius:2px">
+        <div style="font-size:11px;color:rgba(255,255,255,.4)">Content Area</div>
+        <div style="font-size:9px;color:rgba(255,255,255,.25);margin-top:4px">210mm × 297mm (A4)</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="color:var(--acento-dark);font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin:32px 0 16px;font-weight:700">Border Radius</h3>
+  <div class="radius-grid">
+    <div class="radius-item">
+      <div class="radius-box" style="border-radius:0"></div>
+      <div class="radius-val">0</div>
+      <div class="radius-label">Padrão</div>
+    </div>
+    <div class="radius-item">
+      <div class="radius-box" style="border-radius:3px"></div>
+      <div class="radius-val">1mm</div>
+      <div class="radius-label">Pequeno</div>
+    </div>
+    <div class="radius-item">
+      <div class="radius-box" style="border-radius:6px"></div>
+      <div class="radius-val">2mm</div>
+      <div class="radius-label">Médio</div>
+    </div>
+  </div>
+
+  <h3 style="color:var(--acento-dark);font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin:32px 0 16px;font-weight:700">Decorative Rules</h3>
+  <div class="rule-demo">
+    <div class="rule-label">.rule — 0.5mm · --ouro · opacity 0.7</div>
+    <div style="height:2px;background:#2563EB;opacity:.7"></div>
+  </div>
+  <div class="rule-demo">
+    <div class="rule-label">.capa-rule — 0.5mm · --acento-dark · 20mm wide</div>
+    <div style="height:2px;width:80px;background:#38BDF8"></div>
+  </div>
+  <div class="rule-demo">
+    <div class="rule-label">.sidebar-rule — 0.4mm · --acento-dark · opacity 0.5</div>
+    <div style="height:1.5px;background:#38BDF8;opacity:.5"></div>
+  </div>
+  <div class="rule-demo">
+    <div class="rule-label">Header/Footer — 0.3mm · --ouro · opacity 0.25</div>
+    <div style="height:1px;background:#2563EB;opacity:.25"></div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ═══════════════ COMPONENTS ═══════════════ -->
+<section>
+  <div class="section-label">Components</div>
+  <h2 class="section-title">Componentes</h2>
+  <p class="section-desc">Biblioteca de componentes reutilizáveis para landing page, quiz e materiais de venda.</p>
+
+  <div class="component-grid">
+
+    <!-- Callout -->
+    <div class="comp-card">
+      <div class="comp-header">
+        <div class="comp-title">Callout Block</div>
+        <div class="comp-tag">Destaque</div>
+      </div>
+      <div class="comp-body">
+        <div class="demo-callout">
+          <div class="cl">Informação importante</div>
+          <p>Profissionais que adotaram I.A. em 2024 faturaram em média 3x mais que concorrentes tradicionais.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stat Row -->
+    <div class="comp-card">
+      <div class="comp-header">
+        <div class="comp-title">Stat Row</div>
+        <div class="comp-tag">Dados</div>
+      </div>
+      <div class="comp-body">
+        <div class="demo-stat-row">
+          <div class="demo-stat-item">
+            <span class="demo-stat-n">3x</span>
+            <div class="demo-stat-d">Mais faturamento com I.A.</div>
+          </div>
+          <div class="demo-stat-item">
+            <span class="demo-stat-n">87%</span>
+            <div class="demo-stat-d">Adotaram em 2024</div>
+          </div>
+          <div class="demo-stat-item">
+            <span class="demo-stat-n">R$15k</span>
+            <div class="demo-stat-d">Faturamento médio</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dark Stat Grid -->
+    <div class="comp-card">
+      <div class="comp-header">
+        <div class="comp-title">Dark Stat Grid</div>
+        <div class="comp-tag">Impacto</div>
+      </div>
+      <div class="comp-body">
+        <div class="demo-dark-stat">
+          <div class="demo-dark-card">
+            <span class="demo-dsn">R$30k</span>
+            <div class="demo-dsd">Faturamento/mês</div>
+          </div>
+          <div class="demo-dark-card">
+            <span class="demo-dsn">50+</span>
+            <div class="demo-dsd">Ferramentas mapeadas</div>
+          </div>
+          <div class="demo-dark-card">
+            <span class="demo-dsn">7</span>
+            <div class="demo-dsd">Carreiras possíveis</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool Card -->
+    <div class="comp-card">
+      <div class="comp-header">
+        <div class="comp-title">Tool Card</div>
+        <div class="comp-tag">Ferramenta</div>
+      </div>
+      <div class="comp-body">
+        <div class="demo-tool">
+          <div class="tn">Claude (Anthropic)</div>
+          <div class="tt">Agente de I.A.</div>
+          <p>Raciocínio longo, análise de documentos, copy profissional. Ideal para escritores, consultores e marketers.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Career Card -->
+    <div class="comp-card">
+      <div class="comp-header">
+        <div class="comp-title">Career Card</div>
+        <div class="comp-tag">Carreira</div>
+      </div>
+      <div class="comp-body">
+        <div class="demo-career">
+          <div class="ct">Designer I.A.</div>
+          <div class="cv">R$ 3.000–15.000</div>
+          <div class="cp">por mês · freelancer</div>
+          <p>Identidades visuais, mockups e materiais de marketing usando Midjourney + Magnific.ai + Adobe Firefly.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pull Quote -->
+    <div class="comp-card">
+      <div class="comp-header">
+        <div class="comp-title">Pull Quote</div>
+        <div class="comp-tag">Citação</div>
+      </div>
+      <div class="comp-body" style="background:var(--fundo)">
+        <div class="demo-pullquote">
+          <blockquote>"A janela de oportunidade da I.A. está aberta — e vai fechar."</blockquote>
+          <cite>Era da I.A.</cite>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Item -->
+    <div class="comp-card">
+      <div class="comp-header">
+        <div class="comp-title">FAQ Item</div>
+        <div class="comp-tag">Pergunta</div>
+      </div>
+      <div class="comp-body">
+        <div class="demo-faq">
+          <div class="fq">Não sou técnico, consigo usar?</div>
+          <div class="fa">Sim. O eBook foi criado para quem não tem experiência técnica. Cada ferramenta é explicada passo a passo, com exemplos práticos.</div>
+        </div>
+        <div class="demo-faq">
+          <div class="fq">As ferramentas não mudam rápido demais?</div>
+          <div class="fa">O foco é no princípio: qual ferramenta para qual objetivo. Mesmo que a interface mude, o raciocínio permanece.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exercise Block -->
+    <div class="comp-card">
+      <div class="comp-header">
+        <div class="comp-title">Exercise Block</div>
+        <div class="comp-tag">Prática</div>
+      </div>
+      <div class="comp-body">
+        <div class="demo-exercise">
+          <div class="el">Exercício Prático</div>
+          <h4>Teste o ChatGPT Agora</h4>
+          <p>Crie sua conta gratuita e copie o prompt abaixo para gerar seu primeiro conteúdo monetizável.</p>
+          <div class="demo-prompt">Crie 5 ideias de posts para Instagram sobre I.A. para um público de designers freelancer brasileiros...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary Block -->
+    <div class="comp-card">
+      <div class="comp-header">
+        <div class="comp-title">Summary Block</div>
+        <div class="comp-tag">Resumo</div>
+      </div>
+      <div class="comp-body">
+        <div class="demo-summary">
+          <div class="sl">Resumo do Capítulo</div>
+          <ul>
+            <li>O ecossistema de I.A. tem 4 categorias principais</li>
+            <li>Hubs são ferramentas de nível profissional</li>
+            <li>Agentes são seus colaboradores digitais</li>
+            <li>Escolha uma verticela e domine</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chart Bar -->
+    <div class="comp-card">
+      <div class="comp-header">
+        <div class="comp-title">Chart Bar</div>
+        <div class="comp-tag">Gráfico</div>
+      </div>
+      <div class="comp-body">
+        <div class="demo-chart-row">
+          <div class="demo-chart-label">Designer</div>
+          <div class="demo-chart-bg"><div class="demo-chart-fill" style="width:75%;background:var(--ouro)"><span class="demo-chart-val">R$ 15k</span></div></div>
+        </div>
+        <div class="demo-chart-row">
+          <div class="demo-chart-label">Cineasta</div>
+          <div class="demo-chart-bg"><div class="demo-chart-fill" style="width:100%;background:var(--acento-dark)"><span class="demo-chart-val">R$ 30k</span></div></div>
+        </div>
+        <div class="demo-chart-row">
+          <div class="demo-chart-label">Consultor</div>
+          <div class="demo-chart-bg"><div class="demo-chart-fill" style="width:90%;background:var(--pop)"><span class="demo-chart-val">R$ 50k</span></div></div>
+        </div>
+        <div class="demo-chart-row">
+          <div class="demo-chart-label">Conteúdo</div>
+          <div class="demo-chart-bg"><div class="demo-chart-fill" style="width:40%;background:var(--ouro)"><span class="demo-chart-val">R$ 10k</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature Row -->
+    <div class="comp-card" style="grid-column:span 2">
+      <div class="comp-header">
+        <div class="comp-title">Feature Row</div>
+        <div class="comp-tag">Imagem + Texto</div>
+      </div>
+      <div class="comp-body">
+        <div class="demo-feat-row">
+          <div class="demo-feat-img"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></div>
+          <div class="demo-feat-content">
+            <div class="demo-feat-tag">Capítulo 2</div>
+            <h4>Os Hubs de I.A. que Profissionais Usam</h4>
+            <p>Ferramentas de nível profissional que a maioria não conhece. Magnific.ai, Higgsfield.ai e Runway ML — como usar e quanto cobrar por cada serviço.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Button -->
+    <div class="comp-card">
+      <div class="comp-header">
+        <div class="comp-title">CTA Button</div>
+        <div class="comp-tag">Ação</div>
+      </div>
+      <div class="comp-body" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+        <a class="demo-cta">Quero Meu eBook Agora</a>
+        <span style="font-size:11px;color:var(--acento-dark)">R$ 27,00 · Acesso imediato</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ═══════════════ TEMPLATES ═══════════════ -->
+<section>
+  <div class="section-label">Templates</div>
+  <h2 class="section-title">Modelos de Página</h2>
+  <p class="section-desc">Layouts base usados no eBook — reutilizáveis na landing page e quiz.</p>
+
+  <div class="template-grid">
+    <div class="template-card">
+      <div class="template-preview tpl-cover">
+        <div class="cl">eBook Digital Premium</div>
+        <div class="ct">Era da <span>I.A.</span></div>
+        <div class="cr"></div>
+        <div class="cs">Como Lucrar Agora Antes que Seja Tarde Demais</div>
+      </div>
+      <div class="template-info">
+        <h4>Cover (Capa)</h4>
+        <p>Full-bleed image + gradient vignette. Título bottom-left.</p>
+      </div>
+    </div>
+
+    <div class="template-card">
+      <div class="template-preview tpl-back">
+        <div class="bt">A Janela Está Aberta</div>
+        <div class="bs">Entre agora antes que a maioria perceba</div>
+        <div class="br"></div>
+        <div class="bp">Era da I.A. — 2025</div>
+      </div>
+      <div class="template-info">
+        <h4>Back Cover (Contra-capa)</h4>
+        <p>Fundo negro sólido. Conteúdo centralizado.</p>
+      </div>
+    </div>
+
+    <div class="template-card">
+      <div class="template-preview tpl-divider">
+        <div class="tpl-div-img"></div>
+        <div class="tpl-div-txt">
+          <div class="dl">Capítulo 2</div>
+          <div class="dt">Os Hubs de I.A.</div>
+          <div class="dr"></div>
+          <div class="dd">Ferramentas que profissionais usam para criar, produzir e lucrar</div>
+        </div>
+      </div>
+      <div class="template-info">
+        <h4>Chapter Divider</h4>
+        <p>Split imagem + fundo carbon. Label + título + descrição.</p>
+      </div>
+    </div>
+
+    <div class="template-card">
+      <div class="template-preview tpl-close">
+        <div class="clt">Próximo Passo</div>
+        <div class="clt2">Comece Agora</div>
+        <div class="clr"></div>
+        <div class="cls">A janela de oportunidade está aberta. Não espere fechar.</div>
+        <a class="demo-cta" style="font-size:10px;padding:8px 20px">Quero Meu eBook</a>
+      </div>
+      <div class="template-info">
+        <h4>Closing Page</h4>
+        <p>Imagem + overlay escuro. CTA centralizado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ═══════════════ GOOGLE FONTS ═══════════════ -->
+<section>
+  <div class="section-label">Reference</div>
+  <h2 class="section-title">Importação de Fontes</h2>
+  <p class="section-desc">Copie e cole no &lt;head&gt; das páginas que usam este design system.</p>
+
+  <div style="background:#1E293B;border-radius:8px;padding:20px;overflow-x:auto">
+    <pre style="font-family:monospace;font-size:12px;color:var(--acento-dark);line-height:1.6;white-space:pre-wrap;word-break:break-all"><code>&lt;link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Lato:wght@300;400;700;900&amp;family=Cormorant+Garamond:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet"&gt;</code></pre>
+  </div>
+
+  <h3 style="color:var(--acento-dark);font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin:32px 0 16px;font-weight:700">CSS Variables</h3>
+  <div style="background:#1E293B;border-radius:8px;padding:20px;overflow-x:auto">
+    <pre style="font-family:monospace;font-size:12px;line-height:1.6;white-space:pre-wrap"><code><span style="color:#94A3B8">:root{</span>
+  <span style="color:#F472B6">--negro</span><span style="color:#94A3B8">:</span> <span style="color:#38BDF8">#030B14</span><span style="color:#94A3B8">;</span>
+  <span style="color:#F472B6">--carbon</span><span style="color:#94A3B8">:</span> <span style="color:#38BDF8">#0A1628</span><span style="color:#94A3B8">;</span>
+  <span style="color:#F472B6">--carbon2</span><span style="color:#94A3B8">:</span> <span style="color:#38BDF8">#0F1E30</span><span style="color:#94A3B8">;</span>
+  <span style="color:#F472B6">--ouro</span><span style="color:#94A3B8">:</span> <span style="color:#38BDF8">#2563EB</span><span style="color:#94A3B8">;</span>
+  <span style="color:#F472B6">--acento-dark</span><span style="color:#94A3B8">:</span> <span style="color:#38BDF8">#38BDF8</span><span style="color:#94A3B8">;</span>
+  <span style="color:#F472B6">--pop</span><span style="color:#94A3B8">:</span> <span style="color:#38BDF8">#22D3EE</span><span style="color:#94A3B8">;</span>
+  <span style="color:#F472B6">--amber</span><span style="color:#94A3B8">:</span> <span style="color:#38BDF8">#FBBF24</span><span style="color:#94A3B8">;</span>
+  <span style="color:#F472B6">--fundo</span><span style="color:#94A3B8">:</span> <span style="color:#38BDF8">#EEF4FF</span><span style="color:#94A3B8">;</span>
+  <span style="color:#F472B6">--fundo-alt</span><span style="color:#94A3B8">:</span> <span style="color:#38BDF8">#F0F9FF</span><span style="color:#94A3B8">;</span>
+  <span style="color:#F472B6">--texto</span><span style="color:#94A3B8">:</span> <span style="color:#38BDF8">#1E293B</span><span style="color:#94A3B8">;</span>
+  <span style="color:#F472B6">--texto-suave</span><span style="color:#94A3B8">:</span> <span style="color:#38BDF8">#475569</span><span style="color:#94A3B8">;</span>
+  <span style="color:#F472B6">--branco</span><span style="color:#94A3B8">:</span> <span style="color:#38BDF8">#FFFFFF</span><span style="color:#94A3B8">;</span>
+<span style="color:#94A3B8">}</span></code></pre>
+  </div>
+</section>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>Era da I.A. — Design System v1.0 · <span class="accent">mercado-ia-2025</span> · 2026</p>
+</footer>
+
+</body>
+</html>
