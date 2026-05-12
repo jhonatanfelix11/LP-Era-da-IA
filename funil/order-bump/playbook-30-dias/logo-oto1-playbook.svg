@@ -1,0 +1,121 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+<defs>
+
+  <!-- Background: very dark navy-black -->
+  <radialGradient id="bg" cx="50%" cy="42%" r="60%">
+    <stop offset="0%"   stop-color="#111827"/>
+    <stop offset="100%" stop-color="#050810"/>
+  </radialGradient>
+
+  <!-- Amber neon halo behind card/symbol -->
+  <radialGradient id="neonHalo" cx="50%" cy="50%" r="42%">
+    <stop offset="0%"   stop-color="#F59E0B" stop-opacity="0.18"/>
+    <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+  </radialGradient>
+
+  <!-- Card background: dark with subtle warm tint -->
+  <linearGradient id="cardGrad" x1="20%" y1="0%" x2="80%" y2="100%">
+    <stop offset="0%"   stop-color="#1C1608"/>
+    <stop offset="100%" stop-color="#0E0D14"/>
+  </linearGradient>
+
+  <!-- Card top highlight (subtle warm rim) -->
+  <linearGradient id="cardHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%"   stop-color="#FFFFFF" stop-opacity="0.08"/>
+    <stop offset="35%"  stop-color="#FFFFFF" stop-opacity="0.02"/>
+    <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+  </linearGradient>
+
+  <!-- Symbol: amber-white gradient (bright white top, amber base) -->
+  <linearGradient id="symGrad" x1="0%" y1="0%" x2="20%" y2="100%">
+    <stop offset="0%"   stop-color="#FFFFFF"  stop-opacity="1"/>
+    <stop offset="50%"  stop-color="#FDE68A"  stop-opacity="1"/>
+    <stop offset="100%" stop-color="#F59E0B"  stop-opacity="0.85"/>
+  </linearGradient>
+
+  <!-- Neon glow filter (applied to card border and symbol) -->
+  <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="14" result="blur"/>
+    <feMerge>
+      <feMergeNode in="blur"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+
+  <!-- Soft glow around the symbol -->
+  <filter id="symbolAura" x="-40%" y="-40%" width="180%" height="180%">
+    <feGaussianBlur stdDeviation="28" result="aura"/>
+    <feMerge>
+      <feMergeNode in="aura"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+
+  <!-- Symbol drop shadow -->
+  <filter id="symShadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#F59E0B" flood-opacity="0.25"/>
+  </filter>
+
+</defs>
+
+<!-- ── LAYER 1: Background ── -->
+<rect width="1024" height="1024" fill="url(#bg)"/>
+
+<!-- ── LAYER 2: Neon ambient halo ── -->
+<ellipse cx="512" cy="512" rx="380" ry="360" fill="url(#neonHalo)"/>
+
+<!-- ── LAYER 3: Card body ── -->
+<rect x="112" y="112" width="800" height="800" rx="172" fill="url(#cardGrad)"/>
+
+<!-- ── LAYER 4: Card top highlight ── -->
+<rect x="112" y="112" width="800" height="320" rx="172" fill="url(#cardHighlight)"/>
+
+<!-- ── LAYER 5: Card neon border (amber glow) ── -->
+<rect x="112" y="112" width="800" height="800" rx="172"
+      fill="none"
+      stroke="#F59E0B"
+      stroke-width="1.8"
+      opacity="0.75"
+      filter="url(#neonGlow)"/>
+
+<!-- ── LAYER 6: Symbol aura (blurred copy for glow) ── -->
+<!--
+  Bold upward arrow — represents: reaching the goal, 30 days of progress.
+  Arrowhead wide + body narrow below.
+  Path at (0,0):
+    Tip: (0, -170)
+    Right wing: (140, -35)  inner: (82, -35)
+    Body right: (82, 170)
+    Body left: (-82, 170)
+    Inner left: (-82, -35)
+    Left wing: (-140, -35)
+-->
+<path transform="translate(512,510)"
+      d="M 0,-170 L 140,-35 L 82,-35 L 82,170 L -82,170 L -82,-35 L -140,-35 Z"
+      fill="#F59E0B"
+      opacity="0.22"
+      filter="url(#symbolAura)"/>
+
+<!-- ── LAYER 7: Symbol — back plane ── -->
+<path transform="translate(524,524)"
+      d="M 0,-170 L 140,-35 L 82,-35 L 82,170 L -82,170 L -82,-35 L -140,-35 Z"
+      fill="#F59E0B"
+      opacity="0.28"/>
+
+<!-- ── LAYER 8: Symbol — front plane ── -->
+<path transform="translate(512,510)"
+      d="M 0,-170 L 140,-35 L 82,-35 L 82,170 L -82,170 L -82,-35 L -140,-35 Z"
+      fill="url(#symGrad)"
+      filter="url(#symShadow)"/>
+
+<!-- ── LAYER 9: Symbol inner edge highlight ── -->
+<path transform="translate(512,510)"
+      d="M 0,-170 L 140,-35 L 82,-35 L 82,170"
+      fill="none"
+      stroke="#FFFFFF"
+      stroke-width="2.5"
+      stroke-opacity="0.40"
+      stroke-linecap="round"
+      stroke-linejoin="round"/>
+
+</svg>

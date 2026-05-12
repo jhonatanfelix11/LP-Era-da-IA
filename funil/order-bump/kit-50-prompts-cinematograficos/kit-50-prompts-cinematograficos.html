@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kit 50 Prompts Cinematográficos com I.A.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+/* ══ PALETA TECNOLOGIA & I.A. ══ */
+:root{
+  --negro:#030B14;
+  --carbon:#0D1F38;
+  --ouro:#2563EB;
+  --pop:#22D3EE;
+  --amber:#38BDF8;
+  --acento-dark:#93C5FD;
+  --fundo:#EEF4FF;
+  --fundo-alt:#E0EDFF;
+  --texto:#0A1628;
+  --texto-suave:#3B6090;
+  --branco:#FFFFFF;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{background:#4A6080;font-family:'Lato',sans-serif;color:var(--texto)}
+
+/* PAGE */
+.page{width:210mm;height:297mm;overflow:hidden;background:var(--fundo);position:relative;margin:0 auto 8mm;page-break-after:always;break-after:page}
+.page-inner{padding:20mm 20mm 18mm 24mm;height:100%;overflow:hidden;position:relative}
+.no-hf .page-inner{padding:0}
+
+/* HEADER FOOTER */
+.ph,.pf{position:absolute;left:0;right:0;display:flex;justify-content:space-between;align-items:center;font-family:'Lato',sans-serif;font-size:6.5pt;letter-spacing:.12em;color:var(--texto-suave);text-transform:uppercase;padding:0 24mm}
+.ph{top:8mm}.pf{bottom:8mm}
+.ph::after{content:'';position:absolute;bottom:-2.5mm;left:24mm;right:24mm;height:.35mm;background:var(--ouro);opacity:.35}
+.pf::before{content:'';position:absolute;top:-2.5mm;left:24mm;right:24mm;height:.35mm;background:var(--ouro);opacity:.35}
+.pnum{color:var(--pop);font-weight:900;font-size:7.5pt}
+
+/* RULE */
+.rule{display:block;height:.5mm;background:var(--ouro);margin:3mm 0;opacity:.7}
+.rule-pop{display:block;height:.8mm;background:var(--pop);margin:3mm 0}
+
+/* TYPOGRAPHY */
+h1{font-family:'Playfair Display',serif;font-weight:900;font-size:22pt;line-height:1.1;color:var(--negro);margin-bottom:3mm}
+h2{font-family:'Playfair Display',serif;font-weight:700;font-size:16pt;line-height:1.2;color:var(--negro);margin:3.5mm 0 2mm}
+h3{font-family:'Lato',sans-serif;font-weight:900;font-size:9pt;letter-spacing:.12em;text-transform:uppercase;color:var(--ouro);margin:4mm 0 1.5mm}
+p{font-family:'Source Serif 4',Georgia,serif;font-size:10pt;line-height:1.65;color:var(--texto);margin-bottom:2mm}
+strong,b{font-family:'Lato',sans-serif;font-weight:700}
+.num{font-family:'Lato',sans-serif;font-weight:900;color:var(--pop)}
+.cap-num{font-family:'Lato',sans-serif;font-size:6.5pt;letter-spacing:.18em;text-transform:uppercase;color:var(--pop);font-weight:700;margin-bottom:1mm}
+
+/* SOLID COLOR DIVIDER PAGES */
+.solid-pop{background:var(--pop)!important}
+.solid-negro{background:var(--negro)!important}
+.solid-carbon{background:var(--carbon)!important}
+.div-solid-inner{width:100%;height:100%;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:18mm 20mm 20mm 24mm}
+.div-big-num{position:absolute;top:-8mm;left:14mm;font-family:'Bebas Neue',sans-serif;font-size:180pt;line-height:.85;color:rgba(255,255,255,.12);letter-spacing:-2px;pointer-events:none;user-select:none}
+.div-solid-label{font-family:'Lato',sans-serif;font-size:7pt;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.6);font-weight:700;margin-bottom:3mm}
+.div-solid-title{font-family:'Bebas Neue',sans-serif;font-size:56pt;line-height:.9;color:#FFF;letter-spacing:2px;text-transform:uppercase;margin-bottom:5mm}
+.div-solid-rule{display:block;height:1mm;background:rgba(255,255,255,.35);width:30mm;margin-bottom:5mm}
+.div-solid-desc{font-family:'Source Serif 4',serif;font-style:italic;font-size:10pt;color:rgba(255,255,255,.7);line-height:1.55;max-width:120mm}
+.div-solid-count{position:absolute;top:18mm;right:20mm;font-family:'Lato',sans-serif;font-size:7pt;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.div-solid-tags{display:flex;flex-wrap:wrap;gap:2mm;margin-top:6mm}
+.div-solid-tag{font-family:'Lato',sans-serif;font-size:6.5pt;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:1mm 2.5mm;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.8);border-radius:.8mm}
+
+/* PHOTO STRIP full width */
+.photo-strip{position:absolute;right:0;top:0;bottom:0;width:65mm;overflow:hidden}
+.photo-strip img{width:100%;height:100%;object-fit:cover;display:block;opacity:.6}
+.photo-strip::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,var(--pop) 0%,transparent 60%)}
+.photo-strip-negro::after{background:linear-gradient(to right,var(--negro) 0%,transparent 60%)}
+
+/* CAPA */
+.capa-wrap{width:100%;height:100%;position:relative;overflow:hidden;background:var(--negro)}
+.capa-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3;display:block}
+.capa-overlay{position:absolute;inset:0;background:linear-gradient(145deg,rgba(3,11,20,.96) 0%,rgba(13,31,56,.85) 45%,rgba(37,99,235,.25) 100%)}
+.capa-grid-line{position:absolute;top:0;bottom:0;width:.3mm;background:rgba(255,255,255,.06)}
+.capa-content{position:absolute;inset:0;padding:26mm 22mm;display:flex;flex-direction:column;justify-content:flex-end}
+.capa-eyebrow{font-family:'Lato',sans-serif;font-size:7pt;letter-spacing:.3em;text-transform:uppercase;color:var(--acento-dark);font-weight:700;margin-bottom:4mm}
+.capa-title{font-family:'Bebas Neue',sans-serif;font-size:64pt;line-height:.88;color:#FFF;letter-spacing:3px;text-transform:uppercase;margin-bottom:6mm}
+.capa-title span{color:var(--pop)}
+.capa-rule{display:block;height:1mm;background:var(--pop);width:35mm;margin-bottom:5mm}
+.capa-sub{font-family:'Source Serif 4',serif;font-style:italic;font-size:12pt;color:rgba(255,255,255,.7);line-height:1.5;max-width:130mm;margin-bottom:7mm}
+.capa-badges{display:flex;gap:2.5mm;flex-wrap:wrap}
+.capa-badge{font-family:'Lato',sans-serif;font-size:6.5pt;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:1.5mm 3mm;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);border-radius:.8mm}
+.capa-top{position:absolute;top:14mm;left:22mm;right:22mm;display:flex;justify-content:space-between;align-items:center}
+.capa-top-label{font-family:'Lato',sans-serif;font-size:7pt;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.capa-top-num{font-family:'Bebas Neue',sans-serif;font-size:14pt;color:var(--pop);letter-spacing:1px}
+.capa-big-bg{position:absolute;bottom:-20mm;right:-5mm;font-family:'Bebas Neue',sans-serif;font-size:200pt;line-height:.8;color:rgba(255,255,255,.04);pointer-events:none}
+
+/* TOOL BADGES */
+.badge-row{display:flex;flex-wrap:wrap;gap:1.5mm;margin:1.5mm 0 2.5mm}
+.badge{display:inline-flex;align-items:center;padding:.7mm 2.5mm;border-radius:.7mm;font-family:'Lato',sans-serif;font-size:6.5pt;font-weight:700;text-transform:uppercase;letter-spacing:.05em;line-height:1}
+.b-mj{background:#030B14;color:#93C5FD}
+.b-leo{background:#1A1A3A;color:#A0B0FF}
+.b-fire{background:#1A0A2A;color:#E090F0}
+.b-magnific{background:#0A1A0A;color:#70E0A0}
+.b-higgs{background:#1A1A1A;color:#E0E0E0}
+.b-gpt{background:#0A2A1A;color:#70DDB0}
+.b-all{background:var(--negro);color:var(--acento-dark)}
+
+/* PROMPT CARD */
+.prompt-card{background:var(--fundo-alt);border-radius:2mm;padding:3.5mm 4mm;margin-bottom:3mm;page-break-inside:avoid;break-inside:avoid;border-left:3px solid var(--pop)}
+.prompt-card-dark{background:var(--negro);border-radius:2mm;padding:3.5mm 4mm;margin-bottom:3mm;page-break-inside:avoid;break-inside:avoid;border-left:3px solid var(--acento-dark)}
+.pc-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:2mm;gap:3mm}
+.pc-num{font-family:'Bebas Neue',sans-serif;font-size:20pt;color:var(--pop);line-height:1;flex-shrink:0}
+.pc-num-dark{font-family:'Bebas Neue',sans-serif;font-size:20pt;color:var(--acento-dark);line-height:1;flex-shrink:0}
+.pc-title{font-family:'Lato',sans-serif;font-weight:900;font-size:10.5pt;color:var(--negro);line-height:1.2;flex:1}
+.pc-title-dark{font-family:'Lato',sans-serif;font-weight:900;font-size:10.5pt;color:#FFF;line-height:1.2;flex:1}
+.pc-desc{font-family:'Source Serif 4',serif;font-size:9pt;color:var(--texto-suave);line-height:1.55;margin:1.5mm 0 2mm}
+.pc-desc-dark{font-family:'Source Serif 4',serif;font-size:9pt;color:rgba(255,255,255,.65);line-height:1.55;margin:1.5mm 0 2mm}
+.prompt-box{background:rgba(0,0,0,.06);border-radius:1.5mm;padding:2.5mm 3mm;font-family:'Lato',sans-serif;font-size:8pt;color:var(--texto);line-height:1.55;white-space:pre-wrap;word-break:break-word}
+.prompt-box-dark{background:rgba(0,0,0,.3);border-radius:1.5mm;padding:2.5mm 3mm;font-family:'Lato',sans-serif;font-size:8pt;color:var(--acento-dark);line-height:1.55;white-space:pre-wrap;word-break:break-word}
+
+/* GRID 2 COL */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin:2mm 0}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2.5mm;margin:2mm 0}
+
+/* STAT ROW */
+.stat-row{display:flex;gap:3mm;margin:3mm 0}
+.stat-cell{flex:1;text-align:center;padding:3mm 2mm;background:var(--negro);border-radius:1.5mm}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:22pt;color:var(--pop);display:block;line-height:1}
+.stat-label{font-family:'Lato',sans-serif;font-size:6pt;font-weight:700;color:rgba(255,255,255,.6);margin-top:1mm;display:block;letter-spacing:.06em;text-transform:uppercase}
+
+/* PLATFORM CARD */
+.plat-card{background:var(--fundo-alt);border-radius:2mm;padding:3mm 4mm;border-left:3px solid var(--ouro);page-break-inside:avoid;break-inside:avoid}
+.plat-name{font-family:'Lato',sans-serif;font-weight:900;font-size:10pt;color:var(--negro);margin-bottom:1mm}
+.plat-desc{font-family:'Source Serif 4',serif;font-size:9pt;color:var(--texto-suave);line-height:1.5}
+.plat-best{font-family:'Lato',sans-serif;font-size:6.5pt;font-weight:700;color:var(--pop);text-transform:uppercase;letter-spacing:.06em;margin-top:1mm}
+
+/* GLOSSARY TABLE */
+.gloss-row{display:flex;gap:0;margin-bottom:1.5mm;page-break-inside:avoid}
+.gloss-term{font-family:'Lato',sans-serif;font-weight:700;font-size:9pt;color:var(--negro);width:46mm;flex-shrink:0;padding:1.5mm 2mm;background:var(--fundo-alt);border-radius:1mm 0 0 1mm;display:flex;align-items:center}
+.gloss-def{font-family:'Source Serif 4',serif;font-size:9pt;color:var(--texto);padding:1.5mm 2.5mm;line-height:1.5;flex:1;border-left:2px solid var(--pop);background:rgba(34,211,238,.04)}
+
+/* CLOSING DARK */
+.close-wrap{width:100%;height:100%;position:relative;overflow:hidden;background:var(--negro)}
+.close-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.2;display:block}
+.close-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(3,11,20,.97) 0%,rgba(34,211,238,.25) 100%)}
+.close-content{position:absolute;inset:0;padding:30mm 26mm;display:flex;flex-direction:column;justify-content:center}
+.close-tag{font-family:'Lato',sans-serif;font-size:7pt;letter-spacing:.22em;text-transform:uppercase;color:var(--acento-dark);font-weight:700;margin-bottom:5mm}
+.close-title{font-family:'Bebas Neue',sans-serif;font-size:46pt;line-height:.9;color:#FFF;letter-spacing:2px;text-transform:uppercase;margin-bottom:6mm}
+.close-rule{display:block;height:.8mm;background:var(--pop);width:30mm;margin-bottom:6mm}
+.close-text{font-family:'Source Serif 4',serif;font-style:italic;font-size:11pt;color:rgba(255,255,255,.7);line-height:1.55;max-width:130mm;margin-bottom:8mm}
+.close-footer{position:absolute;bottom:10mm;left:26mm;right:26mm;display:flex;justify-content:space-between;font-family:'Lato',sans-serif;font-size:6.5pt;color:rgba(255,255,255,.25);letter-spacing:.08em;text-transform:uppercase}
+.close-big{position:absolute;bottom:-15mm;right:-5mm;font-family:'Bebas Neue',sans-serif;font-size:160pt;line-height:.8;color:rgba(255,255,255,.04);pointer-events:none}
+
+/* PHOTO PANEL */
+.photo-panel{width:100%;height:38mm;overflow:hidden;border-radius:1.5mm;margin:2.5mm 0;position:relative}
+.photo-panel img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-panel-sm{height:28mm}
+
+/* SECTION INTRO STRIP */
+.sec-strip{display:flex;gap:0;margin-bottom:4mm;page-break-inside:avoid}
+.sec-strip-color{width:8mm;background:var(--pop);border-radius:1mm 0 0 1mm;flex-shrink:0}
+.sec-strip-color-dark{background:var(--negro)}
+.sec-strip-body{flex:1;background:var(--fundo-alt);border-radius:0 1mm 1mm 0;padding:2.5mm 3.5mm}
+.sec-strip-num{font-family:'Bebas Neue',sans-serif;font-size:14pt;color:var(--pop);line-height:1}
+.sec-strip-num-dark{color:var(--negro)}
+.sec-strip-title{font-family:'Lato',sans-serif;font-weight:900;font-size:9pt;color:var(--negro);margin-bottom:.5mm}
+.sec-strip-desc{font-family:'Source Serif 4',serif;font-size:7.5pt;color:var(--texto-suave);line-height:1.45}
+
+/* SUMMARY TABLE */
+.tabela{width:100%;border-collapse:collapse;font-size:8pt}
+.tabela th{background:var(--negro);color:var(--acento-dark);font-family:'Lato',sans-serif;font-weight:700;font-size:6.5pt;text-transform:uppercase;letter-spacing:.1em;padding:2mm 3mm;text-align:left}
+.tabela td{padding:2mm 3mm;border-bottom:.3mm solid rgba(0,0,0,.07);font-family:'Source Serif 4',serif;color:var(--texto)}
+.tabela tr:nth-child(even) td{background:var(--fundo-alt)}
+.tabela .td-n{font-family:'Lato',sans-serif;font-weight:900;color:var(--pop);font-size:9pt}
+
+/* CALLOUT */
+.callout{background:var(--negro);border-radius:2mm;padding:3.5mm 5mm;margin:3mm 0;page-break-inside:avoid}
+.callout .cl{font-size:6.5pt;letter-spacing:.12em;text-transform:uppercase;color:var(--acento-dark);font-weight:700;font-family:'Lato',sans-serif;margin-bottom:1.5mm}
+.callout p{color:rgba(255,255,255,.8);font-size:9.5pt;margin:0;line-height:1.6}
+
+/* ACCENT BLOCK */
+.accent-block{background:var(--pop);border-radius:2mm;padding:4mm 5mm;margin:3mm 0;page-break-inside:avoid}
+.accent-block .al{font-size:6.5pt;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:700;font-family:'Lato',sans-serif;margin-bottom:1.5mm}
+.accent-block p{color:#FFF;font-size:10pt;margin:0;line-height:1.6;font-family:'Source Serif 4',serif}
+.accent-block strong{color:#FFF}
+
+/* ANIMATION */
+.av{opacity:0;transition:opacity .5s ease,transform .5s ease}
+.av.up{transform:translateY(5mm)}.av.in{transform:none}.av.scale{transform:scale(.97)}
+.av.visible{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* PDF BUTTON */
+.ui-only{position:fixed;bottom:8mm;right:8mm;z-index:999}
+.pdf-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:2mm}
+.pdf-hint{font-size:7pt;color:#555;font-family:'Lato',sans-serif;background:rgba(255,255,255,.9);padding:1.5mm 3mm;border-radius:1mm}
+.btn-pdf{display:flex;align-items:center;gap:2mm;background:var(--pop);color:#fff;border:none;padding:3mm 6mm;font-family:'Lato',sans-serif;font-weight:700;font-size:9pt;cursor:pointer;border-radius:1mm}
+.btn-pdf svg{width:5mm;height:5mm;fill:white}
+
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  .ui-only{display:none}
+  .av{opacity:1!important;transform:none!important;transition:none!important}
+  @page{size:A4;margin:0}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ P1 CAPA ═══ -->
+<div class="page no-hf" id="p1">
+  <div class="capa-wrap">
+    <img class="capa-bg" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1400&q=90&fit=crop" alt="" loading="eager">
+    <div class="capa-overlay"></div>
+    <div class="capa-grid-line" style="left:70mm"></div>
+    <div class="capa-grid-line" style="left:140mm"></div>
+    <div class="capa-big-bg">I.A.</div>
+    <div class="capa-top">
+      <span class="capa-top-label">Era da I.A. — Kit Prático</span>
+    </div>
+    <div class="capa-content">
+      <div class="capa-eyebrow">Era da I.A. · Produto Digital · Kit de Prompts</div>
+      <div class="capa-title">Kit 50<br><span>Prompts</span><br>Cinemato-<br>gráficos</div>
+      <div class="capa-rule"></div>
+      <p class="capa-sub">Imagens de impacto geradas com I.A. — textura real, luz dramática, cenas que param o scroll. 7 nichos prontos para usar.</p>
+      <div class="capa-badges">
+        <span class="capa-badge">Midjourney</span>
+        <span class="capa-badge">Leonardo AI</span>
+        <span class="capa-badge">Adobe Firefly</span>
+        <span class="capa-badge">Magnific AI</span>
+        <span class="capa-badge">Higgsfield</span>
+        <span class="capa-badge">ChatGPT</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ P2 COMO USAR ═══ -->
+<div class="page" id="p2">
+  <div class="ph"><span>KIT 50 PROMPTS CINEMATOGRÁFICOS</span><span>COMO USAR</span></div>
+  <div class="page-inner">
+    <div class="cap-num av in">Introdução</div>
+    <h1 class="av up d1" style="font-size:20pt">Como usar este kit<br>para resultados profissionais</h1>
+    <span class="rule-pop av scale d2"></span>
+
+    <div class="stat-row av scale d2">
+      <div class="stat-cell"><span class="stat-num">50</span><span class="stat-label">Prompts prontos</span></div>
+      <div class="stat-cell"><span class="stat-num">7</span><span class="stat-label">Nichos cobertos</span></div>
+      <div class="stat-cell"><span class="stat-num">6</span><span class="stat-label">Plataformas</span></div>
+    </div>
+
+    <p class="av up d3">Cada prompt foi construído com 5 camadas técnicas: <strong>cena, ângulo de câmera, iluminação, estilo de referência e qualidade técnica.</strong> Cole diretamente na ferramenta — sem adaptação necessária.</p>
+
+    <div class="grid-2 av up d3" style="margin:3mm 0">
+      <div style="background:var(--fundo-alt);border-radius:2mm;padding:3mm;border-top:2.5px solid var(--pop)">
+        <div style="font-family:'Lato',sans-serif;font-weight:900;font-size:10pt;color:var(--negro);margin-bottom:1.5mm">Passo 1 — Escolha o nicho</div>
+        <p style="margin:0;font-size:9.5pt">Localize a seção do nicho mais próximo do seu negócio ou cliente.</p>
+      </div>
+      <div style="background:var(--fundo-alt);border-radius:2mm;padding:3mm;border-top:2.5px solid var(--pop)">
+        <div style="font-family:'Lato',sans-serif;font-weight:900;font-size:10pt;color:var(--negro);margin-bottom:1.5mm">Passo 2 — Copie o prompt</div>
+        <p style="margin:0;font-size:9.5pt">Cole o texto em inglês na ferramenta de sua escolha e gere.</p>
+      </div>
+      <div style="background:var(--fundo-alt);border-radius:2mm;padding:3mm;border-top:2.5px solid var(--negro)">
+        <div style="font-family:'Lato',sans-serif;font-weight:900;font-size:10pt;color:var(--negro);margin-bottom:1.5mm">Passo 3 — Gere variações</div>
+        <p style="margin:0;font-size:9.5pt">Gere ao menos 4 versões por prompt. A I.A. nunca entrega o mesmo resultado duas vezes.</p>
+      </div>
+      <div style="background:var(--fundo-alt);border-radius:2mm;padding:3mm;border-top:2.5px solid var(--negro)">
+        <div style="font-family:'Lato',sans-serif;font-weight:900;font-size:10pt;color:var(--negro);margin-bottom:1.5mm">Passo 4 — Personalize</div>
+        <p style="margin:0;font-size:9.5pt">Substitua apenas os elementos específicos de cena para adaptar ao seu produto.</p>
+      </div>
+    </div>
+
+    <div class="accent-block av scale d4">
+      <div class="al">Regra de ouro</div>
+      <p><strong>Prompts em inglês geram resultados muito superiores</strong> em todas as ferramentas. Escreva sua ideia em português, peça para a própria I.A. traduzir, e use a versão em inglês para gerar a imagem.</p>
+    </div>
+  </div>
+  <div class="pf"><span>Era da I.A.</span><span class="pnum">2</span></div>
+</div>
+
+<!-- ═══ P3 PLATAFORMAS ═══ -->
+<div class="page" id="p3">
+  <div class="ph"><span>KIT 50 PROMPTS CINEMATOGRÁFICOS</span><span>PLATAFORMAS</span></div>
+  <div class="page-inner">
+    <div class="cap-num av in">Ferramentas</div>
+    <h1 class="av up d1" style="font-size:18pt">Onde gerar suas imagens</h1>
+    <span class="rule-pop av scale d2"></span>
+
+    <div style="display:flex;flex-direction:column;gap:2.5mm;margin-top:1mm" class="av up d2">
+
+      <div class="plat-card" style="border-left-color:var(--pop)">
+        <div style="display:flex;align-items:center;gap:2mm;margin-bottom:1.5mm">
+          <span class="badge b-mj">Midjourney</span>
+          <div class="plat-name" style="margin:0">Midjourney v6</div>
+        </div>
+        <div class="plat-desc">Melhor qualidade geral para imagens cinematográficas e editoriais. Acesso via Discord ou web. Resultados mais artísticos e estilizados.</div>
+        <div class="plat-best">Ideal para: capas, editorial, moda, paisagens épicas</div>
+      </div>
+
+      <div class="plat-card" style="border-left-color:#6070FF">
+        <div style="display:flex;align-items:center;gap:2mm;margin-bottom:1.5mm">
+          <span class="badge b-leo">Leonardo AI</span>
+          <div class="plat-name" style="margin:0">Leonardo AI (Alchemy)</div>
+        </div>
+        <div class="plat-desc">Controle fino sobre realismo e estilo. Plataforma web com modo Alchemy para texturas hiper-realistas. Ótimo para produto e arquitetura.</div>
+        <div class="plat-best">Ideal para: food, produto, textura, tecnologia</div>
+      </div>
+
+      <div class="plat-card" style="border-left-color:#C050E0">
+        <div style="display:flex;align-items:center;gap:2mm;margin-bottom:1.5mm">
+          <span class="badge b-fire">Adobe Firefly</span>
+          <div class="plat-name" style="margin:0">Adobe Firefly</div>
+        </div>
+        <div class="plat-desc">Integrado ao Creative Cloud. 100% seguro para uso comercial — treinado com imagens licenciadas. Ideal para quem já usa Photoshop ou Illustrator.</div>
+        <div class="plat-best">Ideal para: identidade visual, produto, lifestyle</div>
+      </div>
+
+      <div class="plat-card" style="border-left-color:#20B060">
+        <div style="display:flex;align-items:center;gap:2mm;margin-bottom:1.5mm">
+          <span class="badge b-magnific">Magnific AI</span>
+          <div class="plat-name" style="margin:0">Magnific AI (ex-Freepik AI)</div>
+        </div>
+        <div class="plat-desc">Especialista em upscaling e geração hiper-realista de texturas. Eleva qualquer imagem para detalhes de nível 8K — pele, tecido, superfícies naturais.</div>
+        <div class="plat-best">Ideal para: beleza, close-up, produto premium, moda</div>
+      </div>
+
+      <div class="plat-card" style="border-left-color:#888">
+        <div style="display:flex;align-items:center;gap:2mm;margin-bottom:1.5mm">
+          <span class="badge b-higgs">Higgsfield AI</span>
+          <div class="plat-name" style="margin:0">Higgsfield AI</div>
+        </div>
+        <div class="plat-desc">Especialista em geração de vídeo a partir de texto e imagens. Use os prompts deste kit para criar conteúdo em movimento para Reels e Stories.</div>
+        <div class="plat-best">Ideal para: vídeo, reels, conteúdo em movimento</div>
+      </div>
+
+      <div class="plat-card" style="border-left-color:#20A070">
+        <div style="display:flex;align-items:center;gap:2mm;margin-bottom:1.5mm">
+          <span class="badge b-gpt">ChatGPT / DALL-E 3</span>
+          <div class="plat-name" style="margin:0">ChatGPT com DALL-E 3</div>
+        </div>
+        <div class="plat-desc">O mais fácil de usar. Integrado ao ChatGPT Plus. Ideal para primeiros testes e iteração rápida de conceitos antes de migrar para ferramentas especializadas.</div>
+        <div class="plat-best">Ideal para: testes rápidos, conceitos, ilustrações</div>
+      </div>
+
+    </div>
+  </div>
+  <div class="pf"><span>Era da I.A.</span><span class="pnum">3</span></div>
+</div>
+
+<!-- ═══ P4 GLOSSÁRIO ═══ -->
+<div class="page" id="p4">
+  <div class="ph"><span>KIT 50 PROMPTS CINEMATOGRÁFICOS</span><span>GLOSSÁRIO</span></div>
+  <div class="page-inner">
+    <div class="cap-num av in">Referência técnica</div>
+    <h1 class="av up d1" style="font-size:18pt">Glossário — termos usados<br>nos prompts</h1>
+    <span class="rule-pop av scale d2"></span>
+    <div class="av up d2" style="margin-top:2mm">
+      <div class="gloss-row"><div class="gloss-term">cinematic lighting</div><div class="gloss-def">Iluminação com contraste dramático, como em filmes de cinema</div></div>
+      <div class="gloss-row"><div class="gloss-term">shallow depth of field</div><div class="gloss-def">Fundo desfocado com sujeito em foco nítido — efeito de câmera profissional</div></div>
+      <div class="gloss-row"><div class="gloss-term">8K / ultra-sharp</div><div class="gloss-def">Máxima resolução e nitidez de detalhes — textura realista em tudo</div></div>
+      <div class="gloss-row"><div class="gloss-term">volumetric light</div><div class="gloss-def">Raios de luz visíveis no ar — névoa, poeira, fumaça iluminada</div></div>
+      <div class="gloss-row"><div class="gloss-term">rim light</div><div class="gloss-def">Luz de contorno que separa visualmente o sujeito do fundo</div></div>
+      <div class="gloss-row"><div class="gloss-term">chiaroscuro</div><div class="gloss-def">Contraste extremo entre luz e sombra — estilo Caravaggio</div></div>
+      <div class="gloss-row"><div class="gloss-term">specular highlights</div><div class="gloss-def">Reflexos brilhantes em superfícies polidas como metal, vidro e água</div></div>
+      <div class="gloss-row"><div class="gloss-term">bokeh</div><div class="gloss-def">Pontos de luz desfocados no plano de fundo — efeito cremoso</div></div>
+      <div class="gloss-row"><div class="gloss-term">editorial photography</div><div class="gloss-def">Estilo de revista — composição intencional, elegante e com narrativa</div></div>
+      <div class="gloss-row"><div class="gloss-term">teal & orange grade</div><div class="gloss-def">Tratamento de cor cinematográfico clássico — azul nas sombras, laranja nas luzes</div></div>
+      <div class="gloss-row"><div class="gloss-term">macro photography</div><div class="gloss-def">Fotografia de detalhe extremo — texturas invisíveis a olho nu</div></div>
+      <div class="gloss-row"><div class="gloss-term">hero shot</div><div class="gloss-def">Ângulo baixo olhando para cima — o sujeito parece maior e mais poderoso</div></div>
+      <div class="gloss-row"><div class="gloss-term">flat-lay</div><div class="gloss-def">Vista de cima com elementos dispostos na horizontal — muito usado em food</div></div>
+      <div class="gloss-row"><div class="gloss-term">dutch angle</div><div class="gloss-def">Câmera levemente inclinada — cria tensão visual e dinamismo</div></div>
+      <div class="gloss-row"><div class="gloss-term">anamorphic lens</div><div class="gloss-def">Lente de cinema com flares horizontais característicos de blockbusters</div></div>
+    </div>
+
+    <div class="callout av scale d3" style="margin-top:3mm">
+      <div class="cl">Negative Prompt — usar sempre</div>
+      <p>book, book mockup, 3d book, text, words, letters, watermark, typography, title, robot, android, low quality, cartoon, frame, border</p>
+    </div>
+  </div>
+  <div class="pf"><span>Era da I.A.</span><span class="pnum">4</span></div>
+</div>
+
+<!-- ═══ P5 DIVISÓRIA CULINÁRIA — FUNDO SÓLIDO POP ═══ -->
+<div class="page no-hf solid-pop" id="p5">
+  <div class="div-solid-inner">
+    <div class="div-big-num">01</div>
+    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=700&q=85&fit=crop" alt="" loading="eager" style="position:absolute;right:0;top:0;bottom:0;width:72mm;height:100%;object-fit:cover;opacity:.25">
+    <div style="position:absolute;right:0;top:0;bottom:0;width:72mm;background:linear-gradient(to right,var(--pop) 0%,rgba(34,211,238,.1) 100%)"></div>
+    <div class="div-solid-count">Prompts 01 – 08</div>
+    <div class="div-solid-label">Nicho 01 — 8 Prompts</div>
+    <div class="div-solid-title">Culinária<br>& Food</div>
+    <div class="div-solid-rule"></div>
+    <div class="div-solid-desc">Food editorial profissional — texturas de ingredientes, iluminação dramática, pratos gourmet e cozinha artesanal para marcas premium e criadores de conteúdo gastronômico.</div>
+    <div class="div-solid-tags">
+      <span class="div-solid-tag">Food Editorial</span>
+      <span class="div-solid-tag">Macro Culinário</span>
+      <span class="div-solid-tag">Gourmet</span>
+      <span class="div-solid-tag">Artesanal</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ P6 CULINÁRIA PROMPTS 01–04 ═══ -->
+<div class="page" id="p6">
+  <div class="ph"><span>KIT 50 PROMPTS CINEMATOGRÁFICOS</span><span>CULINÁRIA — 01 a 04</span></div>
+  <div class="page-inner" style="padding-top:18mm">
+
+    <div class="prompt-card av up d1">
+      <div class="pc-header">
+        <span class="pc-num">01</span>
+        <div style="flex:1;padding-left:2mm">
+          <div class="pc-title">Mise en Place Dramática</div>
+          <div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-leo">Leonardo</span></div>
+        </div>
+      </div>
+      <div class="prompt-box">A professional chef's mise en place still life, extreme close-up, dark slate background, ingredients in geometric precision, single overhead spotlight casting hard shadows, steam rising from copper pot, shallow depth of field (50mm f/1.4), 8K food editorial, cinematic color grading, specular highlights on copper. No text.</div>
+      <div class="pc-desc">Mesa de preparo com ingredientes em precisão geométrica. Luz única cria sombras duras e reflexos em cobre.</div>
+    </div>
+
+    <div class="prompt-card av up d2">
+      <div class="pc-header">
+        <span class="pc-num">02</span>
+        <div style="flex:1;padding-left:2mm">
+          <div class="pc-title">Chocolate em Queda</div>
+          <div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-magnific">Magnific AI</span></div>
+        </div>
+      </div>
+      <div class="prompt-box">Ultra-slow-motion pour of molten dark chocolate from copper spoon into handmade ceramic bowl, extreme macro, surface tension visible, glossy reflections, pitch-black background, single rim backlight creating luminous golden edges on chocolate stream, 8K food editorial, cinematic lighting. No text.</div>
+      <div class="pc-desc">Fio de chocolate derretido em queda contra fundo preto. Retroiluminação faz o chocolate brilhar como ouro líquido.</div>
+    </div>
+
+    <div class="prompt-card av up d3">
+      <div class="pc-header">
+        <span class="pc-num">03</span>
+        <div style="flex:1;padding-left:2mm">
+          <div class="pc-title">Brunch de Luxo</div>
+          <div class="badge-row"><span class="badge b-fire">Adobe Firefly</span><span class="badge b-gpt">ChatGPT</span></div>
+        </div>
+      </div>
+      <div class="prompt-box">Overhead flat-lay of luxury brunch, white marble surface, croissants with visible flaky golden layers, fresh berries with morning dew, espresso in matte black ceramic, steam rising, soft diffused natural window light from left, shadows define textures, warm golden tones, Vogue Living editorial style, 8K. No text.</div>
+      <div class="pc-desc">Vista de cima de mesa de brunch sofisticado em mármore branco. Luz natural suave revela texturas e gotas de orvalho.</div>
+    </div>
+
+    <div class="prompt-card av up d4">
+      <div class="pc-header">
+        <span class="pc-num">04</span>
+        <div style="flex:1;padding-left:2mm">
+          <div class="pc-title">Pasta Fresca ao Vivo</div>
+          <div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-leo">Leonardo</span></div>
+        </div>
+      </div>
+      <div class="prompt-box">Rustic Italian chef's hands stretching fresh pasta dough on floured wooden surface, medium close-up, dramatic single side window light revealing flour dust particles floating in air, shallow depth of field, warm amber tones, cinematic film grain, documentary food photography, National Geographic quality, 8K. No text.</div>
+      <div class="pc-desc">Mãos de chef estirando massa fresca. Luz lateral de janela cria partículas de farinha visíveis no ar — artesanato e autenticidade.</div>
+    </div>
+
+  </div>
+  <div class="pf"><span>Era da I.A.</span><span class="pnum">6</span></div>
+</div>
+
+<!-- ═══ P7 CULINÁRIA PROMPTS 05–08 ═══ -->
+<div class="page" id="p7">
+  <div class="ph"><span>KIT 50 PROMPTS CINEMATOGRÁFICOS</span><span>CULINÁRIA — 05 a 08</span></div>
+  <div class="page-inner" style="padding-top:18mm">
+
+    <div class="prompt-card av up d1">
+      <div class="pc-header"><span class="pc-num">05</span>
+        <div style="flex:1;padding-left:2mm"><div class="pc-title">Churrasco Épico</div>
+        <div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-leo">Leonardo</span></div></div>
+      </div>
+      <div class="prompt-box">Hero shot of perfectly charred thick-cut ribeye on cast iron skillet, low angle eye-level, Maillard crust glistening under backlight, wisps of smoke backlit by warm amber kitchen light creating volumetric beams, fresh rosemary nearby, cinematic teal and orange color grade, 8K, hyper-realistic meat texture. No text.</div>
+      <div class="pc-desc">Bife alto e bem selado visto de frente ao nível do prato. A fumaça retroiluminada cria raios volumétricos de luz — nível de campanha premium.</div>
+    </div>
+
+    <div class="prompt-card av up d2">
+      <div class="pc-header"><span class="pc-num">06</span>
+        <div style="flex:1;padding-left:2mm"><div class="pc-title">Café Revelado</div>
+        <div class="badge-row"><span class="badge b-fire">Adobe Firefly</span><span class="badge b-mj">Midjourney</span></div></div>
+      </div>
+      <div class="prompt-box">Bird's eye macro of barista-made latte art in white ceramic cup, perfect rosetta pattern, microfoam texture visible at microscopic detail, dark espresso contrast, single overhead spotlight, coffee bar marble counter, minimal and dramatic editorial photography, 8K ultra-sharp. No text.</div>
+      <div class="pc-desc">Vista de cima de xícara com latte art perfeito. O macro revela a textura da microespuma — conteúdo premium para cafeterias e baristas.</div>
+    </div>
+
+    <div class="prompt-card av up d3">
+      <div class="pc-header"><span class="pc-num">07</span>
+        <div style="flex:1;padding-left:2mm"><div class="pc-title">Patisserie Francesa</div>
+        <div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-magnific">Magnific AI</span></div></div>
+      </div>
+      <div class="prompt-box">Interior of upscale Parisian patisserie, wide architectural shot, tiers of macarons in jewel tones (ruby, emerald, sapphire), croissants, glazed fruit tarts, cool morning blue light through floor-to-ceiling windows, one bright window creating radiant backlight silhouetting display cases, hyper-realistic pastry textures, cinematic, 8K. No text.</div>
+      <div class="pc-desc">Interior de confeitaria parisiense com luz da manhã retroiluminando vitrines com macarons em tons de joia.</div>
+    </div>
+
+    <div class="prompt-card av up d4">
+      <div class="pc-header"><span class="pc-num">08</span>
+        <div style="flex:1;padding-left:2mm"><div class="pc-title">Mesa da Colheita</div>
+        <div class="badge-row"><span class="badge b-leo">Leonardo</span><span class="badge b-gpt">ChatGPT</span></div></div>
+      </div>
+      <div class="prompt-box">Rustic harvest feast table from low Dutch angle, overflowing with roasted root vegetables, pomegranates cut open showing ruby seeds, fresh sourdough with cracked crust, warm candlelight as primary source, cool ambient window fill, bokeh revealing old stone farmhouse kitchen, photorealistic cinematic golden hour, 8K. No text.</div>
+      <div class="pc-desc">Mesa rústica de colheita vista com câmera levemente inclinada. Luz de vela principal com preenchimento frio da janela — cinematográfico e aconchegante.</div>
+    </div>
+
+  </div>
+  <div class="pf"><span>Era da I.A.</span><span class="pnum">7</span></div>
+</div>
+
+<!-- ═══ P8 DIVISÓRIA SAÚDE — FUNDO SÓLIDO NEGRO ═══ -->
+<div class="page no-hf solid-negro" id="p8">
+  <div class="div-solid-inner">
+    <div class="div-big-num" style="color:rgba(255,255,255,.08)">02</div>
+    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=700&q=85&fit=crop" alt="" loading="eager" style="position:absolute;right:0;top:0;bottom:0;width:72mm;height:100%;object-fit:cover;opacity:.2">
+    <div style="position:absolute;right:0;top:0;bottom:0;width:72mm;background:linear-gradient(to right,var(--negro) 0%,rgba(3,11,20,.1) 100%)"></div>
+    <div class="div-solid-count">Prompts 09 – 16</div>
+    <div class="div-solid-label">Nicho 02 — 8 Prompts</div>
+    <div class="div-solid-title" style="color:var(--acento-dark)">Saúde<br>& Bem-Estar</div>
+    <div class="div-solid-rule" style="background:var(--acento-dark)"></div>
+    <div class="div-solid-desc">Fitness aspiracional, meditação, produtos de saúde e spa premium — imagens que comunicam energia, vitalidade e transformação corporal e mental.</div>
+    <div class="div-solid-tags">
+      <span class="div-solid-tag">Fitness</span>
+      <span class="div-solid-tag">Wellness</span>
+      <span class="div-solid-tag">Produto de Saúde</span>
+      <span class="div-solid-tag">Spa Premium</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ P9 SAÚDE PROMPTS 09–12 ═══ -->
+<div class="page" id="p9">
+  <div class="ph"><span>KIT 50 PROMPTS CINEMATOGRÁFICOS</span><span>SAÚDE — 09 a 12</span></div>
+  <div class="page-inner" style="padding-top:18mm">
+
+    <div class="prompt-card av up d1">
+      <div class="pc-header"><span class="pc-num">09</span>
+        <div style="flex:1;padding-left:2mm"><div class="pc-title">Atleta na Névoa</div>
+        <div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-higgs">Higgsfield</span></div></div>
+      </div>
+      <div class="prompt-box">Athletic female runner sprinting through misty forest trail at golden hour, medium tracking shot, morning mist catching shafts of sunlight between eucalyptus trees, anamorphic lens flare, motion blur on legs, sharp focus on determined face, Nike campaign poster aesthetic, 28mm wide angle, teal shadows and warm amber highlights, 8K. No text.</div>
+      <div class="pc-desc">Corredora em trilha com névoa da manhã cortada por raios de sol dourado. Desfoque de movimento e névoa iluminada criam energia e velocidade.</div>
+    </div>
+
+    <div class="prompt-card av up d2">
+      <div class="pc-header"><span class="pc-num">10</span>
+        <div style="flex:1;padding-left:2mm"><div class="pc-title">Yoga ao Amanhecer</div>
+        <div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-fire">Adobe Firefly</span></div></div>
+      </div>
+      <div class="prompt-box">Woman holding Warrior III yoga pose on granite cliff overlooking ocean at dawn, wide shot, pure silhouette against gradient sky transitioning from deep indigo to apricot to gold, long exposure capturing cloud movement, ultra-sharp horizon, spiritual and aspirational, Vogue Health editorial photography, 8K cinematic. No text.</div>
+      <div class="pc-desc">Silhueta de mulher em yoga sobre penhascos ao amanhecer. Céu em gradiente índigo-dourado cria imagem espiritual e aspiracional.</div>
+    </div>
+
+    <div class="prompt-card av up d3">
+      <div class="pc-header"><span class="pc-num">11</span>
+        <div style="flex:1;padding-left:2mm"><div class="pc-title">Suplementos Premium</div>
+        <div class="badge-row"><span class="badge b-fire">Adobe Firefly</span><span class="badge b-magnific">Magnific AI</span></div></div>
+      </div>
+      <div class="prompt-box">High-end supplement bottles and glass capsule container, top-down overhead, polished obsidian black acrylic surface, single overhead LED spotlight with perfect specular highlights on glass and metallic labels, gold foil details sharp, capsules in geometric radial pattern with scattered herbs and seeds, ultra-premium product editorial, 8K. No text on products.</div>
+      <div class="pc-desc">Frascos de suplementos em composição geométrica sobre superfície negra polida. Reflexos especulares perfeitos — campanha de marca premium.</div>
+    </div>
+
+    <div class="prompt-card av up d4">
+      <div class="pc-header"><span class="pc-num">12</span>
+        <div style="flex:1;padding-left:2mm"><div class="pc-title">Meditação na Altitude</div>
+        <div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-leo">Leonardo</span></div></div>
+      </div>
+      <div class="prompt-box">Person meditating in lotus position on boulder in vast mountain landscape, extreme wide aerial drone perspective, morning fog filling valleys below while meditator sits above cloud line in golden light, solitude and stillness, National Geographic epic landscape photography, ultra high resolution 8K cinematic. No text.</div>
+      <div class="pc-desc">Figura meditando acima das nuvens em rocha elevada. O contraste entre imensidão e quietude cria impacto emocional imediato.</div>
+    </div>
+
+  </div>
+  <div class="pf"><span>Era da I.A.</span><span class="pnum">9</span></div>
+</div>
+
+<!-- ═══ P10 SAÚDE PROMPTS 13–16 ═══ -->
+<div class="page" id="p10">
+  <div class="ph"><span>KIT 50 PROMPTS CINEMATOGRÁFICOS</span><span>SAÚDE — 13 a 16</span></div>
+  <div class="page-inner" style="padding-top:18mm">
+
+    <div class="prompt-card av up d1">
+      <div class="pc-header"><span class="pc-num">13</span>
+        <div style="flex:1;padding-left:2mm"><div class="pc-title">Spa Minimalista</div>
+        <div class="badge-row"><span class="badge b-fire">Adobe Firefly</span><span class="badge b-gpt">ChatGPT</span></div></div>
+      </div>
+      <div class="prompt-box">Interior of luxury Japanese-influenced spa treatment room, wide architectural shot, floor-to-ceiling windows overlooking zen gravel garden, morning light casting long precise shadows across pristine white towels and dark volcanic stone, single white orchid in matte ceramic vase, absolute stillness, Aesop brand aesthetic, desaturated warm tones, 8K. No text.</div>
+      <div class="pc-desc">Sala de spa de luxo com influência japonesa. Sombras paralelas da luz da manhã sobre toalhas dobradas criam ordem e paz.</div>
+    </div>
+
+    <div class="prompt-card av up d2">
+      <div class="pc-header"><span class="pc-num">14</span>
+        <div style="flex:1;padding-left:2mm"><div class="pc-title">Alimentos da Terra</div>
+        <div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-magnific">Magnific AI</span></div></div>
+      </div>
+      <div class="prompt-box">Extreme close-up macro of halved turmeric root, purple cabbage cross-section, and sliced kiwi on dark basalt stone, large water droplets catching and refracting backlight, single rim backlight making produce cross-sections translucent and jewel-like, dark moody studio, editorial health food photography, 8K macro masterpiece. No text.</div>
+      <div class="pc-desc">Macro de vegetais cortados em pedra negra. Retroiluminação atravessa os alimentos tornando-os translúcidos como pedras preciosas.</div>
+    </div>
+
+    <div class="prompt-card av up d3">
+      <div class="pc-header"><span class="pc-num">15</span>
+        <div style="flex:1;padding-left:2mm"><div class="pc-title">Corrida Urbana</div>
+        <div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-higgs">Higgsfield</span></div></div>
+      </div>
+      <div class="prompt-box">Male urban athlete in frozen high-speed sprint through minimalist city underpass, Dutch angle, motion blur background contrasting with sharp subject, single overhead sodium vapor light creating hard downward shadows and warm yellow cast, neon reflection on wet concrete, cinematic sports editorial, Nike meets Michael Mann aesthetic, 8K. No text.</div>
+      <div class="pc-desc">Atleta em sprint em túnel urbano com câmera inclinada. Luz de sódio laranja e piso molhado criam look cinematográfico de grande campanha.</div>
+    </div>
+
+    <div class="prompt-card av up d4">
+      <div class="pc-header"><span class="pc-num">16</span>
+        <div style="flex:1;padding-left:2mm"><div class="pc-title">Força Revelada</div>
+        <div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-leo">Leonardo</span></div></div>
+      </div>
+      <div class="prompt-box">Athletic male physique in dramatic fine art fitness portrait, direct side profile, powerful single overhead light creating precise muscle definition through shadow and highlight, dark charcoal studio background, strong confident posture, black and white with rich deep contrast, fine art fitness photography, Arnold Classic era influence, 8K. No text.</div>
+      <div class="pc-desc">Retrato em preto e branco de físico atlético com luz única de cima. Contraste extremo revela definição muscular — nível de academia premium.</div>
+    </div>
+
+  </div>
+  <div class="pf"><span>Era da I.A.</span><span class="pnum">10</span></div>
+</div>
+
+<!-- ═══ P11 DIVISÓRIA FINANÇAS — FUNDO SÓLIDO POP ═══ -->
+<div class="page no-hf solid-pop" id="p11">
+  <div class="div-solid-inner">
+    <div class="div-big-num">03</div>
+    <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=700&q=85&fit=crop" alt="" loading="eager" style="position:absolute;right:0;top:0;bottom:0;width:72mm;height:100%;object-fit:cover;opacity:.2">
+    <div style="position:absolute;right:0;top:0;bottom:0;width:72mm;background:linear-gradient(to right,var(--pop) 0%,rgba(34,211,238,.1) 100%)"></div>
+    <div class="div-solid-count">Prompts 17 – 24</div>
+    <div class="div-solid-label">Nicho 03 — 8 Prompts</div>
+    <div class="div-solid-title">Finanças<br>& Negócios</div>
+    <div class="div-solid-rule"></div>
+    <div class="div-solid-desc">Poder, riqueza, autoridade e estratégia — imagens de nível Wall Street para conteúdo financeiro, investimentos, consultoria e posicionamento de liderança executiva.</div>
+    <div class="div-solid-tags">
+      <span class="div-solid-tag">Wall Street</span>
+      <span class="div-solid-tag">Investimentos</span>
+      <span class="div-solid-tag">Autoridade</span>
+      <span class="div-solid-tag">Executivo</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ P12 FINANÇAS 17–20 ═══ -->
+<div class="page" id="p12">
+  <div class="ph"><span>KIT 50 PROMPTS CINEMATOGRÁFICOS</span><span>FINANÇAS — 17 a 20</span></div>
+  <div class="page-inner" style="padding-top:18mm">
+    <div class="prompt-card av up d1">
+      <div class="pc-header"><span class="pc-num">17</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Sala de Poder</div><div class="badge-row"><span class="badge b-mj">Midjourney</span></div></div></div>
+      <div class="prompt-box">View from directly behind powerful executive in dark tailored suit at floor-to-ceiling windows of Manhattan skyscraper penthouse at dusk, wide cinematic shot, city lights below, subtle reflection in glass, authoritative silhouette, teal and gold color palette, cinematic anamorphic lens bokeh on city lights, Wall Street Journal editorial style, 8K. No text.</div>
+      <div class="pc-desc">Executivo de costas olhando para Manhattan ao entardecer de cobertura. Solidão e escala da cidade transmitem poder e ambição.</div>
+    </div>
+    <div class="prompt-card av up d2">
+      <div class="pc-header"><span class="pc-num">18</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Vista da Prosperidade</div><div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-leo">Leonardo</span></div></div></div>
+      <div class="prompt-box">Aerial drone shot of large private estate at golden hour, extreme wide shot, infinity pool reflecting orange and crimson sky, manicured geometric gardens, private stone motor court, warm amber raking light creating deep dramatic shadows, Architectural Digest editorial style, 8K. No text.</div>
+      <div class="pc-desc">Propriedade privada de luxo vista do ar ao pôr do sol. Piscina infinita reflete o céu e sombras dramáticas revelam jardins geométricos.</div>
+    </div>
+    <div class="prompt-card av up d3">
+      <div class="pc-header"><span class="pc-num">19</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Dinheiro em Movimento</div><div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-leo">Leonardo</span></div></div></div>
+      <div class="prompt-box">High-speed photography of currency bills in mid-air cascade, jet-black background, single strobe light freezing motion with sharp edges on every bill, shallow depth of field creating smooth bokeh on distant bills, motion blur trails on outer bills suggesting abundance, dramatic side rim light, editorial finance photography, 8K. No text on bills.</div>
+      <div class="pc-desc">Cédulas em cascata congeladas em pleno voo contra fundo preto. Luz estroboscópica revela cada detalhe com nitidez extrema.</div>
+    </div>
+    <div class="prompt-card av up d4">
+      <div class="pc-header"><span class="pc-num">20</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Sala de Operações</div><div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-fire">Adobe Firefly</span></div></div></div>
+      <div class="prompt-box">Ultra-wide panoramic of multi-screen trading workstation at night, six monitors displaying financial charts in electric blue and green on black, ambient room illumination from screens only creating dramatic chiaroscuro, focused hand on precision mouse, Bloomberg Terminal aesthetic, cinematic deep blue color grade, 8K. No text.</div>
+      <div class="pc-desc">Estação de trader com múltiplos monitores na escuridão. A única fonte de luz são as telas — concentração, poder e controle em tempo real.</div>
+    </div>
+  </div>
+  <div class="pf"><span>Era da I.A.</span><span class="pnum">12</span></div>
+</div>
+
+<!-- ═══ P13 FINANÇAS 21–24 ═══ -->
+<div class="page" id="p13">
+  <div class="ph"><span>KIT 50 PROMPTS CINEMATOGRÁFICOS</span><span>FINANÇAS — 21 a 24</span></div>
+  <div class="page-inner" style="padding-top:18mm">
+    <div class="prompt-card av up d1">
+      <div class="pc-header"><span class="pc-num">21</span><div style="flex:1;padding-left:2mm"><div class="pc-title">O Acordo</div><div class="badge-row"><span class="badge b-mj">Midjourney</span></div></div></div>
+      <div class="prompt-box">Extreme close-up of two firm handshakes, foreground luxury office elements out of focus (crystal glasses, leather folder), sharp focus on hands with fine suit fabric revealed by raking side light, luxury watch partially visible, warm amber tones, Fortune 500 annual report photography style, 8K. No text.</div>
+      <div class="pc-desc">Close de aperto de mão em ambiente corporativo de luxo. Luz rasante revela textura do terno e relógio — autoridade e credibilidade.</div>
+    </div>
+    <div class="prompt-card av up d2">
+      <div class="pc-header"><span class="pc-num">22</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Ouro Real</div><div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-magnific">Magnific AI</span></div></div></div>
+      <div class="prompt-box">Hyper-realistic macro of stacked gold bullion ingots, each bar reflecting a dramatic spotlight creating golden caustic light patterns on dark polished surface, extreme shallow depth of field, razor-sharp nearest bar showing serial marks, rich deep amber tones, pitch-black background, commodity investment editorial, 8K masterpiece. No text.</div>
+      <div class="pc-desc">Macro de lingotes de ouro refletindo luz de estúdio. Padrões de caustics de luz sobre superfície negra criam composição abstrata e poderosa.</div>
+    </div>
+    <div class="prompt-card av up d3">
+      <div class="pc-header"><span class="pc-num">23</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Pitch de Alto Risco</div><div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-leo">Leonardo</span></div></div></div>
+      <div class="prompt-box">Startup founder presenting to investors in modern glass-walled conference room at night, wide shot from back, presenter under single strong spotlight, investors as silhouettes in darkness, projection screen visible, TED Talk meets Michael Mann aesthetic, documentary photography, anamorphic widescreen, 8K. No text.</div>
+      <div class="pc-desc">Apresentador sob holofote único em sala de conferência à noite. Investidores em silhueta criam tensão dramática.</div>
+    </div>
+    <div class="prompt-card av up d4">
+      <div class="pc-header"><span class="pc-num">24</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Estratégia Global</div><div class="badge-row"><span class="badge b-fire">Adobe Firefly</span><span class="badge b-gpt">ChatGPT</span></div></div></div>
+      <div class="prompt-box">Top-down overhead of executive hands placing strategic marker pin on large vintage world map on dark oak boardroom table, premium accessories sharp (Montblanc pen, Rolex watch, black Moleskine), single overhead spotlight, deep warm amber tones, Forbes magazine editorial style, ultra-sharp 8K. No text.</div>
+      <div class="pc-desc">Mãos de executivo em mapa estratégico visto de cima. Acessórios de luxo em detalhe nítido comunicam autoridade e padrão elevado.</div>
+    </div>
+  </div>
+  <div class="pf"><span>Era da I.A.</span><span class="pnum">13</span></div>
+</div>
+
+<!-- ═══ P14 DIVISÓRIA MODA — FUNDO SÓLIDO NEGRO ═══ -->
+<div class="page no-hf solid-negro" id="p14">
+  <div class="div-solid-inner">
+    <div class="div-big-num" style="color:rgba(255,255,255,.08)">04</div>
+    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=700&q=85&fit=crop" alt="" loading="eager" style="position:absolute;right:0;top:0;bottom:0;width:72mm;height:100%;object-fit:cover;opacity:.25">
+    <div style="position:absolute;right:0;top:0;bottom:0;width:72mm;background:linear-gradient(to right,var(--negro) 0%,rgba(3,11,20,.1) 100%)"></div>
+    <div class="div-solid-count">Prompts 25 – 30</div>
+    <div class="div-solid-label">Nicho 04 — 6 Prompts</div>
+    <div class="div-solid-title" style="color:var(--acento-dark)">Moda<br>& Estilo</div>
+    <div class="div-solid-rule" style="background:var(--acento-dark)"></div>
+    <div class="div-solid-desc">Editorial fashion de alto nível, textura de luxo, silhueta de poder e fotografia de produto premium para marcas de vestuário, acessórios e beleza.</div>
+    <div class="div-solid-tags">
+      <span class="div-solid-tag">Fashion Editorial</span><span class="div-solid-tag">Produto Luxo</span><span class="div-solid-tag">Beleza</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ P15 MODA 25–27 ═══ -->
+<div class="page" id="p15">
+  <div class="ph"><span>KIT 50 PROMPTS CINEMATOGRÁFICOS</span><span>MODA — 25 a 27</span></div>
+  <div class="page-inner" style="padding-top:17mm">
+
+    <div class="prompt-card">
+      <div class="pc-header"><span class="pc-num" style="font-size:16pt">25</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Editorial Arquitetônico</div><div class="badge-row"><span class="badge b-mj">Midjourney</span></div></div></div>
+      <div class="prompt-box">High fashion editorial of model in sculptural white architectural couture gown, stark white cyclorama studio, extreme side light from single large softbox creating shadow gradients on fabric folds, model half-lit half-shadowed, Paolo Roversi influence, Vogue Italia aesthetic, black and white, 8K. No text.</div>
+      <div class="pc-desc">Vestido escultural branco em fundo branco puro. Luz lateral única define cada dobra do tecido.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="pc-header"><span class="pc-num" style="font-size:16pt">26</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Textura Viva</div><div class="badge-row"><span class="badge b-magnific">Magnific AI</span></div></div></div>
+      <div class="prompt-box">Extreme macro of luxury silk fabric folds in deep emerald green, single dramatic raking side light revealing micro-texture of individual silk threads at near-microscopic detail, jewel-tone color, abstract composition, Hermès product photography aesthetic, 8K. No text.</div>
+      <div class="pc-desc">Macro abstrato de seda verde esmeralda. Luz rasante revela cada fio de tecido individualmente.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="pc-header"><span class="pc-num" style="font-size:16pt">27</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Street Couture</div><div class="badge-row"><span class="badge b-mj">Midjourney</span></div></div></div>
+      <div class="prompt-box">Fashion-forward individual in avant-garde streetwear at boundary of single overhead streetlight, medium shot, neon reflections in rain-soaked Tokyo street, wet asphalt mirror effect, Tokyo Harajuku meets Paris fashion week, editorial night photography, 8K. No text.</div>
+      <div class="pc-desc">Figura fashionista na fronteira entre luz e sombra em rua molhada de Tóquio à noite.</div>
+    </div>
+
+  </div>
+  <div class="pf"><span>Era da I.A.</span><span class="pnum">15</span></div>
+</div>
+
+<!-- ═══ P16 MODA 28–30 ═══ -->
+<div class="page" id="p16">
+  <div class="ph"><span>KIT 50 PROMPTS CINEMATOGRÁFICOS</span><span>MODA — 28 a 30</span></div>
+  <div class="page-inner" style="padding-top:17mm">
+
+    <div class="prompt-card">
+      <div class="pc-header"><span class="pc-num" style="font-size:16pt">28</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Frasco de Poder</div><div class="badge-row"><span class="badge b-fire">Adobe Firefly</span><span class="badge b-magnific">Magnific</span></div></div></div>
+      <div class="prompt-box">Cinematic macro of luxury perfume bottle with fine mist being sprayed, pure black background, single precision backlight making mist glow and reveal particle density, glass bottle with prismatic clarity, condensation on cold glass, ultra-premium beauty editorial, 8K masterpiece. No text on bottle.</div>
+      <div class="pc-desc">Frasco de perfume com névoa retroiluminada revelando cada partícula no ar — luxo e exclusividade.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="pc-header"><span class="pc-num" style="font-size:16pt">29</span><div style="flex:1;padding-left:2mm"><div class="pc-title">O Detalhe Importa</div><div class="badge-row"><span class="badge b-mj">Midjourney</span></div></div></div>
+      <div class="prompt-box">Extreme close-up editorial of manicured hands holding luxury leather handbag handle, shallow depth of field, fine stitching and grain revealed by dramatic raking side light, gold hardware gleaming, blurred luxury boutique background, Bottega Veneta style, warm amber tones, 8K. No text.</div>
+      <div class="pc-desc">Detalhe de mãos segurando alça de bolsa de luxo. Costuras e granulação do couro em detalhe extremo.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="pc-header"><span class="pc-num" style="font-size:16pt">30</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Silhueta de Poder</div><div class="badge-row"><span class="badge b-mj">Midjourney</span></div></div></div>
+      <div class="prompt-box">Female model in dramatic wide-leg tailored black power suit, full body, backlit by floor-level diffused warm light creating dramatic halo rim light, face in deep shadow, pure authoritative silhouette, extreme high contrast, black and white cinematic, Helmut Newton influence, 8K. No text.</div>
+      <div class="pc-desc">Silhueta feminina em terno preto com retroiluminação criando halo. Autoridade feminina sem precedentes.</div>
+    </div>
+
+  </div>
+  <div class="pf"><span>Era da I.A.</span><span class="pnum">16</span></div>
+</div>
+
+<!-- ═══ P17 DIVISÓRIA TECNOLOGIA — FUNDO SÓLIDO POP ═══ -->
+<div class="page no-hf solid-pop" id="p17">
+  <div class="div-solid-inner">
+    <div class="div-big-num">05</div>
+    <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=700&q=85&fit=crop" alt="" loading="eager" style="position:absolute;right:0;top:0;bottom:0;width:72mm;height:100%;object-fit:cover;opacity:.2">
+    <div style="position:absolute;right:0;top:0;bottom:0;width:72mm;background:linear-gradient(to right,var(--pop) 0%,rgba(34,211,238,.1) 100%)"></div>
+    <div class="div-solid-count">Prompts 31 – 36</div>
+    <div class="div-solid-label">Nicho 05 — 6 Prompts</div>
+    <div class="div-solid-title">Tecnologia<br>& I.A.</div>
+    <div class="div-solid-rule"></div>
+    <div class="div-solid-desc">Futurismo, circuitos vivos, ambientes de data center e holografia — imagens de impacto para marcas tech, startups de I.A. e produtos digitais de alto padrão.</div>
+    <div class="div-solid-tags">
+      <span class="div-solid-tag">Futurismo</span><span class="div-solid-tag">I.A. Visual</span><span class="div-solid-tag">Data Center</span><span class="div-solid-tag">Tech Premium</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ P18 TECNOLOGIA 31–33 ═══ -->
+<div class="page" id="p18">
+  <div class="ph"><span>KIT 50 PROMPTS CINEMATOGRÁFICOS</span><span>TECNOLOGIA — 31 a 33</span></div>
+  <div class="page-inner" style="padding-top:17mm">
+
+    <div class="prompt-card">
+      <div class="pc-header"><span class="pc-num" style="font-size:16pt">31</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Circuito Vivo</div><div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-magnific">Magnific</span></div></div></div>
+      <div class="prompt-box">Extreme macro of cutting-edge CPU processor, single overhead light creating cyan specular highlights on transistor arrays, circuit pathways resembling aerial city maps, pitch-black background, hyper-detailed surface, science and technology editorial, 8K masterpiece. No text.</div>
+      <div class="pc-desc">Macro de processador com circuitos que se parecem com mapas de cidade vistos do ar.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="pc-header"><span class="pc-num" style="font-size:16pt">32</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Rede Neural Viva</div><div class="badge-row"><span class="badge b-mj">Midjourney</span></div></div></div>
+      <div class="prompt-box">Conceptual long exposure of neural network as luminous fiber optic strands, glowing light trails in electric cyan and deep blue, dark studio, spherical node intersection points as hot white point sources, receding depth perspective, abstract science art editorial, tech brand visual identity, 8K. No text.</div>
+      <div class="pc-desc">Rede de fibras ópticas em longa exposição. Nós de intersecção brilham como estrelas em ciano elétrico.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="pc-header"><span class="pc-num" style="font-size:16pt">33</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Código na Madrugada</div><div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-fire">Firefly</span></div></div></div>
+      <div class="prompt-box">Developer's hands typing at 3am, monitor light as sole illumination casting cold blue-white on skin and desk, code reflected in glasses, deep chiaroscuro, complete darkness surrounding monitor glow, lonely genius aesthetic, Bloomberg Businessweek meets film noir, 8K. No text on screen.</div>
+      <div class="pc-desc">Mãos de desenvolvedor à madrugada com a tela como única luz. Chiaroscuro extremo — fundador solitário.</div>
+    </div>
+
+  </div>
+  <div class="pf"><span>Era da I.A.</span><span class="pnum">18</span></div>
+</div>
+
+<!-- ═══ P19 TECNOLOGIA 34–36 ═══ -->
+<div class="page" id="p19">
+  <div class="ph"><span>KIT 50 PROMPTS CINEMATOGRÁFICOS</span><span>TECNOLOGIA — 34 a 36</span></div>
+  <div class="page-inner" style="padding-top:17mm">
+
+    <div class="prompt-card">
+      <div class="pc-header"><span class="pc-num" style="font-size:16pt">34</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Data Center Épico</div><div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-leo">Leonardo</span></div></div></div>
+      <div class="prompt-box">Wide angle architectural inside hyperscale data center corridor, infinite rows of server racks illuminated by cool blue LED status lights, vanishing point creating infinite depth illusion, single warm maintenance light in middle distance for contrast, cinematic tech infrastructure editorial, Google AWS visual style, 8K. No text.</div>
+      <div class="pc-desc">Corredor de data center com servidores em perspectiva infinita. Único ponto quente no fundo cria contraste dramático.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="pc-header"><span class="pc-num" style="font-size:16pt">35</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Braço Mecânico</div><div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-leo">Leonardo</span></div></div></div>
+      <div class="prompt-box">Industrial robotic arm frozen mid-movement, single overhead shaft of light cutting through industrial fog creating volumetric god-ray beams, robot surface with precision specular highlights, complete darkness surrounding light shaft, heavy industry meets fine art photography, cinematic production editorial, 8K masterpiece. No text.</div>
+      <div class="pc-desc">Braço robótico em névoa industrial com feixe de luz único criando raios volumétricos de nível sci-fi.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="pc-header"><span class="pc-num" style="font-size:16pt">36</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Holografia Viva</div><div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-higgs">Higgsfield</span></div></div></div>
+      <div class="prompt-box">Researcher surrounded by floating holographic data visualization interfaces, cool teal and electric blue glowing holographic UI elements, person illuminated exclusively by holographic light, dramatic contrast against dark laboratory, Blade Runner 2049 cinematography aesthetic, 8K cinematic. No text on holograms.</div>
+      <div class="pc-desc">Cientista rodeado de hologramas iluminado apenas pela projeção. Paleta ciano-azul — futurismo de nível cinematográfico.</div>
+    </div>
+
+  </div>
+  <div class="pf"><span>Era da I.A.</span><span class="pnum">19</span></div>
+</div>
+
+<!-- ═══ P20 DIVISÓRIA EMPREENDEDORISMO — FUNDO SÓLIDO NEGRO ═══ -->
+<div class="page no-hf solid-negro" id="p20">
+  <div class="div-solid-inner">
+    <div class="div-big-num" style="color:rgba(255,255,255,.08)">06</div>
+    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=700&q=85&fit=crop" alt="" loading="eager" style="position:absolute;right:0;top:0;bottom:0;width:72mm;height:100%;object-fit:cover;opacity:.2">
+    <div style="position:absolute;right:0;top:0;bottom:0;width:72mm;background:linear-gradient(to right,var(--negro) 0%,rgba(3,11,20,.1) 100%)"></div>
+    <div class="div-solid-count">Prompts 37 – 42</div>
+    <div class="div-solid-label">Nicho 06 — 6 Prompts</div>
+    <div class="div-solid-title" style="color:var(--acento-dark)">Empreen-<br>dedorismo</div>
+    <div class="div-solid-rule" style="background:var(--acento-dark)"></div>
+    <div class="div-solid-desc">A narrativa visual do fundador, da startup garage ao palco do pitch — imagens que comunicam ambição, sacrifício e crescimento para conteúdo de negócios e marketing.</div>
+    <div class="div-solid-tags">
+      <span class="div-solid-tag">Startup</span><span class="div-solid-tag">Fundador</span><span class="div-solid-tag">Marketing</span><span class="div-solid-tag">Pitch</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ P21 EMPREENDEDORISMO 37–39 ═══ -->
+<div class="page" id="p21">
+  <div class="ph"><span>KIT 50 PROMPTS CINEMATOGRÁFICOS</span><span>EMPREENDEDORISMO — 37 a 39</span></div>
+  <div class="page-inner" style="padding-top:17mm">
+
+    <div class="prompt-card">
+      <div class="pc-header"><span class="pc-num" style="font-size:16pt">37</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Startup Garage</div><div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-fire">Firefly</span></div></div></div>
+      <div class="prompt-box">Startup team working intensely at night in converted industrial loft, wide shot, exposed brick walls, warm Edison bulb light creating pools of warmth, multiple laptop screens glowing, city lights through metal-framed windows, cinematic American dream narrative, Silicon Valley documentary style, 8K. No text on screens.</div>
+      <div class="pc-desc">Time pequeno em loft industrial tarde da noite. Luz Edison e telas brilhando — estética da startup no começo.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="pc-header"><span class="pc-num" style="font-size:16pt">38</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Fundador Solitário</div><div class="badge-row"><span class="badge b-mj">Midjourney</span></div></div></div>
+      <div class="prompt-box">Single individual at minimalist standing desk at 3am, shot from behind over shoulder, room dark except dual monitor glow in cold blue-white light, city lights creating warm bokeh through floor-to-ceiling windows, solitary ambition atmosphere, The Social Network visual aesthetic, 8K. No text on screens.</div>
+      <div class="pc-desc">Fundador solitário às 3h com dois monitores como única luz. Luzes da cidade em bokeh quente — sacrifício do empreendedor.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="pc-header"><span class="pc-num" style="font-size:16pt">39</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Palco do Pitch</div><div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-leo">Leonardo</span></div></div></div>
+      <div class="prompt-box">Startup founder on stage at packed conference auditorium, wide shot from back, presenter under single strong spotlight, audience silhouettes in darkness, TED Talk aesthetic, documentary event photography, anamorphic lens bokeh on audience, 8K. No text on screen.</div>
+      <div class="pc-desc">Apresentador sob holofote em palco de conferência lotado. Audiência em silhueta — drama e foco imediato.</div>
+    </div>
+
+  </div>
+  <div class="pf"><span>Era da I.A.</span><span class="pnum">21</span></div>
+</div>
+
+<!-- ═══ P22 EMPREENDEDORISMO 40–42 ═══ -->
+<div class="page" id="p22">
+  <div class="ph"><span>KIT 50 PROMPTS CINEMATOGRÁFICOS</span><span>EMPREENDEDORISMO — 40 a 42</span></div>
+  <div class="page-inner" style="padding-top:17mm">
+
+    <div class="prompt-card">
+      <div class="pc-header"><span class="pc-num" style="font-size:16pt">40</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Produto nas Mãos</div><div class="badge-row"><span class="badge b-fire">Adobe Firefly</span><span class="badge b-leo">Leonardo</span></div></div></div>
+      <div class="prompt-box">Confident entrepreneur holding physical product close to camera, extreme shallow depth of field (85mm f/1.4), product in razor-sharp focus, background dissolved into warm bokeh revealing modern co-working space, Apple product launch campaign aesthetic, warm natural light, 8K. No text.</div>
+      <div class="pc-desc">Empreendedor segurando produto com foco total no item e fundo em bokeh quente — estética Apple.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="pc-header"><span class="pc-num" style="font-size:16pt">41</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Mapeando o Futuro</div><div class="badge-row"><span class="badge b-mj">Midjourney</span></div></div></div>
+      <div class="prompt-box">Lone entrepreneur from behind filling floor-to-ceiling whiteboard with interconnected mind maps and flow charts, medium shot, early morning light from industrial windows casting long shadows, creative productive chaos, Entrepreneur Magazine editorial photography, cinematic warm tones, 8K. No legible text on whiteboard.</div>
+      <div class="pc-desc">Empreendedor de costas preenchendo quadro enorme. Escala do quadro versus a pessoa — visão e ambição.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="pc-header"><span class="pc-num" style="font-size:16pt">42</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Primeira Semente</div><div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-fire">Firefly</span></div></div></div>
+      <div class="prompt-box">Extreme macro of single plant seedling breaking through cracked dry earth, dramatic backlight creating luminous rim-light halo on delicate translucent first leaves, single water droplet on primary leaf refracting backlight, dark rich soil for maximum contrast, National Geographic macro quality, 8K masterpiece. No text.</div>
+      <div class="pc-desc">Macro de broto emergindo da terra rachada com halo luminoso. Metáfora visual de crescimento poderosa para qualquer conteúdo de negócios.</div>
+    </div>
+
+  </div>
+  <div class="pf"><span>Era da I.A.</span><span class="pnum">22</span></div>
+</div>
+
+<!-- ═══ P23 DIVISÓRIA LIFESTYLE — FUNDO SÓLIDO POP ═══ -->
+<div class="page no-hf solid-pop" id="p23">
+  <div class="div-solid-inner">
+    <div class="div-big-num">07</div>
+    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=85&fit=crop" alt="" loading="eager" style="position:absolute;right:0;top:0;bottom:0;width:72mm;height:100%;object-fit:cover;opacity:.22">
+    <div style="position:absolute;right:0;top:0;bottom:0;width:72mm;background:linear-gradient(to right,var(--pop) 0%,rgba(34,211,238,.1) 100%)"></div>
+    <div class="div-solid-count">Prompts 43 – 50</div>
+    <div class="div-solid-label">Nicho 07 — 8 Prompts</div>
+    <div class="div-solid-title">Lifestyle<br>& Viagem</div>
+    <div class="div-solid-rule"></div>
+    <div class="div-solid-desc">Paisagens épicas, hotéis de luxo, aventura e experiências que parecem sonho — conteúdo aspiracional de máximo impacto visual para marcas de turismo e lifestyle premium.</div>
+    <div class="div-solid-tags">
+      <span class="div-solid-tag">Paisagem Épica</span><span class="div-solid-tag">Luxo</span><span class="div-solid-tag">Aventura</span><span class="div-solid-tag">Viagem Premium</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ P24 LIFESTYLE 43–46 ═══ -->
+<div class="page" id="p24">
+  <div class="ph"><span>KIT 50 PROMPTS CINEMATOGRÁFICOS</span><span>LIFESTYLE — 43 a 46</span></div>
+  <div class="page-inner" style="padding-top:18mm">
+    <div class="prompt-card av up d1">
+      <div class="pc-header"><span class="pc-num">43</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Cume ao Crepúsculo</div><div class="badge-row"><span class="badge b-mj">Midjourney</span></div></div></div>
+      <div class="prompt-box">Epic landscape of lone figure on granite mountain summit at sunset, extreme wide aerial-style shot, dramatic layered cloud formations in crimson and amber, silhouette against luminous sky, valley in cold blue shadow while peaks glow warm, 8K ultra-high-resolution, National Geographic cover quality. No text.</div>
+      <div class="pc-desc">Figura solitária no cume ao pôr do sol. Contraste entre vale em sombra fria e picos em luz quente — uma das composições mais poderosas da fotografia.</div>
+    </div>
+    <div class="prompt-card av up d2">
+      <div class="pc-header"><span class="pc-num">44</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Suite com Visão</div><div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-fire">Firefly</span></div></div></div>
+      <div class="prompt-box">Interior of luxury ocean-view hotel suite at golden hour, wide architectural shot, floor-to-ceiling frameless windows commanding panoramic ocean view, warm golden sunset backlight creating silhouetted rim-light on furniture edges, suite interior in warm shadows with sunlight pooling on white bed linens, Condé Nast Traveler aesthetic, 8K. No text.</div>
+      <div class="pc-desc">Suite de hotel de luxo com vista para o oceano ao pôr do sol. Retroiluminação cria silhuetas dos móveis contra a imensidão do oceano.</div>
+    </div>
+    <div class="prompt-card av up d3">
+      <div class="pc-header"><span class="pc-num">45</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Estrada sem Fim</div><div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-leo">Leonardo</span></div></div></div>
+      <div class="prompt-box">Aerial drone shot looking down along perfectly straight desert highway at sunrise, dramatic low raking light creating extreme long shadows from roadside saguaro cacti, warm amber foreground to deep purple horizon, motion blur on single pickup truck suggesting freedom, adventure travel photography, Road & Track editorial, 8K. No text.</div>
+      <div class="pc-desc">Rodovia deserta vista do ar ao amanhecer com sombras longas de cactos. Único veículo em movimento no horizonte — liberdade e aventura.</div>
+    </div>
+    <div class="prompt-card av up d4">
+      <div class="pc-header"><span class="pc-num">46</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Cidade Iluminada</div><div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-fire">Firefly</span></div></div></div>
+      <div class="prompt-box">Rooftop perspective over illuminated metropolitan city at blue hour, ultra-wide 16mm angle, foreground rooftop elements as silhouette, city skyline in warm amber bokeh, gradient sky from deep indigo to warm amber horizon, visible river reflections multiplying lights, long exposure 30 seconds, National Geographic Cities editorial, 8K. No text.</div>
+      <div class="pc-desc">Cidade iluminada vista de cobertura ao blue hour. Gradiente do céu e reflexos no rio criam composição que convida para dentro da cena.</div>
+    </div>
+  </div>
+  <div class="pf"><span>Era da I.A.</span><span class="pnum">24</span></div>
+</div>
+
+<!-- ═══ P25 LIFESTYLE 47–50 ═══ -->
+<div class="page" id="p25">
+  <div class="ph"><span>KIT 50 PROMPTS CINEMATOGRÁFICOS</span><span>LIFESTYLE — 47 a 50</span></div>
+  <div class="page-inner" style="padding-top:18mm">
+    <div class="prompt-card av up d1">
+      <div class="pc-header"><span class="pc-num">47</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Mergulho no Paraíso</div><div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-higgs">Higgsfield</span></div></div></div>
+      <div class="prompt-box">Free diver descending in crystal-clear tropical ocean, wide shot, natural sunlight breaking through surface in dramatic volumetric god-ray columns, diver silhouetted against bright glowing surface, coral reef in foreground catching warm light, rich layered blue water from aquamarine to deep navy, National Geographic ocean photography, 8K. No text.</div>
+      <div class="pc-desc">Mergulhador descendo em água tropical com raios de sol criando colunas de luz. Recife em primeiro plano e gradiente do azul criam profundidade visual imediata.</div>
+    </div>
+    <div class="prompt-card av up d2">
+      <div class="pc-header"><span class="pc-num">48</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Espelho de Sal</div><div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-leo">Leonardo</span></div></div></div>
+      <div class="prompt-box">Person walking slowly across vast salt flat at blue hour, extreme wide shot from very low ground level, perfect mirror reflection of dramatic storm cloud sky in thin film of water, walking figure as tiny solitary element, surreal hyper-realistic landscape, equal parts sky and reflection, Salar de Uyuni reference, Fine Art landscape photography, 8K. No text.</div>
+      <div class="pc-desc">Figura solitária em salar ao blue hour com reflexo perfeito do céu nublado. Composição simétrica — uma das ilusões visuais mais poderosas da fotografia.</div>
+    </div>
+    <div class="prompt-card av up d3">
+      <div class="pc-header"><span class="pc-num">49</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Trem de Luxo</div><div class="badge-row"><span class="badge b-mj">Midjourney</span><span class="badge b-fire">Firefly</span></div></div></div>
+      <div class="prompt-box">Interior of luxury heritage train sleeping compartment at night, medium shot, warm dark wood paneling and brass fittings, crisp white linen on narrow made bed, single warm amber table lamp creating intimate pool of light, dark countryside rushing past window with rain droplets caught by station platform lights, Orient Express reference, romantic travel photography, 8K. No text.</div>
+      <div class="pc-desc">Compartimento de trem de luxo à noite com luz de abajur quente e paisagem escura passando pela janela. Nostalgia e sofisticação.</div>
+    </div>
+    <div class="prompt-card av up d4">
+      <div class="pc-header"><span class="pc-num">50</span><div style="flex:1;padding-left:2mm"><div class="pc-title">Templo ao Amanhecer</div><div class="badge-row"><span class="badge b-mj">Midjourney</span></div></div></div>
+      <div class="prompt-box">Dramatic sunrise over ancient Khmer-style temple complex, extreme wide shot, silhouette of ornate temple spires against gradient sky transitioning from deep violet to brilliant orange, still lotus pond in foreground creating perfect mirror reflection, volumetric mist rising between temple structures, single monk silhouette in middle distance, Angkor Wat reference, 8K travel masterpiece. No text.</div>
+      <div class="pc-desc">Templo antigo ao amanhecer com minaretes em silhueta. Reflexo perfeito no lago dobra a composição — espiritual e cinematográfico.</div>
+    </div>
+  </div>
+  <div class="pf"><span>Era da I.A.</span><span class="pnum">25</span></div>
+</div>
+
+<!-- ═══ P26 RESUMO GERAL ═══ -->
+<div class="page" id="p26">
+  <div class="ph"><span>KIT 50 PROMPTS CINEMATOGRÁFICOS</span><span>RESUMO</span></div>
+  <div class="page-inner">
+    <div class="cap-num av in">Visão geral</div>
+    <h1 class="av up d1" style="font-size:19pt">Os 50 prompts —<br>mapa completo</h1>
+    <span class="rule-pop av scale d2"></span>
+
+    <table class="tabela av up d2" style="margin-top:2mm">
+      <thead>
+        <tr>
+          <th>Nicho</th>
+          <th>Prompts</th>
+          <th>Total</th>
+          <th>Foco visual</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Culinária</strong></td><td class="td-n">01 – 08</td><td class="td-n">8</td><td>Food editorial, textura, luz dramática</td></tr>
+        <tr><td><strong>Saúde</strong></td><td class="td-n">09 – 16</td><td class="td-n">8</td><td>Fitness aspiracional, natureza, produto premium</td></tr>
+        <tr><td><strong>Finanças</strong></td><td class="td-n">17 – 24</td><td class="td-n">8</td><td>Poder, riqueza, Wall Street, autoridade</td></tr>
+        <tr><td><strong>Moda</strong></td><td class="td-n">25 – 30</td><td class="td-n">6</td><td>Editorial fashion, textura luxo, silhueta</td></tr>
+        <tr><td><strong>Tecnologia</strong></td><td class="td-n">31 – 36</td><td class="td-n">6</td><td>Futurismo, high-tech, cinematográfico</td></tr>
+        <tr><td><strong>Empreendedorismo</strong></td><td class="td-n">37 – 42</td><td class="td-n">6</td><td>Startup, fundador, crescimento, pitch</td></tr>
+        <tr><td><strong>Lifestyle</strong></td><td class="td-n">43 – 50</td><td class="td-n">8</td><td>Paisagens épicas, luxo, aventura</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout av scale d3" style="margin-top:4mm">
+      <div class="cl">Como personalizar qualquer prompt</div>
+      <p>Substitua apenas os elementos descritivos de cena (ingrediente, pessoa, localização) mantendo a estrutura técnica intacta — iluminação, lente, estilo de referência e qualidade. São esses parâmetros que fazem a diferença entre uma imagem amadora e uma profissional.</p>
+    </div>
+
+    <div class="stat-row av scale d4" style="margin-top:4mm">
+      <div class="stat-cell"><span class="stat-num">50</span><span class="stat-label">Prompts prontos</span></div>
+      <div class="stat-cell"><span class="stat-num">7</span><span class="stat-label">Nichos</span></div>
+      <div class="stat-cell"><span class="stat-num">6</span><span class="stat-label">Plataformas</span></div>
+      <div class="stat-cell"><span class="stat-num">8K</span><span class="stat-label">Qualidade</span></div>
+    </div>
+
+    <div class="accent-block av scale d4">
+      <div class="al">Próximo passo</div>
+      <p>Escolha 1 nicho. Copie 1 prompt. Gere 4 variações. <strong>A primeira imagem profissional sai em menos de 2 minutos.</strong></p>
+    </div>
+  </div>
+  <div class="pf"><span>Era da I.A.</span><span class="pnum">26</span></div>
+</div>
+
+<!-- ═══ P27 FECHAMENTO DARK ═══ -->
+<div class="page no-hf" id="p24">
+  <div class="close-wrap">
+    <img class="close-bg" src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1400&q=88&fit=crop" alt="" loading="eager">
+    <div class="close-overlay"></div>
+    <div class="close-big">50</div>
+    <div class="close-content">
+      <div class="close-tag">Era da I.A. — Kit Prático</div>
+      <div class="close-title">Agora é<br>com você.<br>Gere.</div>
+      <div class="close-rule"></div>
+      <p class="close-text">Você tem 50 prompts testados. Tem as ferramentas. Tem o glossário. O que estava entre você e uma imagem cinematográfica era o prompt certo — agora você tem os 50.</p>
+    </div>
+    <div class="close-footer">
+      <span>© 2025 Era da I.A.</span>
+      <span>Kit 50 Prompts Cinematográficos</span>
+    </div>
+  </div>
+</div>
+
+<!-- PDF BUTTON -->
+<div class="ui-only">
+  <div class="pdf-wrap">
+    <div class="pdf-hint">A4 · Margens: Nenhuma · Ativar "Gráficos em segundo plano"</div>
+    <button class="btn-pdf" onclick="window.print()">
+      <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+      Exportar PDF
+    </button>
+  </div>
+</div>
+
+<script>
+// Intersection observer para animações
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible')}});
+},{threshold:.08});
+document.querySelectorAll('.av').forEach(el=>obs.observe(el));
+
+// Beforeprint — garante imagens e animações no PDF
+window.addEventListener('beforeprint',()=>{
+  document.querySelectorAll('.av').forEach(el=>{
+    el.style.opacity='1';el.style.transform='none';el.style.transition='none';
+  });
+  document.querySelectorAll('img').forEach(img=>{
+    img.loading='eager';
+    if(!img.complete)img.src=img.src;
+    img.style.display='block';img.style.visibility='visible';img.style.opacity='1';
+  });
+});
+</script>
+</body>
+</html>
