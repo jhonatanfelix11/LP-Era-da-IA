@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Captação pelo Instagram — Bônus Era da I.A.</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --negro:#030B14;
+  --carbon:#0A1628;
+  --carbon2:#0F1E30;
+  --ouro:#2563EB;
+  --acento-dark:#38BDF8;
+  --pop:#22D3EE;
+  --amber:#FBBF24;
+  --fundo:#EEF4FF;
+  --fundo-alt:#F0F9FF;
+  --texto:#1E293B;
+  --texto-suave:#475569;
+  --branco:#FFFFFF;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{background:#CBD5E1;font-family:'Lato',sans-serif;color:var(--texto)}
+
+/* ── PÁGINA BASE ── */
+.page{
+  width:210mm;height:297mm;overflow:hidden;
+  background:var(--fundo);
+  position:relative;
+  margin:0 auto 8mm;
+  page-break-after:always;break-after:page;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+.page-inner{
+  padding:22mm 20mm 20mm 24mm;
+  height:100%;overflow:hidden;
+  position:relative;
+}
+
+/* ── HEADER / FOOTER ── */
+.ph,.pf{
+  position:absolute;left:0;right:0;
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:'Lato',sans-serif;font-size:7pt;letter-spacing:.08em;
+  color:var(--texto-suave);text-transform:uppercase;
+  padding:0 24mm;
+}
+.ph{top:9mm}
+.pf{bottom:9mm}
+.ph::after{
+  content:'';position:absolute;bottom:-3mm;left:24mm;right:24mm;
+  height:.3mm;background:var(--ouro);opacity:.25;
+}
+.pf::before{
+  content:'';position:absolute;top:-3mm;left:24mm;right:24mm;
+  height:.3mm;background:var(--ouro);opacity:.25;
+}
+.pnum{color:var(--ouro);font-weight:700}
+
+/* ── REGRA DECORATIVA ── */
+.rule{display:block;height:.5mm;background:var(--ouro);margin:4mm 0;opacity:.7}
+
+/* ── TIPOGRAFIA ── */
+h1{font-family:'Playfair Display',serif;font-weight:900;font-size:22pt;line-height:1.15;color:var(--negro);margin-bottom:4mm}
+h2{font-family:'Playfair Display',serif;font-weight:700;font-size:15pt;line-height:1.2;color:var(--negro);margin:5mm 0 2mm}
+h3{font-family:'Lato',sans-serif;font-weight:700;font-size:10pt;letter-spacing:.06em;text-transform:uppercase;color:var(--ouro);margin:4mm 0 2mm}
+strong,b{font-family:'Lato',sans-serif}
+.num{font-family:'Lato',sans-serif;font-weight:900;color:var(--ouro)}
+p{font-family:'Source Serif 4',Georgia,serif;font-size:9.5pt;line-height:1.65;color:var(--texto);margin-bottom:3mm;orphans:3;widows:3}
+.cap-num{font-family:'Lato',sans-serif;font-size:7.5pt;letter-spacing:.15em;text-transform:uppercase;color:var(--ouro);font-weight:700;margin-bottom:2mm}
+
+/* ── COMPONENTES ── */
+.bloco-callout{background:var(--fundo-alt);border-radius:2mm;padding:4mm 5mm;margin:4mm 0;page-break-inside:avoid;border-left:3px solid var(--ouro)}
+.bloco-callout .label{font-size:7pt;text-transform:uppercase;letter-spacing:.1em;font-family:'Lato',sans-serif;font-weight:700;color:var(--ouro);margin-bottom:2mm}
+.bloco-callout p{margin:0;font-size:9pt}
+
+.bloco-exercicio{background:var(--carbon);color:var(--branco);padding:5mm;margin:4mm 0;page-break-inside:avoid;break-inside:avoid}
+.bloco-exercicio .ex-label{font-size:7pt;letter-spacing:.12em;text-transform:uppercase;color:var(--acento-dark);font-weight:700;margin-bottom:2mm}
+.bloco-exercicio h4{color:var(--branco);font-family:'Lato',sans-serif;font-weight:700;font-size:10pt;margin-bottom:2mm}
+.bloco-exercicio p{color:rgba(255,255,255,.8);font-size:9pt;margin-bottom:2mm}
+.msg-box{background:rgba(255,255,255,.07);border-left:1mm solid var(--acento-dark);padding:3mm 4mm;font-family:'Source Serif 4',Georgia,serif;font-style:italic;font-size:9pt;color:rgba(255,255,255,.9);margin-top:2mm;line-height:1.6}
+
+ul.lista-normal{padding-left:5mm;margin:2mm 0 3mm}
+ul.lista-normal li{font-size:9.5pt;line-height:1.6;color:var(--texto);margin-bottom:1.5mm;list-style:none;padding-left:4mm;position:relative}
+ul.lista-normal li::before{content:'—';position:absolute;left:0;color:var(--ouro)}
+
+/* ── TIMELINE ── */
+.timeline-v{position:relative;padding-left:8mm;margin:3mm 0}
+.timeline-v::before{content:'';position:absolute;left:3.5mm;top:1mm;bottom:1mm;width:.5mm;background:linear-gradient(var(--ouro),var(--pop))}
+.tl-item{position:relative;margin-bottom:5mm;page-break-inside:avoid}
+.tl-dot{position:absolute;left:-5mm;top:1mm;width:3mm;height:3mm;background:var(--ouro);border-radius:50%;box-shadow:0 0 0 1.5px var(--fundo),0 0 0 2.5px var(--ouro)}
+.tl-step{font-family:'Lato',sans-serif;font-size:7pt;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--ouro);margin-bottom:.5mm}
+.tl-title{font-family:'Lato',sans-serif;font-size:10pt;font-weight:700;color:var(--negro);margin-bottom:1mm}
+.tl-text{font-size:8.5pt;color:var(--texto-suave);line-height:1.55;font-family:'Source Serif 4',Georgia,serif}
+
+/* ── NICHO CARD ── */
+.nicho-card{background:var(--carbon);border-left:2mm solid var(--acento-dark);padding:4mm 5mm;margin:3mm 0;page-break-inside:avoid}
+.nicho-card .nc-label{font-family:'Lato',sans-serif;font-size:7pt;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--acento-dark);margin-bottom:1.5mm}
+.nicho-card .nc-titulo{font-family:'Lato',sans-serif;font-size:10pt;font-weight:700;color:var(--branco);margin-bottom:2mm}
+.nicho-card .nc-msg{font-family:'Source Serif 4',Georgia,serif;font-style:italic;font-size:8.5pt;color:rgba(255,255,255,.8);line-height:1.6;border-top:.2mm solid rgba(255,255,255,.1);padding-top:2mm;margin-top:1.5mm}
+.nicho-card .nc-obs{font-family:'Lato',sans-serif;font-size:7.5pt;color:rgba(255,255,255,.45);margin-top:1.5mm}
+
+/* ── STAT ROW ── */
+.stat-row{display:flex;gap:4mm;margin:4mm 0;page-break-inside:avoid}
+.stat-cell{flex:1;text-align:center;padding:3mm;background:var(--fundo-alt);border-radius:1.5mm;border-bottom:2px solid var(--ouro)}
+.stat-num{font-family:'Lato',sans-serif;font-size:16pt;font-weight:900;color:var(--ouro);display:block;line-height:1}
+.stat-label{font-family:'Lato',sans-serif;font-size:7pt;font-weight:600;color:var(--texto-suave);margin-top:1mm;display:block}
+
+/* ── FAQ ── */
+.faq-item{border-left:2.5px solid var(--ouro);padding:2mm 3mm;margin-bottom:3mm;background:rgba(37,99,235,.04);border-radius:0 1mm 1mm 0}
+.faq-q{font-family:'Lato',sans-serif;font-weight:700;font-size:9pt;color:var(--texto);margin-bottom:1mm}
+.faq-a{font-size:8.5pt;color:var(--texto-suave);line-height:1.55;font-family:'Source Serif 4',Georgia,serif}
+
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
+  html,body{background:white!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  .page{margin:0!important;box-shadow:none!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  .bloco-callout,.nicho-card,.bloco-exercicio,.stat-cell{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  img{max-width:100%!important;display:block!important}
+  @page{size:A4 portrait;margin:0}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ CAPA ═══ -->
+<div class="page no-hf" id="p1" style="background:var(--negro);position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(37,99,235,.25) 0%,transparent 65%)"></div>
+  <div style="position:absolute;top:25mm;left:20mm;right:20mm;bottom:20mm;display:flex;flex-direction:column;justify-content:center">
+    <div style="font-family:'Lato',sans-serif;font-size:7pt;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--pop);margin-bottom:6mm">Era da I.A. &middot; Material Bônus</div>
+    <div style="font-family:'Lato',sans-serif;font-size:48pt;font-weight:900;color:rgba(255,255,255,.08);line-height:1;margin-bottom:4mm;letter-spacing:-2px">01</div>
+    <h1 style="font-family:'Playfair Display',serif;font-size:28pt;font-weight:700;color:#fff;line-height:1.15;margin-bottom:4mm">Captação pelo Instagram:<br>Primeiros 3 Clientes</h1>
+    <p style="font-family:'Source Serif 4',Georgia,serif;font-size:11pt;color:rgba(255,255,255,.65);line-height:1.6;max-width:120mm">O método em 5 passos para encontrar, engajar e fechar clientes no seu nicho — sem script engessado, sem parecer robô, sem portfólio.</p>
+    <div style="width:20mm;height:.6mm;background:var(--ouro);margin-top:8mm"></div>
+    <div style="font-family:'Lato',sans-serif;font-size:8pt;font-weight:700;color:rgba(255,255,255,.4);margin-top:4mm;text-transform:uppercase;letter-spacing:.1em">Equipe Era da I.A. — 2026</div>
+  </div>
+  <div style="position:absolute;bottom:12mm;right:20mm;font-family:'Lato',sans-serif;font-size:7pt;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:.1em">Este material é complementar ao eBook principal</div>
+</div>
+
+<!-- ═══ VISÃO GERAL DO MÉTODO ═══ -->
+<div class="page" id="p2">
+  <div class="ph"><span>ERA DA I.A.</span><span>BÔNUS 01 — CAPTAÇÃO PELO INSTAGRAM</span></div>
+  <div class="page-inner">
+    <div class="cap-num">Bônus 01</div>
+    <h1 style="font-size:20pt">O Método em 5 Passos</h1>
+    <span class="rule" style="width:20mm"></span>
+    <p>A maioria tenta vender antes de criar qualquer conexão. O resultado é silêncio. Este método inverte a ordem: você vira uma presença familiar no feed do potencial cliente antes de mandar qualquer mensagem.</p>
+
+    <div class="stat-row">
+      <div class="stat-cell"><span class="stat-num">5</span><span class="stat-label">Passos no método</span></div>
+      <div class="stat-cell"><span class="stat-num">7</span><span class="stat-label">Dias de engajamento antes do DM</span></div>
+      <div class="stat-cell"><span class="stat-num">3</span><span class="stat-label">Meta: primeiros clientes</span></div>
+    </div>
+
+    <div class="timeline-v">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-step">Passo 1</div>
+        <div class="tl-title">Escolha o nicho e mapeie os perfis</div>
+        <div class="tl-text">Pesquise no Instagram quem é influente e ativo no nicho que você quer atender. Salve os perfis com maior engajamento.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-step">Passo 2</div>
+        <div class="tl-title">Pesquise trends e conteúdo viral</div>
+        <div class="tl-text">Identifique o que está bombando no nicho: formatos, estética, temas. Esses serão a referência para o seu próprio conteúdo.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-step">Passo 3</div>
+        <div class="tl-title">Crie para o seu perfil usando as trends</div>
+        <div class="tl-text">Produza conteúdo inspirado nas trends do nicho — com a sua assinatura. Isso mostra autoridade antes de qualquer conversa.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-step">Passo 4</div>
+        <div class="tl-title">Engajamento orgânico real</div>
+        <div class="tl-text">Curta, comente de forma genuína e siga o potencial cliente. Faça isso por 5 a 7 dias antes de abrir qualquer conversa.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-step">Passo 5</div>
+        <div class="tl-title">A mensagem que converte</div>
+        <div class="tl-text">Depois do aquecimento, mande um DM curto, humano e direto. Sem pitch de vendas, sem ser formal. Fale como uma pessoa real.</div>
+      </div>
+    </div>
+  </div>
+  <div class="pf"><span>Equipe Era da I.A.</span><span class="pnum">1</span></div>
+</div>
+
+<!-- ═══ PASSOS 1 E 2 ═══ -->
+<div class="page" id="p3">
+  <div class="ph"><span>ERA DA I.A.</span><span>BÔNUS 01 — PESQUISA DE NICHO</span></div>
+  <div class="page-inner">
+    <h2>Passo 1 — Escolha o nicho e mapeie os perfis</h2>
+    <span class="rule" style="width:20mm"></span>
+    <p>Defina com clareza qual nicho você quer atender. Quanto mais específico, mais fácil encontrar os perfis certos e personalizar sua abordagem.</p>
+
+    <h3>Como pesquisar no Instagram</h3>
+    <ul class="lista-normal">
+      <li>Use a aba <strong>Explorar</strong> e pesquise pelo nicho: "nutricionista", "psicólogo", "arquiteto", "coach", "clínica estética"</li>
+      <li>Observe quem tem <strong>engajamento real</strong> — comentários de seguidores, não só curtidas</li>
+      <li>Salve 10 a 15 perfis com pelo menos 1.000 seguidores e posts ativos nos últimos 30 dias</li>
+      <li>Filtre por <strong>localização</strong> se quiser clientes na sua cidade</li>
+    </ul>
+
+    <div class="bloco-callout">
+      <div class="label">Sinal de cliente ideal</div>
+      <p>Perfil ativo, posts regulares, produto ou serviço claro, mas conteúdo visual abaixo do potencial — esse é o cliente que mais precisa de você e mais vai valorizar o que você faz.</p>
+    </div>
+
+    <h2 style="margin-top:5mm">Passo 2 — Pesquise trends e conteúdo viral</h2>
+    <span class="rule" style="width:20mm"></span>
+    <p>Antes de criar qualquer coisa, entenda o que está funcionando no nicho naquele momento.</p>
+
+    <h3>O que observar</h3>
+    <ul class="lista-normal">
+      <li><strong>Formato:</strong> Reels curtos, carrosséis educativos, before/after, bastidores</li>
+      <li><strong>Estética:</strong> Paleta de cores, tipografia, estilo de edição predominante no nicho</li>
+      <li><strong>Tom:</strong> Formal ou descontraído? Técnico ou acessível?</li>
+      <li><strong>Tema:</strong> O que os seguidores mais comentam e compartilham</li>
+    </ul>
+
+    <div class="bloco-callout">
+      <div class="label">Ferramenta útil</div>
+      <p>Use o ChatGPT ou Claude: "Quais formatos de conteúdo estão performando melhor no Instagram para [nicho] em 2025? Liste os 5 mais engajados com exemplos de tema e formato."</p>
+    </div>
+  </div>
+  <div class="pf"><span>Equipe Era da I.A.</span><span class="pnum">2</span></div>
+</div>
+
+<!-- ═══ PASSOS 3 E 4 ═══ -->
+<div class="page" id="p4">
+  <div class="ph"><span>ERA DA I.A.</span><span>BÔNUS 01 — CONTEÚDO E ENGAJAMENTO</span></div>
+  <div class="page-inner">
+    <h2>Passo 3 — Crie conteúdo usando as trends do nicho</h2>
+    <span class="rule" style="width:20mm"></span>
+    <p>Com o que você aprendeu nos passos anteriores, produza conteúdo para o seu próprio perfil usando I.A. — mas com identidade própria. Você está construindo prova antes de abordar qualquer cliente.</p>
+
+    <h3>Exemplo prático — Designer</h3>
+    <p style="font-size:9pt">Crie imagens de alta qualidade no estilo do nicho que você quer atender. Se o alvo é uma clínica de estética, crie posts no estilo visual de clínicas premium e publique no seu perfil. Quer chamar atenção de um influencer específico? Crie uma arte com a cara dele — uma versão artística, um cenário criativo — e <strong>marque o perfil dele na publicação</strong>. Peça nos comentários que ele compartilhe. Isso cria presença no radar dele de forma não invasiva.</p>
+
+    <div class="bloco-callout">
+      <div class="label">Regra de ouro</div>
+      <p>O conteúdo do seu perfil é seu portfólio em tempo real. Cada post é uma demonstração silenciosa do que você entrega. Você não precisa explicar o que faz — mostre.</p>
+    </div>
+
+    <h2 style="margin-top:5mm">Passo 4 — Engajamento orgânico real</h2>
+    <span class="rule" style="width:20mm"></span>
+    <p>Durante 5 a 7 dias antes de mandar mensagem, crie presença genuína no perfil do potencial cliente:</p>
+    <ul class="lista-normal">
+      <li><strong>Curta</strong> os últimos 3 a 5 posts com frequência, não tudo de uma vez</li>
+      <li><strong>Comente</strong> algo verdadeiro — não "Lindo!" ou "Parabéns!". Leia o post e responda algo que mostre que você prestou atenção</li>
+      <li><strong>Siga</strong> o perfil naturalmente, sem urgência</li>
+      <li>Responda stories quando fizer sentido — uma reação ou uma frase curta</li>
+    </ul>
+
+    <div class="bloco-callout">
+      <div class="label">Por que isso funciona</div>
+      <p>Quando você manda a mensagem, o perfil já te reconhece. Você virou uma presença familiar, não um estranho. A taxa de resposta quando você aqueceu o contato é de 3 a 5 vezes maior do que a abordagem fria.</p>
+    </div>
+  </div>
+  <div class="pf"><span>Equipe Era da I.A.</span><span class="pnum">3</span></div>
+</div>
+
+<!-- ═══ PASSO 5 — O DM ═══ -->
+<div class="page" id="p5">
+  <div class="ph"><span>ERA DA I.A.</span><span>BÔNUS 01 — A MENSAGEM QUE CONVERTE</span></div>
+  <div class="page-inner">
+    <h2>Passo 5 — A mensagem que converte</h2>
+    <span class="rule" style="width:20mm"></span>
+    <p>Depois do período de engajamento, abra a conversa no DM. A regra fundamental é uma só: <strong>seja humano</strong>. Não mande um pitch. Não liste seus serviços. Não comece com "Olá, tudo bem? Sou especialista em..."</p>
+
+    <h3>A estrutura que funciona</h3>
+    <ul class="lista-normal">
+      <li><strong>Cumprimento informal:</strong> use o nome e uma saudação leve — não corporativa</li>
+      <li><strong>Conexão real:</strong> mencione algo específico do perfil dele que você genuinamente curtiu</li>
+      <li><strong>Abertura:</strong> apresente o que você faz em uma linha — simples, sem jargão</li>
+      <li><strong>Convite:</strong> proponha algo sem pressão — uma parceria, uma conversa, um projeto teste</li>
+    </ul>
+
+    <div class="bloco-exercicio">
+      <div class="ex-label">Exemplo real — Tom que funciona</div>
+      <h4>Designer abordando um influencer</h4>
+      <div class="msg-box">"Opa, campeão. Oi, Fernanda. Gostei demais dos seus conteúdos. Trabalho com design e queria saber se poderíamos fazer uma parceria? Tenho algumas ideias visuais que acho que combinam com o que você faz."</div>
+    </div>
+
+    <h3 style="margin-top:4mm">O que evitar</h3>
+    <ul class="lista-normal">
+      <li>Não comece com o que você vende — comece com o que você observou</li>
+      <li>Não mande áudio logo de início — texto tem mais chance de resposta no primeiro contato</li>
+      <li>Não use saudações corporativas: "Prezado(a)", "Boa tarde, tudo bem?"</li>
+      <li>Não copie a mesma mensagem para vários perfis — eles percebem e ignoram</li>
+      <li>Não peça reunião na primeira mensagem — abra conversa, não agende</li>
+    </ul>
+
+    <div class="bloco-callout">
+      <div class="label">Se não responder</div>
+      <p>Continue engajando normalmente por mais 3 a 5 dias, depois mande uma segunda mensagem diferente — nunca uma cópia da primeira. Se ainda assim não responder, passe para o próximo perfil da lista. Não insista.</p>
+    </div>
+  </div>
+  <div class="pf"><span>Equipe Era da I.A.</span><span class="pnum">4</span></div>
+</div>
+
+<!-- ═══ SCRIPTS POR NICHO ═══ -->
+<div class="page" id="p6">
+  <div class="ph"><span>ERA DA I.A.</span><span>BÔNUS 01 — SCRIPTS POR NICHO</span></div>
+  <div class="page-inner">
+    <h2>Scripts por Nicho</h2>
+    <span class="rule" style="width:20mm"></span>
+    <p style="font-size:8.5pt">Adapte cada script ao seu tom e ao que você observou no perfil. Nunca copie exatamente — a naturalidade é o ponto.</p>
+
+    <div class="nicho-card">
+      <div class="nc-label">Nicho — Design</div>
+      <div class="nc-titulo">Para designers que atendem criadores de conteúdo</div>
+      <div class="nc-msg">"Opa, [nome]! Teu feed é demais. Trabalho com design e I.A. e vi que sua identidade visual tem muito espaço pra crescer. Tenho umas ideias — topas dar uma olhada?"</div>
+      <div class="nc-obs">Antes: curtiu os últimos 4 posts, comentou em 2, respondeu 1 story.</div>
+    </div>
+
+    <div class="nicho-card">
+      <div class="nc-label">Nicho — Vídeo</div>
+      <div class="nc-titulo">Para editores de vídeo que atendem pequenos negócios</div>
+      <div class="nc-msg">"Oi, [nome]! Vi o seu conteúdo e curti muito o que você faz. Sou editor de vídeo e trabalho com I.A. — consigo fazer Reels que parecem produção de agência com um custo bem menor. Posso te mostrar um exemplo?"</div>
+      <div class="nc-obs">Antes: seguiu o perfil, curtiu, comentou em 1 post sobre conteúdo.</div>
+    </div>
+
+    <div class="nicho-card">
+      <div class="nc-label">Nicho — Copy e Texto</div>
+      <div class="nc-titulo">Para copywriters que atendem infoprodutores</div>
+      <div class="nc-msg">"Oi, [nome]! Acompanho seu trabalho há uns dias. Você tem um produto muito bom — senti que a comunicação pode converter mais. Trabalho com copy e I.A. e adoraria trocar uma ideia sobre isso."</div>
+      <div class="nc-obs">Antes: comentou com observação específica sobre o conteúdo, não um elogio genérico.</div>
+    </div>
+
+    <div class="nicho-card">
+      <div class="nc-label">Nicho — Automação</div>
+      <div class="nc-titulo">Para quem oferece automações a pequenos empreendedores</div>
+      <div class="nc-msg">"Salve, [nome]! Vi que você cuida de tudo sozinho no negócio. Trabalho com automação por I.A. — consigo te liberar horas da semana sem contratar ninguém. Posso te explicar como funciona?"</div>
+      <div class="nc-obs">Antes: respondeu um story sobre rotina ou sobre desafios do negócio.</div>
+    </div>
+  </div>
+  <div class="pf"><span>Equipe Era da I.A.</span><span class="pnum">5</span></div>
+</div>
+
+<!-- ═══ FECHAR O CONTRATO ═══ -->
+<div class="page" id="p7">
+  <div class="ph"><span>ERA DA I.A.</span><span>BÔNUS 01 — DEPOIS DO "OI"</span></div>
+  <div class="page-inner">
+    <h2>Depois que ele respondeu — o que fazer</h2>
+    <span class="rule" style="width:20mm"></span>
+    <p>A primeira resposta é o momento mais importante. Não tente vender ainda. Continue a conversa como faria com alguém que acabou de te conhecer numa situação casual.</p>
+
+    <h3>Fluxo natural da conversa</h3>
+    <div class="timeline-v">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-step">Resposta 1</div>
+        <div class="tl-title">Entenda o contexto dele</div>
+        <div class="tl-text">Pergunte sobre o projeto ou negócio. Ouça mais do que fala. "Que tipo de conteúdo você tá produzindo agora?" ou "Qual é o maior gargalo do seu processo hoje?"</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-step">Resposta 2</div>
+        <div class="tl-title">Mostre, não descreva</div>
+        <div class="tl-text">Mande um exemplo do seu trabalho — uma peça, um trecho de vídeo, um antes e depois. Deixe o trabalho falar por você. Não liste suas habilidades.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-step">Resposta 3</div>
+        <div class="tl-title">Proponha um projeto pequeno</div>
+        <div class="tl-text">Ofereça começar com algo de baixo risco — um post, um vídeo de teste, uma semana de conteúdo. Isso reduz a fricção de fechar com alguém novo.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-step">Resposta 4</div>
+        <div class="tl-title">Fale de valor, não de preço</div>
+        <div class="tl-text">Só fale em número quando ele perguntar. E quando falar, apresente o retorno que ele terá — não o que você cobra. Use a Planilha de Preços (Bônus 02) como referência.</div>
+      </div>
+    </div>
+
+    <div class="bloco-callout">
+      <div class="label">Meta realista</div>
+      <p>Com 10 abordagens bem feitas por semana — após o engajamento adequado — é comum fechar 1 a 2 clientes nas primeiras 3 semanas. O método não é rápido, mas tem uma das taxas de conversão mais altas porque não parece venda.</p>
+    </div>
+  </div>
+  <div class="pf"><span>Equipe Era da I.A.</span><span class="pnum">6</span></div>
+</div>
+
+<!-- ═══ CHECKLIST SEMANAL ═══ -->
+<div class="page" id="p8">
+  <div class="ph"><span>ERA DA I.A.</span><span>BÔNUS 01 — ROTINA SEMANAL</span></div>
+  <div class="page-inner">
+    <h2>Checklist Semanal de Captação</h2>
+    <span class="rule" style="width:20mm"></span>
+    <p>Use esta rotina toda semana. O segredo não é fazer muito — é fazer de forma consistente.</p>
+
+    <h3>Segunda e terça — Pesquisa</h3>
+    <ul class="lista-normal">
+      <li>Pesquise 5 novos perfis no nicho que você quer atender</li>
+      <li>Salve os 3 mais relevantes na sua lista de prospecção</li>
+      <li>Observe o conteúdo deles: o que está engajando esta semana</li>
+    </ul>
+
+    <h3>Quarta e quinta — Conteúdo + engajamento</h3>
+    <ul class="lista-normal">
+      <li>Publique 1 post ou Reels no seu perfil no estilo do nicho</li>
+      <li>Curta e comente nos perfis que você está aquecendo</li>
+      <li>Responda stories quando fizer sentido</li>
+    </ul>
+
+    <h3>Sexta — DMs</h3>
+    <ul class="lista-normal">
+      <li>Mande DM para os perfis que completaram 5 a 7 dias de engajamento</li>
+      <li>Meta: 3 mensagens novas por semana</li>
+      <li>Registre em uma planilha simples: nome, data do contato, status</li>
+    </ul>
+
+    <div class="bloco-callout" style="margin-top:5mm">
+      <div class="label">Rotina mínima — 1 hora por dia</div>
+      <p>15 min pesquisando + 20 min engajando + 10 min criando conteúdo + 15 min respondendo DMs. Com essa rotina por 30 dias, você terá os primeiros 3 clientes ou estará em negociação avançada com pelo menos 5 perfis.</p>
+    </div>
+
+    <div class="bloco-exercicio" style="margin-top:5mm">
+      <div class="ex-label">Ação agora</div>
+      <h4>Comece hoje — 15 minutos</h4>
+      <p>Abra o Instagram, pesquise o nicho que você quer atender, salve os 5 perfis mais ativos. Não precisa ser perfeito. Só começa.</p>
+    </div>
+  </div>
+  <div class="pf"><span>Equipe Era da I.A.</span><span class="pnum">7</span></div>
+</div>
+
+<!-- ═══ PÁGINA FINAL ═══ -->
+<div class="page" id="p_final" style="background:var(--negro)">
+  <div class="page-inner" style="display:flex;flex-direction:column;justify-content:center;align-items:center;height:100%;text-align:center">
+    <div style="font-family:'Playfair Display',serif;font-size:22pt;font-weight:700;color:#fff;margin-bottom:4mm">O primeiro cliente vem da ação.</div>
+    <p style="font-family:'Source Serif 4',Georgia,serif;font-size:10pt;color:rgba(255,255,255,.6);max-width:120mm;line-height:1.7">Leitura não fecha contrato. Engajamento fecha. Comece hoje com 5 perfis e 15 minutos. O método funciona para qualquer nicho — o diferencial é a consistência.</p>
+    <div style="width:15mm;height:.5mm;background:var(--ouro);margin:6mm auto"></div>
+    <div style="font-family:'Lato',sans-serif;font-size:7.5pt;color:var(--pop);letter-spacing:.08em;text-transform:uppercase">eBook: Era da I.A. — Como Lucrar Agora</div>
+  </div>
+</div>
+
+</body>
+</html>
