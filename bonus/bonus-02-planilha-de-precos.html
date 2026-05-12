@@ -335,138 +335,413 @@ ul.lista-normal li::before{content:'—';position:absolute;left:0;color:var(--ou
   }
 </style>
 </head>
+<style>
+/* ── TABELA DE PREÇOS ── */
+.preco-header{display:grid;grid-template-columns:1fr 28mm 28mm 32mm;gap:0;margin-bottom:0}
+.preco-header-cell{font-family:'Lato',sans-serif;font-size:6.5pt;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:2mm 3mm;text-align:center}
+.preco-row{display:grid;grid-template-columns:1fr 28mm 28mm 32mm;gap:0;border-bottom:.2mm solid rgba(5,14,26,.07);page-break-inside:avoid}
+.preco-row:last-child{border-bottom:none}
+.preco-servico{font-family:'Lato',sans-serif;font-size:8pt;font-weight:600;color:var(--texto);padding:2.5mm 3mm;display:flex;align-items:center}
+.preco-val{font-family:'Lato',sans-serif;font-size:8pt;font-weight:700;padding:2.5mm 3mm;text-align:center;display:flex;align-items:center;justify-content:center}
+.preco-min{color:#64748B;background:rgba(100,116,139,.05)}
+.preco-med{color:var(--ouro);background:rgba(37,99,235,.05)}
+.preco-prem{color:#fff;background:var(--carbon);font-size:8.5pt}
+.preco-table{border:.3mm solid rgba(5,14,26,.1);border-radius:2mm;overflow:hidden;margin:3mm 0}
+
+/* ── MOCKUP 3D ── */
+.mockup-screen{background:var(--negro);border-radius:4mm;padding:6mm;position:relative;box-shadow:0 12px 40px rgba(0,0,0,.45),0 2px 0 rgba(255,255,255,.05) inset;margin:4mm auto}
+.mockup-screen::before{content:'';position:absolute;top:2.5mm;left:50%;transform:translateX(-50%);width:12mm;height:1mm;background:rgba(255,255,255,.15);border-radius:1mm}
+.mockup-bar{display:flex;gap:1.5mm;margin-bottom:3mm;padding-top:2mm}
+.mockup-dot{width:2.5mm;height:2.5mm;border-radius:50%}
+
+/* ── CARDS DE NÍVEL ── */
+.tier-grid{display:flex;gap:3mm;margin:4mm 0;align-items:flex-end;page-break-inside:avoid}
+.tier-card{flex:1;border-radius:3mm;padding:4mm 3mm;position:relative;overflow:hidden}
+.tier-card.t-base{background:var(--fundo-alt);border:1px solid rgba(37,99,235,.15);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.tier-card.t-mid{background:var(--carbon);border:1px solid rgba(37,99,235,.3);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.tier-card.t-top{background:linear-gradient(145deg,#0F1E30,#0A1628);border:1px solid var(--acento-dark);box-shadow:0 16px 40px rgba(37,99,235,.35),0 0 0 1px rgba(56,189,248,.2);transform:translateY(-3mm) scale(1.03)}
+.tier-card.t-top::before{content:'';position:absolute;top:0;left:0;right:0;height:.5mm;background:linear-gradient(90deg,var(--ouro),var(--pop));border-radius:3mm 3mm 0 0}
+.tier-label{font-family:'Lato',sans-serif;font-size:6.5pt;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:2mm}
+.tier-price{font-family:'Playfair Display',serif;font-weight:900;font-size:15pt;line-height:1;margin-bottom:1mm}
+.tier-sub{font-family:'Lato',sans-serif;font-size:7pt;opacity:.6;margin-bottom:3mm}
+.tier-feat{font-family:'Lato',sans-serif;font-size:7pt;line-height:1.8;list-style:none;padding:0}
+.tier-feat li{padding-left:3mm;position:relative}
+.tier-feat li::before{content:'✓';position:absolute;left:0;font-size:6pt}
+.t-base .tier-label{color:var(--texto-suave)}
+.t-base .tier-price{color:var(--texto)}
+.t-base .tier-feat li{color:var(--texto-suave)}
+.t-base .tier-feat li::before{color:var(--ouro)}
+.t-mid .tier-label{color:var(--acento-dark)}
+.t-mid .tier-price{color:#fff}
+.t-mid .tier-feat li{color:rgba(255,255,255,.7)}
+.t-mid .tier-feat li::before{color:var(--pop)}
+.t-top .tier-label{color:var(--pop)}
+.t-top .tier-price{background:linear-gradient(135deg,var(--acento-dark),var(--pop));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-size:18pt}
+.t-top .tier-feat li{color:rgba(255,255,255,.8)}
+.t-top .tier-feat li::before{color:var(--pop)}
+.t-top .tier-sub{color:rgba(255,255,255,.5)}
+.tier-badge{position:absolute;top:2.5mm;right:2.5mm;background:linear-gradient(135deg,var(--ouro),var(--pop));color:#fff;font-family:'Lato',sans-serif;font-size:5.5pt;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.8mm 2mm;border-radius:1mm}
+
+/* ── CALCULADORA META ── */
+.calc-row{display:flex;align-items:center;gap:3mm;padding:3mm 4mm;border-radius:2mm;margin-bottom:2mm;page-break-inside:avoid}
+.calc-meta{background:var(--negro);flex:1}
+.calc-label{font-family:'Lato',sans-serif;font-size:7pt;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.4);margin-bottom:.5mm}
+.calc-value{font-family:'Playfair Display',serif;font-size:16pt;font-weight:900;line-height:1}
+.calc-detail{font-family:'Lato',sans-serif;font-size:7pt;color:rgba(255,255,255,.45);margin-top:.5mm}
+.calc-arrow{font-size:14pt;color:var(--acento-dark);flex-shrink:0;font-family:'Lato',sans-serif;font-weight:900}
+.bar-track{height:4mm;background:rgba(255,255,255,.08);border-radius:2mm;overflow:hidden;margin-top:1.5mm}
+.bar-fill{height:100%;border-radius:2mm;background:linear-gradient(90deg,var(--ouro),var(--pop))}
+</style>
+
 <body>
 
-<!-- CAPA DO BÔNUS -->
+<!-- ═══ CAPA ═══ -->
 <div class="page no-hf" id="p1" style="background:var(--negro);position:relative;overflow:hidden">
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(37,99,235,.25) 0%,transparent 65%)"></div>
-  <div style="position:absolute;top:25mm;left:20mm;right:20mm;bottom:20mm;display:flex;flex-direction:column;justify-content:center">
-    <div style="font-family:'Lato',sans-serif;font-size:7pt;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--pop);margin-bottom:6mm">Era da I.A. &middot; Material Bônus</div>
-    <div style="font-family:'Lato',sans-serif;font-size:48pt;font-weight:900;color:rgba(255,255,255,.08);line-height:1;margin-bottom:4mm;letter-spacing:-2px">02</div>
-    <h1 style="font-family:'Playfair Display',serif;font-size:28pt;font-weight:700;color:#fff;line-height:1.15;margin-bottom:4mm">Planilha de Preços para Serviços I.A.</h1>
-    <p style="font-family:'Source Serif 4',Georgia,serif;font-size:11pt;color:rgba(255,255,255,.65);line-height:1.6;max-width:120mm">Preço mínimo, médio e premium por tipo de serviço — design, vídeo, copy, automação e consultoria. Nunca mais fique sem saber quanto cobrar.</p>
-    <div style="width:20mm;height:.6mm;background:var(--ouro);margin-top:8mm"></div>
-    <div style="font-family:'Lato',sans-serif;font-size:8pt;font-weight:700;color:rgba(255,255,255,.4);margin-top:4mm;text-transform:uppercase;letter-spacing:.1em">Equipe Era da I.A. — 2026</div>
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(37,99,235,.3) 0%,transparent 60%)"></div>
+  <div style="position:absolute;top:0;right:0;width:80mm;height:100%;background:linear-gradient(135deg,rgba(34,211,238,.04) 0%,transparent 60%)"></div>
+  <!-- Mockup decorativo de tela com planilha -->
+  <div style="position:absolute;right:14mm;top:30mm;width:68mm">
+    <div class="mockup-screen" style="padding:5mm">
+      <div class="mockup-bar"><div class="mockup-dot" style="background:#FF5F57"></div><div class="mockup-dot" style="background:#FFBD2E"></div><div class="mockup-dot" style="background:#28CA41"></div></div>
+      <div style="font-family:'Lato',sans-serif;font-size:6pt;color:var(--pop);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:2mm">Planilha de Preços 2026</div>
+      <!-- mini tabela mockup -->
+      <div style="display:grid;grid-template-columns:1fr 14mm 14mm;gap:0;font-family:'Lato',sans-serif;font-size:5.5pt">
+        <div style="padding:1mm;background:rgba(37,99,235,.2);color:var(--acento-dark);font-weight:700">Serviço</div>
+        <div style="padding:1mm;background:rgba(37,99,235,.2);color:var(--acento-dark);font-weight:700;text-align:center">Médio</div>
+        <div style="padding:1mm;background:rgba(56,189,248,.2);color:var(--pop);font-weight:700;text-align:center">Premium</div>
+        <div style="padding:1mm 1mm;color:rgba(255,255,255,.6);border-bottom:.2mm solid rgba(255,255,255,.06)">Logo I.A.</div><div style="padding:1mm;color:var(--ouro);text-align:center;border-bottom:.2mm solid rgba(255,255,255,.06)">R$600</div><div style="padding:1mm;color:#fff;text-align:center;border-bottom:.2mm solid rgba(255,255,255,.06);font-weight:700">R$1.200</div>
+        <div style="padding:1mm 1mm;color:rgba(255,255,255,.6);border-bottom:.2mm solid rgba(255,255,255,.06)">Reels 30s</div><div style="padding:1mm;color:var(--ouro);text-align:center;border-bottom:.2mm solid rgba(255,255,255,.06)">R$1.800</div><div style="padding:1mm;color:#fff;text-align:center;border-bottom:.2mm solid rgba(255,255,255,.06);font-weight:700">R$4.000</div>
+        <div style="padding:1mm 1mm;color:rgba(255,255,255,.6);border-bottom:.2mm solid rgba(255,255,255,.06)">Landing page</div><div style="padding:1mm;color:var(--ouro);text-align:center;border-bottom:.2mm solid rgba(255,255,255,.06)">R$1.200</div><div style="padding:1mm;color:#fff;text-align:center;border-bottom:.2mm solid rgba(255,255,255,.06);font-weight:700">R$2.500</div>
+        <div style="padding:1mm 1mm;color:rgba(255,255,255,.6)">Automação</div><div style="padding:1mm;color:var(--ouro);text-align:center">R$1.500</div><div style="padding:1mm;color:#fff;text-align:center;font-weight:700">R$3.000</div>
+      </div>
+      <div style="margin-top:3mm;height:.3mm;background:linear-gradient(90deg,var(--ouro),var(--pop));border-radius:1mm;opacity:.5"></div>
+      <div style="margin-top:2mm;font-family:'Lato',sans-serif;font-size:5pt;color:rgba(255,255,255,.3);text-align:center;text-transform:uppercase;letter-spacing:.08em">Era da I.A. — Mercado Brasileiro 2026</div>
+    </div>
   </div>
-  <div style="position:absolute;bottom:12mm;right:20mm;font-family:'Lato',sans-serif;font-size:7pt;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:.1em">Este material é complementar ao eBook principal</div>
+  <div style="position:absolute;top:25mm;left:20mm;right:86mm;bottom:20mm;display:flex;flex-direction:column;justify-content:center">
+    <div style="font-family:'Lato',sans-serif;font-size:7pt;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--pop);margin-bottom:6mm">Era da I.A. &middot; Bônus 02</div>
+    <div style="font-family:'Lato',sans-serif;font-size:48pt;font-weight:900;color:rgba(255,255,255,.05);line-height:1;margin-bottom:4mm;letter-spacing:-2px">02</div>
+    <h1 style="font-family:'Playfair Display',serif;font-size:24pt;font-weight:700;color:#fff;line-height:1.15;margin-bottom:4mm">Planilha de Preços para Serviços I.A.</h1>
+    <p style="font-family:'Source Serif 4',Georgia,serif;font-size:10pt;color:rgba(255,255,255,.6);line-height:1.6">Preço mínimo, médio e premium por tipo de serviço. Design, vídeo, copy, automação e consultoria — tudo em um só lugar.</p>
+    <div style="width:20mm;height:.6mm;background:linear-gradient(90deg,var(--ouro),var(--pop));margin-top:6mm"></div>
+    <div style="font-family:'Lato',sans-serif;font-size:8pt;font-weight:700;color:rgba(255,255,255,.3);margin-top:4mm;text-transform:uppercase;letter-spacing:.1em">Equipe Era da I.A. — 2026</div>
+  </div>
+  <div style="position:absolute;bottom:12mm;right:20mm;font-family:'Lato',sans-serif;font-size:7pt;color:rgba(255,255,255,.2);text-transform:uppercase;letter-spacing:.1em">Material complementar ao eBook principal</div>
 </div>
 
-<!-- ═══════════════════════════════════ P_BONUS_EXTRA2 — COMPARATIVO ═══════════════════════════════════ -->
-<div class="page" id="p47b">
-  <div class="ph"><span>ERA DA I.A.</span><span>BÔNUS — COMPARATIVO DE FERRAMENTAS</span></div>
+<!-- ═══ COMO USAR + CONCEITOS ═══ -->
+<div class="page" id="p2">
+  <div class="ph"><span>ERA DA I.A.</span><span>BÔNUS 02 — PLANILHA DE PREÇOS</span></div>
   <div class="page-inner">
-    <h2 >Bônus 5 — Qual Ferramenta Usar para Cada Objetivo</h2>
-    <p >Guia de referência rápida. Salve, imprima ou abra no celular antes de iniciar qualquer projeto.</p>
-    <span class="rule" style="width:22mm"></span>
-    <h3>Por tipo de entrega</h3>
-    <ul class="lista-normal" style="font-size:8.5pt;line-height:1.75">
-      <li><strong>Texto longo (eBook, relatório, proposta):</strong> Claude → claude.ai</li>
-      <li><strong>Texto curto + imagem na mesma sessão:</strong> ChatGPT → chatgpt.com</li>
-      <li><strong>Pesquisa com dados atuais:</strong> Gemini → gemini.google.com</li>
-      <li><strong>Imagem artística / branding:</strong> Midjourney → midjourney.com</li>
-      <li><strong>Foto de produto fotorrealista:</strong> Magnific → magnific.com</li>
-      <li><strong>Upscaling de imagem existente:</strong> Magnific → magnific.com</li>
-      <li><strong>Vídeo com controle de câmera:</strong> Higgsfield → higgsfield.ai</li>
-      <li><strong>Vídeo com movimento físico natural:</strong> Kling AI → klingai.com</li>
-      <li><strong>Edição e efeitos em vídeo:</strong> Runway ML → runwayml.com</li>
-      <li><strong>Upscale de vídeo em 4K:</strong> Magnific → magnific.com</li>
-      <li><strong>Voz sintética e narração:</strong> ElevenLabs → elevenlabs.io</li>
-      <li><strong>Música para vídeo:</strong> Suno → suno.com</li>
-      <li><strong>Automação de marketing:</strong> Make → make.com / Zapier → zapier.com</li>
-      <li><strong>Apresentação automática:</strong> Gamma → gamma.app</li>
-      <li><strong>Transcrição de reunião:</strong> Otter → otter.ai</li>
-    </ul>
+    <div class="cap-num">Como usar este bônus</div>
+    <h1 style="font-size:18pt">Quanto cobrar pelo seu trabalho com I.A.</h1>
+    <span class="rule" style="width:20mm"></span>
+    <p>Os valores desta planilha refletem o mercado brasileiro de 2026 para profissionais que usam I.A. como ferramenta de produção. Use como referência — não como limite.</p>
+
+    <div style="display:flex;gap:4mm;margin:4mm 0">
+      <div style="flex:1;background:var(--fundo-alt);border-radius:2mm;padding:4mm;border-left:3px solid var(--ouro)">
+        <div style="font-family:'Lato',sans-serif;font-size:7pt;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--ouro);margin-bottom:1.5mm">Mínimo</div>
+        <div style="font-family:'Source Serif 4',Georgia,serif;font-size:8.5pt;color:var(--texto-suave);line-height:1.5">Início de carreira, sem portfólio sólido, cliente de baixo orçamento. Nunca cobre menos que isso.</div>
+      </div>
+      <div style="flex:1;background:var(--carbon);border-radius:2mm;padding:4mm;border-left:3px solid var(--acento-dark)">
+        <div style="font-family:'Lato',sans-serif;font-size:7pt;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--acento-dark);margin-bottom:1.5mm">Médio</div>
+        <div style="font-family:'Source Serif 4',Georgia,serif;font-size:8.5pt;color:rgba(255,255,255,.7);line-height:1.5">Profissional com 2 a 5 clientes no portfólio. Referência para 80% das negociações.</div>
+      </div>
+      <div style="flex:1;background:linear-gradient(145deg,#0F1E30,#0A1628);border-radius:2mm;padding:4mm;border:1px solid rgba(56,189,248,.3);box-shadow:0 4px 16px rgba(37,99,235,.2)">
+        <div style="font-family:'Lato',sans-serif;font-size:7pt;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--pop);margin-bottom:1.5mm">Premium</div>
+        <div style="font-family:'Source Serif 4',Georgia,serif;font-size:8.5pt;color:rgba(255,255,255,.7);line-height:1.5">Especialista reconhecido, entrega de alta qualidade, nicho específico ou urgência.</div>
+      </div>
+    </div>
+
     <div class="bloco-callout">
-      <div class="label">Regra de ouro: Magnific primeiro</div>
-      <p>Para quem quer começar com uma única ferramenta que cobre o máximo de casos de uso, o Magnific é a escolha mais estratégica: gera imagens, faz upscaling, converte imagem em vídeo, faz upscale de vídeo e tem ferramentas de voz — tudo em uma assinatura (~R$220/mês) com suporte em português.</p>
+      <div class="label">Princípio fundamental</div>
+      <p>Você não cobra pelo tempo — cobra pelo resultado entregue. Um logo feito em 20 minutos com I.A. que vai representar a empresa por 10 anos vale pelo menos R$600, não R$20/hora.</p>
+    </div>
+
+    <h3 style="margin-top:4mm">Fatores que justificam cobrar premium</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2mm;margin-top:1mm">
+      <div style="background:var(--fundo-alt);border-radius:1.5mm;padding:2.5mm 3mm;font-family:'Lato',sans-serif;font-size:8pt;color:var(--texto)">⚡ Urgência — prazo menor que 72h</div>
+      <div style="background:var(--fundo-alt);border-radius:1.5mm;padding:2.5mm 3mm;font-family:'Lato',sans-serif;font-size:8pt;color:var(--texto)">🎯 Nicho especializado (saúde, jurídico)</div>
+      <div style="background:var(--fundo-alt);border-radius:1.5mm;padding:2.5mm 3mm;font-family:'Lato',sans-serif;font-size:8pt;color:var(--texto)">📦 Pacote recorrente mensal</div>
+      <div style="background:var(--fundo-alt);border-radius:1.5mm;padding:2.5mm 3mm;font-family:'Lato',sans-serif;font-size:8pt;color:var(--texto)">🏢 Cliente B2B com faturamento alto</div>
+      <div style="background:var(--fundo-alt);border-radius:1.5mm;padding:2.5mm 3mm;font-family:'Lato',sans-serif;font-size:8pt;color:var(--texto)">🔁 Revisões ilimitadas incluídas</div>
+      <div style="background:var(--fundo-alt);border-radius:1.5mm;padding:2.5mm 3mm;font-family:'Lato',sans-serif;font-size:8pt;color:var(--texto)">📊 Estratégia + execução juntas</div>
     </div>
   </div>
-  <div class="pf"><span>Equipe Era da I.A.</span><span class="pnum">59</span></div>
+  <div class="pf"><span>Equipe Era da I.A.</span><span class="pnum">1</span></div>
 </div>
 
-<!-- ═══ P_MODELO_PROPOSTA — TEMPLATE ═══ -->
-<div class="page" id="p_prop1">
-  <div class="ph"><span>ERA DA I.A.</span><span>BÔNUS — MODELO DE PROPOSTA</span></div>
+<!-- ═══ DESIGN ═══ -->
+<div class="page" id="p3">
+  <div class="ph"><span>ERA DA I.A.</span><span>BÔNUS 02 — DESIGN COM I.A.</span></div>
   <div class="page-inner">
-    <h2 >Bônus 6 — Modelo de Proposta Comercial Pronta</h2>
-    <p >Use este modelo como base. Substitua os campos em [colchetes] e envie. Copie para o Google Docs e adapte ao seu estilo.</p>
-    <span class="rule" style="width:22mm"></span>
-    <div class="bloco-callout" style="background:var(--carbon);color:var(--branco)">
-      <div class="label">Proposta de Serviço — Gestão de Conteúdo com I.A.</div>
-      <p style="font-size:8.5pt;line-height:1.7;color:var(--branco)"><strong>Para:</strong> [Nome do cliente] · <strong>Data:</strong> [data] · <strong>Válida até:</strong> [7 dias]<br><br>
-      <strong>O que você vai receber:</strong> [número] posts para [plataforma] por mês — copy completo + imagem gerada com I.A. alinhada à sua identidade visual. Entrega semanal de [X] posts, programados com até [Y] dias de antecedência.<br><br>
-      <strong>Pacote Essencial — R$[valor]:</strong> [X] posts/mês, 1 reunião mensal de alinhamento, relatório de desempenho.<br>
-      <strong>Pacote Profissional — R$[2x valor]:</strong> tudo do Essencial + [X+10] posts + 1 Reels roteirizado + análise de concorrentes mensalmente.<br>
-      <strong>Pacote Premium — R$[3x valor]:</strong> tudo do Profissional + gestão de DMs + stories diários + suporte via WhatsApp.<br><br>
-      <strong>Próximo passo:</strong> responda este e-mail com o pacote de sua preferência. Contrato digital assinado em minutos via [DocuSign / Adobe Sign]. Início em [X] dias úteis após confirmação.</p>
+    <div style="display:flex;align-items:center;gap:3mm;margin-bottom:2mm">
+      <div style="width:7mm;height:7mm;background:linear-gradient(135deg,var(--ouro),var(--pop));border-radius:1.5mm;display:flex;align-items:center;justify-content:center;font-size:11pt;flex-shrink:0">🎨</div>
+      <div>
+        <div style="font-family:'Lato',sans-serif;font-size:7pt;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--ouro)">Categoria 01</div>
+        <h2 style="margin:0;font-size:14pt">Design com I.A.</h2>
+      </div>
     </div>
-    <div class="bloco-callout">
-      <div class="label">Por que 3 pacotes sempre funcionam</div>
-      <p>Cérebro humano não avalia valor absoluto — avalia valor relativo. Com 3 opções, o pacote do meio parece o ponto de equilíbrio ideal. Na prática, 60-70% dos clientes escolhem o meio. Defina seus pacotes para que o do meio seja exatamente onde você quer estar.</p>
+    <span class="rule" style="width:20mm"></span>
+
+    <div class="preco-table">
+      <div class="preco-header">
+        <div class="preco-header-cell" style="text-align:left;color:var(--texto-suave)">Serviço</div>
+        <div class="preco-header-cell" style="background:rgba(100,116,139,.08);color:#64748B">Mínimo</div>
+        <div class="preco-header-cell" style="background:rgba(37,99,235,.08);color:var(--ouro)">Médio</div>
+        <div class="preco-header-cell" style="background:var(--carbon);color:var(--pop)">Premium</div>
+      </div>
+      <div class="preco-row"><div class="preco-servico">Logo simples (I.A. + ajuste)</div><div class="preco-val preco-min">R$ 300</div><div class="preco-val preco-med">R$ 600</div><div class="preco-val preco-prem">R$ 1.200</div></div>
+      <div class="preco-row"><div class="preco-servico">Identidade visual completa</div><div class="preco-val preco-min">R$ 1.500</div><div class="preco-val preco-med">R$ 3.000</div><div class="preco-val preco-prem">R$ 6.000</div></div>
+      <div class="preco-row"><div class="preco-servico">Pack de posts — 12/mês</div><div class="preco-val preco-min">R$ 800</div><div class="preco-val preco-med">R$ 1.500</div><div class="preco-val preco-prem">R$ 3.000</div></div>
+      <div class="preco-row"><div class="preco-servico">Post único (feed)</div><div class="preco-val preco-min">R$ 100</div><div class="preco-val preco-med">R$ 200</div><div class="preco-val preco-prem">R$ 450</div></div>
+      <div class="preco-row"><div class="preco-servico">Thumbnail / capa YouTube</div><div class="preco-val preco-min">R$ 80</div><div class="preco-val preco-med">R$ 150</div><div class="preco-val preco-prem">R$ 300</div></div>
+      <div class="preco-row"><div class="preco-servico">Mockup de produto fotorrealista</div><div class="preco-val preco-min">R$ 200</div><div class="preco-val preco-med">R$ 450</div><div class="preco-val preco-prem">R$ 900</div></div>
+      <div class="preco-row"><div class="preco-servico">Apresentação / deck (10 slides)</div><div class="preco-val preco-min">R$ 400</div><div class="preco-val preco-med">R$ 800</div><div class="preco-val preco-prem">R$ 1.800</div></div>
+    </div>
+
+    <div class="bloco-callout" style="margin-top:3mm">
+      <div class="label">Potencial mensal — Design</div>
+      <p>Com 3 clientes no pacote mensal de posts (R$1.500 cada): <strong>R$4.500/mês</strong> recorrente. Adicione 2 identidades visuais por mês (R$3.000 cada) e chegue a <strong>R$10.500/mês</strong> trabalhando 4 horas por dia.</p>
+    </div>
+
+    <h3 style="margin-top:3mm">Tempo médio de produção com I.A.</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2mm">
+      <div style="text-align:center;background:var(--fundo-alt);border-radius:2mm;padding:3mm"><div style="font-family:'Playfair Display',serif;font-size:14pt;font-weight:900;color:var(--ouro)">20min</div><div style="font-family:'Lato',sans-serif;font-size:7pt;color:var(--texto-suave)">Logo simples</div></div>
+      <div style="text-align:center;background:var(--fundo-alt);border-radius:2mm;padding:3mm"><div style="font-family:'Playfair Display',serif;font-size:14pt;font-weight:900;color:var(--ouro)">4h</div><div style="font-family:'Lato',sans-serif;font-size:7pt;color:var(--texto-suave)">Identidade completa</div></div>
+      <div style="text-align:center;background:var(--fundo-alt);border-radius:2mm;padding:3mm"><div style="font-family:'Playfair Display',serif;font-size:14pt;font-weight:900;color:var(--ouro)">8min</div><div style="font-family:'Lato',sans-serif;font-size:7pt;color:var(--texto-suave)">Post único</div></div>
     </div>
   </div>
-  <div class="pf"><span>Equipe Era da I.A.</span><span class="pnum">60</span></div>
+  <div class="pf"><span>Equipe Era da I.A.</span><span class="pnum">2</span></div>
 </div>
 
-<!-- ═══ P_FAQ — PERGUNTAS FREQUENTES ═══ -->
-<div class="page" id="p_faq">
-  <div class="ph"><span>ERA DA I.A.</span><span>BÔNUS — FAQ</span></div>
+<!-- ═══ VÍDEO ═══ -->
+<div class="page" id="p4">
+  <div class="ph"><span>ERA DA I.A.</span><span>BÔNUS 02 — VÍDEO COM I.A.</span></div>
   <div class="page-inner">
-    <h2 >FAQ — As 10 Perguntas Mais Honestas sobre I.A.</h2>
-    <p  style="font-size:8.5pt">Respostas diretas para as dúvidas que a maioria tem mas poucos perguntam abertamente.</p>
-    <span class="rule" style="width:22mm"></span>
-    <div class="faq-item">
-      <div class="faq-q">Preciso saber programar para ganhar dinheiro com I.A.?</div>
-      <div class="faq-a">Não. 100% das ferramentas deste eBook funcionam sem nenhuma linha de código. O diferencial é saber formular bons prompts — habilidade que você desenvolve em semanas.</div>
+    <div style="display:flex;align-items:center;gap:3mm;margin-bottom:2mm">
+      <div style="width:7mm;height:7mm;background:linear-gradient(135deg,#7C3AED,var(--pop));border-radius:1.5mm;display:flex;align-items:center;justify-content:center;font-size:11pt;flex-shrink:0">🎬</div>
+      <div>
+        <div style="font-family:'Lato',sans-serif;font-size:7pt;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#7C3AED">Categoria 02</div>
+        <h2 style="margin:0;font-size:14pt">Vídeo com I.A.</h2>
+      </div>
     </div>
-    <div class="faq-item">
-      <div class="faq-q">Quanto tempo leva para ter o primeiro cliente?</div>
-      <div class="faq-a">Com dedicação de 1-2 horas por dia, profissionais com portfólio básico (3 estudos de caso) conseguem o primeiro cliente pago em 3 a 6 semanas. O principal acelerador é a oferta clara — não a quantidade de ferramentas dominadas.</div>
+    <span class="rule" style="width:20mm;background:#7C3AED"></span>
+
+    <div class="preco-table">
+      <div class="preco-header">
+        <div class="preco-header-cell" style="text-align:left;color:var(--texto-suave)">Serviço</div>
+        <div class="preco-header-cell" style="background:rgba(100,116,139,.08);color:#64748B">Mínimo</div>
+        <div class="preco-header-cell" style="background:rgba(37,99,235,.08);color:var(--ouro)">Médio</div>
+        <div class="preco-header-cell" style="background:var(--carbon);color:var(--pop)">Premium</div>
+      </div>
+      <div class="preco-row"><div class="preco-servico">Reels 15–30s (I.A. completo)</div><div class="preco-val preco-min">R$ 800</div><div class="preco-val preco-med">R$ 1.800</div><div class="preco-val preco-prem">R$ 4.000</div></div>
+      <div class="preco-row"><div class="preco-servico">Vídeo publicitário 60s</div><div class="preco-val preco-min">R$ 3.000</div><div class="preco-val preco-med">R$ 6.000</div><div class="preco-val preco-prem">R$ 12.000</div></div>
+      <div class="preco-row"><div class="preco-servico">Vídeo de produto (30s)</div><div class="preco-val preco-min">R$ 1.200</div><div class="preco-val preco-med">R$ 2.500</div><div class="preco-val preco-prem">R$ 5.000</div></div>
+      <div class="preco-row"><div class="preco-servico">Edição de footage existente</div><div class="preco-val preco-min">R$ 400</div><div class="preco-val preco-med">R$ 800</div><div class="preco-val preco-prem">R$ 1.500</div></div>
+      <div class="preco-row"><div class="preco-servico">Pack Reels — 4/mês</div><div class="preco-val preco-min">R$ 2.400</div><div class="preco-val preco-med">R$ 5.000</div><div class="preco-val preco-prem">R$ 10.000</div></div>
+      <div class="preco-row"><div class="preco-servico">Upscale de vídeo para 4K</div><div class="preco-val preco-min">R$ 300</div><div class="preco-val preco-med">R$ 600</div><div class="preco-val preco-prem">R$ 1.200</div></div>
+      <div class="preco-row"><div class="preco-servico">Narração sintética profissional</div><div class="preco-val preco-min">R$ 200</div><div class="preco-val preco-med">R$ 450</div><div class="preco-val preco-prem">R$ 900</div></div>
     </div>
-    <div class="faq-item">
-      <div class="faq-q">Preciso revelar ao cliente que usei I.A.?</div>
-      <div class="faq-a">Não existe obrigação legal ou ética de revelar, da mesma forma que um designer não precisa revelar qual software usou. O que importa é a qualidade da entrega. Dito isso, nunca minta se perguntado diretamente.</div>
+
+    <div class="bloco-callout" style="margin-top:3mm">
+      <div class="label">Potencial mensal — Vídeo</div>
+      <p>Um único pacote de Reels mensais (4/mês) a R$5.000 já é o salário médio brasileiro. Com 2 clientes nesse pacote: <strong>R$10.000/mês recorrente</strong> — e cada Reels leva em média 45 minutos com I.A.</p>
     </div>
-    <div class="faq-item">
-      <div class="faq-q">As ferramentas de I.A. vão substituir designers e redatores?</div>
-      <div class="faq-a">Não os melhores. I.A. executa — mas não estrategiza. Quem entende o negócio do cliente, sabe o que comunicar e por que, e usa I.A. para executar 10x mais rápido, se torna insubstituível. Quem executa tarefas repetitivas sem estratégia — sim, corre risco.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Qual a ferramenta mais importante para começar?</div>
-      <div class="faq-a">Claude Pro (~R$110/mês) para texto, Magnific (~R$220/mês) para imagem e vídeo. Essas duas cobrem a maior parte dos pedidos de clientes nos primeiros 6 meses. Comece com o plano grátis de ambas para testar antes de assinar.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">I.A. inventa informações — isso não é um problema?</div>
-      <div class="faq-a">Sim, e é um risco real. A solução: nunca publique sem revisar dados verificáveis (datas, números, nomes). Use I.A. para estruturar e redigir — você valida os fatos. Com esse processo, o risco é zero.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Quanto investir nas ferramentas no início?</div>
-      <div class="faq-a">Stack mínimo viável: ~R$330/mês (Claude Pro + Magnific). Um único cliente pagando R$1.500/mês cobre esse custo mais de 4 vezes. Comece pequeno, reinvista à medida que fatura.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Os planos das ferramentas mudam muito?</div>
-      <div class="faq-a">Sim — o mercado de I.A. evolui rápido. Os preços neste eBook refletem maio de 2026. Sempre verifique o site oficial antes de assinar. A escolha de ferramenta deve ser baseada em funcionalidade, não apenas preço.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Posso usar as imagens geradas por I.A. comercialmente?</div>
-      <div class="faq-a">Na maioria das ferramentas pagas: sim. Midjourney, Magnific, DALL-E 3 (via ChatGPT Plus) permitem uso comercial nos planos pagos. Leia sempre os Termos de Serviço do plano específico antes de entregar para clientes.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Isso funciona para qualquer nicho ou só para criativo?</div>
-      <div class="faq-a">Funciona para qualquer nicho onde exista necessidade de conteúdo, imagem, vídeo ou automação. Os melhores casos são: saúde, direito, imóveis, e-commerce, educação e serviços B2B — onde o volume de conteúdo necessário é alto e o budget para produção existe.</div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2mm;margin-top:3mm">
+      <div style="text-align:center;background:var(--carbon);border-radius:2mm;padding:3mm"><div style="font-family:'Playfair Display',serif;font-size:14pt;font-weight:900;color:var(--pop)">45min</div><div style="font-family:'Lato',sans-serif;font-size:7pt;color:rgba(255,255,255,.5)">Reels com I.A.</div></div>
+      <div style="text-align:center;background:var(--carbon);border-radius:2mm;padding:3mm"><div style="font-family:'Playfair Display',serif;font-size:14pt;font-weight:900;color:var(--pop)">3h</div><div style="font-family:'Lato',sans-serif;font-size:7pt;color:rgba(255,255,255,.5)">Vídeo de produto</div></div>
+      <div style="text-align:center;background:var(--carbon);border-radius:2mm;padding:3mm"><div style="font-family:'Playfair Display',serif;font-size:14pt;font-weight:900;color:var(--pop)">8h</div><div style="font-family:'Lato',sans-serif;font-size:7pt;color:rgba(255,255,255,.5)">Publicitário 60s</div></div>
     </div>
   </div>
-  <div class="pf"><span>Equipe Era da I.A.</span><span class="pnum">61</span></div>
+  <div class="pf"><span>Equipe Era da I.A.</span><span class="pnum">3</span></div>
 </div>
 
+<!-- ═══ COPY E AUTOMAÇÃO ═══ -->
+<div class="page" id="p5">
+  <div class="ph"><span>ERA DA I.A.</span><span>BÔNUS 02 — COPY E AUTOMAÇÃO</span></div>
+  <div class="page-inner">
+    <div style="display:flex;align-items:center;gap:3mm;margin-bottom:2mm">
+      <div style="width:7mm;height:7mm;background:linear-gradient(135deg,#059669,#22D3EE);border-radius:1.5mm;display:flex;align-items:center;justify-content:center;font-size:11pt;flex-shrink:0">✍️</div>
+      <div>
+        <div style="font-family:'Lato',sans-serif;font-size:7pt;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#059669">Categoria 03</div>
+        <h2 style="margin:0;font-size:14pt">Copy &amp; Texto com I.A.</h2>
+      </div>
+    </div>
+    <span class="rule" style="width:20mm;background:#059669"></span>
 
-<!-- PÁGINA FINAL DO BÔNUS -->
-<div class="page" id="p_final" style="background:var(--negro)">
-  <div class="page-inner" style="display:flex;flex-direction:column;justify-content:center;align-items:center;height:100%;text-align:center">
-    <div style="font-family:'Playfair Display',serif;font-size:22pt;font-weight:700;color:#fff;margin-bottom:4mm">Obrigado por fazer parte.</div>
-    <p style="font-family:'Source Serif 4',Georgia,serif;font-size:10pt;color:rgba(255,255,255,.6);max-width:120mm;line-height:1.7">Este bônus é parte do ecossistema Era da I.A. Aplique o que aprendeu — resultados aparecem na execução, não na leitura.</p>
-    <div style="width:15mm;height:.5mm;background:var(--ouro);margin:6mm auto"></div>
-    <div style="font-family:'Lato',sans-serif;font-size:7.5pt;color:var(--pop);letter-spacing:.08em;text-transform:uppercase">eBook: Era da I.A. — Como Lucrar Agora</div>
+    <div class="preco-table">
+      <div class="preco-header">
+        <div class="preco-header-cell" style="text-align:left;color:var(--texto-suave)">Serviço</div>
+        <div class="preco-header-cell" style="background:rgba(100,116,139,.08);color:#64748B">Mínimo</div>
+        <div class="preco-header-cell" style="background:rgba(37,99,235,.08);color:var(--ouro)">Médio</div>
+        <div class="preco-header-cell" style="background:var(--carbon);color:var(--pop)">Premium</div>
+      </div>
+      <div class="preco-row"><div class="preco-servico">Landing page (copy completo)</div><div class="preco-val preco-min">R$ 500</div><div class="preco-val preco-med">R$ 1.200</div><div class="preco-val preco-prem">R$ 2.500</div></div>
+      <div class="preco-row"><div class="preco-servico">E-mail marketing mensal</div><div class="preco-val preco-min">R$ 500</div><div class="preco-val preco-med">R$ 1.200</div><div class="preco-val preco-prem">R$ 2.500</div></div>
+      <div class="preco-row"><div class="preco-servico">Roteiro de vídeo (até 5min)</div><div class="preco-val preco-min">R$ 300</div><div class="preco-val preco-med">R$ 600</div><div class="preco-val preco-prem">R$ 1.200</div></div>
+      <div class="preco-row"><div class="preco-servico">Post de blog (1.500 palavras)</div><div class="preco-val preco-min">R$ 200</div><div class="preco-val preco-med">R$ 400</div><div class="preco-val preco-prem">R$ 800</div></div>
+      <div class="preco-row"><div class="preco-servico">Legenda + copy para 12 posts</div><div class="preco-val preco-min">R$ 400</div><div class="preco-val preco-med">R$ 800</div><div class="preco-val preco-prem">R$ 1.600</div></div>
+    </div>
+
+    <div style="margin-top:4mm;display:flex;align-items:center;gap:3mm;margin-bottom:2mm">
+      <div style="width:7mm;height:7mm;background:linear-gradient(135deg,#F59E0B,#EF4444);border-radius:1.5mm;display:flex;align-items:center;justify-content:center;font-size:11pt;flex-shrink:0">⚙️</div>
+      <div>
+        <div style="font-family:'Lato',sans-serif;font-size:7pt;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#F59E0B">Categoria 04</div>
+        <h2 style="margin:0;font-size:14pt">Automação &amp; Consultoria</h2>
+      </div>
+    </div>
+    <span class="rule" style="width:20mm;background:#F59E0B"></span>
+
+    <div class="preco-table">
+      <div class="preco-header">
+        <div class="preco-header-cell" style="text-align:left;color:var(--texto-suave)">Serviço</div>
+        <div class="preco-header-cell" style="background:rgba(100,116,139,.08);color:#64748B">Mínimo</div>
+        <div class="preco-header-cell" style="background:rgba(37,99,235,.08);color:var(--ouro)">Médio</div>
+        <div class="preco-header-cell" style="background:var(--carbon);color:var(--pop)">Premium</div>
+      </div>
+      <div class="preco-row"><div class="preco-servico">Automação simples (1 fluxo)</div><div class="preco-val preco-min">R$ 800</div><div class="preco-val preco-med">R$ 1.500</div><div class="preco-val preco-prem">R$ 3.000</div></div>
+      <div class="preco-row"><div class="preco-servico">Diagnóstico I.A. empresarial</div><div class="preco-val preco-min">R$ 1.500</div><div class="preco-val preco-med">R$ 3.000</div><div class="preco-val preco-prem">R$ 6.000</div></div>
+      <div class="preco-row"><div class="preco-servico">Implementação mensal</div><div class="preco-val preco-min">R$ 3.000</div><div class="preco-val preco-med">R$ 6.000</div><div class="preco-val preco-prem">R$ 15.000</div></div>
+      <div class="preco-row"><div class="preco-servico">Treinamento de equipe (4h)</div><div class="preco-val preco-min">R$ 2.000</div><div class="preco-val preco-med">R$ 4.000</div><div class="preco-val preco-prem">R$ 8.000</div></div>
+    </div>
+  </div>
+  <div class="pf"><span>Equipe Era da I.A.</span><span class="pnum">4</span></div>
+</div>
+
+<!-- ═══ MOCKUP 3D — ESTRATÉGIA DE PACOTES ═══ -->
+<div class="page" id="p6" style="background:var(--negro)">
+  <div class="ph" style="color:rgba(255,255,255,.3)"><span>ERA DA I.A.</span><span>BÔNUS 02 — ESTRATÉGIA DE PACOTES</span></div>
+  <div class="page-inner" style="background:var(--negro)">
+    <div class="cap-num" style="color:var(--acento-dark)">Estratégia</div>
+    <h1 style="color:#fff;font-size:18pt">A lógica dos 3 pacotes</h1>
+    <span class="rule" style="background:var(--acento-dark);width:20mm"></span>
+    <p style="color:rgba(255,255,255,.65);font-size:9pt">O cérebro não avalia valor absoluto — avalia relativo. Com 3 opções, o cliente compara entre elas em vez de perguntar "isso é caro?". 60–70% sempre escolhem o do meio. Monte seus pacotes para que o meio seja exatamente onde você quer estar.</p>
+
+    <div class="tier-grid" style="margin-top:5mm">
+      <div class="tier-card t-base">
+        <div class="tier-label">Essencial</div>
+        <div class="tier-price">R$[X]</div>
+        <div class="tier-sub">por mês</div>
+        <ul class="tier-feat">
+          <li>[8] posts/mês</li>
+          <li>Entrega em 5 dias úteis</li>
+          <li>1 revisão por peça</li>
+          <li>Relatório mensal</li>
+        </ul>
+      </div>
+      <div class="tier-card t-mid">
+        <div class="tier-label">Profissional</div>
+        <div class="tier-price">R$[2X]</div>
+        <div class="tier-sub" style="color:rgba(255,255,255,.4)">por mês</div>
+        <ul class="tier-feat">
+          <li>Tudo do Essencial</li>
+          <li>[16] posts/mês</li>
+          <li>1 Reels roteirizado</li>
+          <li>Revisões ilimitadas</li>
+          <li>Suporte via WhatsApp</li>
+        </ul>
+      </div>
+      <div class="tier-card t-top">
+        <div class="tier-badge">Mais vendido</div>
+        <div class="tier-label">Premium</div>
+        <div class="tier-price">R$[3X]</div>
+        <div class="tier-sub">por mês</div>
+        <ul class="tier-feat">
+          <li>Tudo do Profissional</li>
+          <li>[24] posts/mês</li>
+          <li>4 Reels por mês</li>
+          <li>Gestão de DMs</li>
+          <li>Stories diários</li>
+          <li>Relatório detalhado</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top:5mm;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:2mm;padding:4mm 5mm">
+      <div style="font-family:'Lato',sans-serif;font-size:7pt;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--pop);margin-bottom:1.5mm">Como definir seus valores de X</div>
+      <p style="font-size:8.5pt;color:rgba(255,255,255,.6);margin:0;line-height:1.6">Defina X = seu pacote Profissional com base na tabela de preços das páginas anteriores. O Essencial deve custar 50–55% do Profissional. O Premium deve custar 150–160%. Isso cria o efeito de ancoragem correto — o Premium parece um upgrade justo, não um luxo.</p>
+    </div>
+  </div>
+  <div class="pf" style="color:rgba(255,255,255,.25)"><span>Equipe Era da I.A.</span><span class="pnum" style="color:var(--pop)">5</span></div>
+</div>
+
+<!-- ═══ CALCULADORA DE META MENSAL ═══ -->
+<div class="page" id="p7">
+  <div class="ph"><span>ERA DA I.A.</span><span>BÔNUS 02 — META MENSAL</span></div>
+  <div class="page-inner">
+    <div class="cap-num">Calculadora</div>
+    <h1 style="font-size:18pt">Quantos clientes você precisa?</h1>
+    <span class="rule" style="width:20mm"></span>
+    <p style="font-size:9pt">Use a lógica abaixo para calcular exatamente quantos clientes você precisa para bater cada meta de faturamento. Preencha com seus preços da planilha.</p>
+
+    <!-- Mockup de calculadora visual -->
+    <div class="mockup-screen" style="max-width:145mm;margin:4mm auto">
+      <div class="mockup-bar"><div class="mockup-dot" style="background:#FF5F57"></div><div class="mockup-dot" style="background:#FFBD2E"></div><div class="mockup-dot" style="background:#28CA41"></div></div>
+      <div style="font-family:'Lato',sans-serif;font-size:6.5pt;color:var(--pop);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:3mm">Simulador de Meta</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2mm;margin-bottom:3mm">
+        <div style="background:rgba(37,99,235,.12);border-radius:2mm;padding:3mm;text-align:center">
+          <div style="font-family:'Lato',sans-serif;font-size:6pt;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--acento-dark);margin-bottom:1mm">Meta</div>
+          <div style="font-family:'Playfair Display',serif;font-size:13pt;font-weight:900;color:#fff">R$5k</div>
+          <div class="bar-track"><div class="bar-fill" style="width:33%"></div></div>
+          <div style="font-family:'Lato',sans-serif;font-size:6pt;color:rgba(255,255,255,.4);margin-top:1mm">3–4 clientes pack</div>
+        </div>
+        <div style="background:rgba(37,99,235,.18);border:1px solid rgba(37,99,235,.3);border-radius:2mm;padding:3mm;text-align:center">
+          <div style="font-family:'Lato',sans-serif;font-size:6pt;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--pop);margin-bottom:1mm">Meta</div>
+          <div style="font-family:'Playfair Display',serif;font-size:13pt;font-weight:900;color:#fff">R$10k</div>
+          <div class="bar-track"><div class="bar-fill" style="width:66%"></div></div>
+          <div style="font-family:'Lato',sans-serif;font-size:6pt;color:rgba(255,255,255,.4);margin-top:1mm">6–7 clientes pack</div>
+        </div>
+        <div style="background:linear-gradient(135deg,rgba(56,189,248,.15),rgba(34,211,238,.08));border:1px solid rgba(56,189,248,.3);border-radius:2mm;padding:3mm;text-align:center">
+          <div style="font-family:'Lato',sans-serif;font-size:6pt;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--pop);margin-bottom:1mm">Meta</div>
+          <div style="font-family:'Playfair Display',serif;font-size:13pt;font-weight:900;background:linear-gradient(135deg,var(--acento-dark),var(--pop));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">R$20k</div>
+          <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+          <div style="font-family:'Lato',sans-serif;font-size:6pt;color:rgba(255,255,255,.4);margin-top:1mm">2–3 clientes premium</div>
+        </div>
+      </div>
+
+      <div style="font-family:'Lato',sans-serif;font-size:6pt;color:rgba(255,255,255,.25);text-align:center;text-transform:uppercase;letter-spacing:.08em">Baseado em pacote médio de R$1.500/cliente/mês</div>
+    </div>
+
+    <h3>Caminhos para cada meta</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3mm">
+      <div style="background:var(--fundo-alt);border-radius:2mm;padding:3.5mm 4mm;border-top:2px solid var(--ouro)">
+        <div style="font-family:'Lato',sans-serif;font-size:8pt;font-weight:700;color:var(--ouro);margin-bottom:2mm">Meta R$5.000/mês</div>
+        <ul style="list-style:none;padding:0;font-family:'Lato',sans-serif;font-size:7.5pt;color:var(--texto-suave);line-height:1.8">
+          <li>→ 3 clientes pack posts (R$1.500)</li>
+          <li>→ 1 identidade visual/mês (R$2.000)</li>
+          <li>→ 5 clientes de post avulso</li>
+        </ul>
+      </div>
+      <div style="background:var(--carbon);border-radius:2mm;padding:3.5mm 4mm;border-top:2px solid var(--pop)">
+        <div style="font-family:'Lato',sans-serif;font-size:8pt;font-weight:700;color:var(--pop);margin-bottom:2mm">Meta R$10.000/mês</div>
+        <ul style="list-style:none;padding:0;font-family:'Lato',sans-serif;font-size:7.5pt;color:rgba(255,255,255,.65);line-height:1.8">
+          <li>→ 2 clientes de Reels pack (R$5.000)</li>
+          <li>→ 2 identidades visuais (R$3.000 cada)</li>
+          <li>→ 1 consultoria mensal (R$4.000)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bloco-callout" style="margin-top:3mm">
+      <div class="label">Regra prática</div>
+      <p>Sempre misture serviços recorrentes (packs mensais) com pontuais (logos, vídeos avulsos). O recorrente paga as contas — o pontual é o lucro.</p>
+    </div>
+  </div>
+  <div class="pf"><span>Equipe Era da I.A.</span><span class="pnum">6</span></div>
+</div>
+
+<!-- ═══ PÁGINA FINAL ═══ -->
+<div class="page" id="p_final" style="background:var(--negro);position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(34,211,238,.12) 0%,transparent 60%)"></div>
+  <div class="page-inner" style="background:transparent;display:flex;flex-direction:column;justify-content:center;align-items:center;height:100%;text-align:center">
+    <div style="font-family:'Lato',sans-serif;font-size:7pt;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:var(--pop);margin-bottom:4mm">Bônus 02 — Concluído</div>
+    <div style="font-family:'Playfair Display',serif;font-size:22pt;font-weight:700;color:#fff;margin-bottom:4mm;line-height:1.2">Preço certo.<br>Cliente certo.<br>Resultado certo.</div>
+    <div style="width:15mm;height:.5mm;background:linear-gradient(90deg,var(--ouro),var(--pop));margin:4mm auto"></div>
+    <p style="font-family:'Source Serif 4',Georgia,serif;font-size:9.5pt;color:rgba(255,255,255,.55);max-width:110mm;line-height:1.7">Nunca mais aceite menos do que você vale. Esta planilha existe para você cobrar com confiança — sabendo que o mercado paga esse preço.</p>
+    <div style="margin-top:6mm;font-family:'Lato',sans-serif;font-size:7.5pt;color:var(--acento-dark);letter-spacing:.08em;text-transform:uppercase">eBook: Era da I.A. — Como Lucrar Agora</div>
   </div>
 </div>
 
