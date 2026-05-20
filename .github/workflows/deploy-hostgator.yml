@@ -1,0 +1,35 @@
+name: Deploy Landing Page → Hostgator
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "pages/**"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Preparar arquivos para deploy
+        run: |
+          mkdir -p deploy/assets
+          cp pages/landing-page.html deploy/index.html
+          cp pages/quiz.html                    deploy/
+          cp pages/politica-de-privacidade.html deploy/
+          cp pages/termos-de-uso.html           deploy/
+          cp pages/favicon.svg                  deploy/
+          cp -r pages/assets/. deploy/assets/
+
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./deploy/
+          server-dir: public_html/
+          dangerous-clean-slate: false
